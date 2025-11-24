@@ -159,4 +159,46 @@ class Solution {
 
 ```
 
-## 5.
+## 5. Increasing Subsequences
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashSet;
+
+class Solution {
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> current = new ArrayList<Integer>();
+        backtrack(0, nums, current, result);
+        return result;
+    }
+    private void backtrack(int index, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        if (current.size() >= 2) {
+            // add a copy of current
+            List<Integer> temp = new ArrayList<Integer>(current);
+            result.add(temp);
+        }
+        // To avoid duplicates at the same depth
+        HashSet<Integer> used = new HashSet<Integer>();
+        for (int i = index; i < nums.length; i++) {
+            // If we already tried nums[i] at this level, skip
+            if (used.contains(nums[i])) {
+                continue;
+            }
+            // If current is not empty, ensure non-decreasing order
+            if (current.size() > 0) {
+                int last = current.get(current.size() - 1);
+                if (nums[i] < last) {
+                    continue;
+                }
+            }
+            used.add(nums[i]);  // mark value used at this depth
+            current.add(nums[i]);
+            backtrack(i + 1, nums, current, result);
+            current.remove(current.size() - 1); // backtrack
+        }
+    }
+}
+
+```
