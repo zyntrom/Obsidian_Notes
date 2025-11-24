@@ -206,5 +206,116 @@ class Solution {
 ## 6.Push Dominoes
 
 ```java
+class Solution {
+    public String pushDominoes(String dominoes) {
+        int n = dominoes.length();
+        char[] arr = dominoes.toCharArray();
+        int lastPos = -1;      // last seen index of 'L' or 'R'
+        char lastChar = 'L';   // pretend before start there is 'L'
+        int i = 0;
+        while (i <= n) {
+            char currentChar;
+            if (i == n) {
+                currentChar = 'R';     // treat end like a right push
+            } else {
+                currentChar = arr[i];
+            }
+            if (currentChar != '.') {
+                // Case 1: same direction: L....L   or   R....R
+                if (currentChar == lastChar) {
+                    int k = lastPos + 1;
+                    while (k < i) {
+                        arr[k] = currentChar;
+                        k++;
+                    }
+                }
+                // Case 2: R....L (inward collapse)
+                else if (lastChar == 'R' && currentChar == 'L') {
+                    int left = lastPos + 1;
+                    int right = i - 1;
+                    while (left < right) {
+                        arr[left] = 'R';
+                        arr[right] = 'L';
+                        left++;
+                        right--;
+                    }
+                }
+                // Case 3: L....R  (do nothing → they stay '.')
+                lastPos = i;
+                lastChar = currentChar;
+            }
+            i++;
+        }
+        return new String(arr);
+    }
+}
+
+```
+
+## 7. Boats to Save People
+
+```java
+class Solution {
+    public int numRescueBoats(int[] people, int limit) {
+        // Sort the array first
+        java.util.Arrays.sort(people);
+        int left = 0;
+        int right = people.length - 1;
+        int boats = 0;
+        while (left <= right) {
+            // If light + heavy fits, take both
+            if (people[left] + people[right] <= limit) {
+                left++;      // move light pointer
+                right--;     // move heavy pointer
+            } else {
+                // heavy person goes alone
+                right--;
+            }
+            boats++; // one boat used every iteration
+        }
+        return boats;
+    }
+}
+
+```
+
+## 8.Letter Combinations of a Phone Number
+
+```java
+class Solution {
+    private String[] mapping = {
+        "",     // 0
+        "",     // 1
+        "abc",  // 2
+        "def",  // 3
+        "ghi",  // 4
+        "jkl",  // 5
+        "mno",  // 6
+        "pqrs", // 7
+        "tuv",  // 8
+        "wxyz"  // 9
+    };
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<String>();
+        if (digits == null || digits.length() == 0) {
+            return result;
+        }
+        backtrack(digits, 0, "", result);
+        return result;
+    }
+    private void backtrack(String digits, int index, String current, List<String> result) {
+        if (index == digits.length()) {
+            result.add(current);
+            return;
+        }
+        int digit = digits.charAt(index) - '0';
+        String letters = mapping[digit];
+
+        for (int i = 0; i < letters.length(); i++) {
+            char ch = letters.charAt(i);
+            backtrack(digits, index + 1, current + ch, result);
+        }
+    }
+}
 
 ```
