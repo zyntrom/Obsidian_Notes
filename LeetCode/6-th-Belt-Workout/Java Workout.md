@@ -359,5 +359,94 @@ class Solution {
 ## 10.Gold Mine Problem
 
 ```java
+class Solution {
+    public int maxGold(int[][] mine) {
+        int n = mine.length;       // number of rows
+        int m = mine[0].length;    // number of columns
+        // DP array
+        int[][] dp = new int[n][m];
+        // Fill last column first
+        for (int i = 0; i < n; i++) {
+            dp[i][m - 1] = mine[i][m - 1];
+        }
+        // Fill from right → left
+        for (int col = m - 2; col >= 0; col--) {
+            for (int row = 0; row < n; row++) {
+                int right = dp[row][col + 1];
+                int rightUp = 0;
+                int rightDown = 0;
+                // check boundaries
+                if (row - 1 >= 0) {
+                    rightUp = dp[row - 1][col + 1];
+                }
+                if (row + 1 < n) {
+                    rightDown = dp[row + 1][col + 1];
+                }
+                // choose best
+                int bestNext = Math.max(right, Math.max(rightUp, rightDown));
+                dp[row][col] = mine[row][col] + bestNext;
+            }
+        }
+        // answer will be max of first column
+        int maxGold = 0;
+        for (int i = 0; i < n; i++) {
+            maxGold = Math.max(maxGold, dp[i][0]);
+        }
+        return maxGold;
+    }
+}
+
+```
+
+## 11.Koko Eating Bananas
+
+```java
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int left = 1;
+        int right = getMaxPile(piles); // max pile = upper limit
+        int answer = right;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;  // mid = eating speed
+            int hoursNeeded = getHours(piles, mid);
+            if (hoursNeeded <= h) {
+                // mid might be the answer; try slower speed
+                answer = mid;
+                right = mid - 1;
+            } else {
+                // too slow, need to increase speed
+                left = mid + 1;
+            }
+        }
+        return answer;
+    }
+    // Helper: find maximum pile value
+    private int getMaxPile(int[] piles) {
+        int max = 0;
+        for (int i = 0; i < piles.length; i++) {
+            if (piles[i] > max) {
+                max = piles[i];
+            }
+        }
+        return max;
+    }
+    // Helper: compute total hours needed for speed k
+    private int getHours(int[] piles, int k) {
+        int hours = 0;
+        for (int i = 0; i < piles.length; i++) {
+            int pile = piles[i];
+            // Work out how many hours this pile takes
+            // hours += ceil(pile / k)
+            hours += (pile + k - 1) / k;
+        }
+        return hours;
+    }
+}
+
+```
+
+## 12.Three Sum
+
+```java
 
 ```
