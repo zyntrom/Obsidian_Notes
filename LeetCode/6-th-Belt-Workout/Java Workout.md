@@ -202,3 +202,9 @@ class Solution {
 }
 
 ```
+
+## 6.Push Dominoes
+
+```java
+
+```
