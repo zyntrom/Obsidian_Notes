@@ -522,5 +522,48 @@ class Solution {
 ## 14.Divide Players Into Teams of Equal Skill
 
 ```java
-
+class Solution {
+    public long dividePlayers(int[] skill) {
+        Arrays.sort(skill);
+        int n = skill.length;
+        long target = skill[0] + skill[n - 1];
+        long chemistry = 0;
+        int i = 0, j = n - 1;
+        while (i < j) {
+            long sum = skill[i] + skill[j];
+            if (sum != target) return -1;
+            chemistry += (long) skill[i] * skill[j];
+            i++;
+            j--;
+        }
+        return chemistry;
+    }
+}
 ```
+
+## 15.Maximum Greatness of an Array
+
+```java
+class Solution {
+    public int maximizeGreatness(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int i = 0; // original
+        int j = 0; // perm
+        int greatness = 0;
+        // Try to match a strictly greater element from j to i
+        while (i < n && j < n) {
+            if (nums[j] > nums[i]) {
+                greatness++;
+                i++;
+                j++;
+            } else {
+                j++;
+            }
+        }
+        return greatness;
+    }
+}
+```
+
+## 16.
