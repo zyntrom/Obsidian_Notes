@@ -223,11 +223,18 @@ for row in matrix:
 
 #### 📥 Input Example (single-line row-wise)
 
-matrix = [list(map(int, input().split())) for _ in range(3)]
+```python
+matrix = list(map(int, input().split())) 
+for _ in range(3)
+```
 
-# Input: 1 2 3 ↵ 4 5 6 ↵ 7 8 9
+```
+Input: 1 2 3 ↵ 4 5 6 ↵ 7 8 9
+```
 
 #### 📤 Output Example
 
+```python
 for row in matrix:  
   print(" ".join(map(str, row)))
+```
