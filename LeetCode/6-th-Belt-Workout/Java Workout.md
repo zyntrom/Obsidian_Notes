@@ -566,4 +566,87 @@ class Solution {
 }
 ```
 
-## 16.
+## 16.Longest Palindromic Substring
+
+```java
+class Solution {
+    public String longestPalindrome(String s) {
+        int n = s.length();
+        if (n < 2) return s;
+        int start = 0;
+        int maxLen = 1;
+        for (int i = 0; i < n; i++) {
+            // Odd length palindrome
+            int len1 = expand(s, i, i);
+            // Even length palindrome
+            int len2 = expand(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > maxLen) {
+                maxLen = len;
+                start = i - (len - 1) / 2;
+            }
+        }
+        return s.substring(start, start + maxLen);
+    }
+    private int expand(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+}
+```
+
+## 17.N-Queens
+
+```java
+class Solution {
+
+    List<List<String>> solutions = new ArrayList<>();
+    char[][] board;
+    boolean[] col;
+    boolean[] diag1;  // r - c + (n-1)
+    boolean[] diag2;  // r + c
+    int n;
+    public List<List<String>> solveNQueens(int n) {
+        this.n = n;
+        board = new char[n][n];
+        col = new boolean[n];
+        diag1 = new boolean[2 * n];
+        diag2 = new boolean[2 * n];
+        for (char[] row : board) Arrays.fill(row, '.');
+        backtrack(0);
+        return solutions;
+    }
+    private void backtrack(int r) {
+        if (r == n) {
+            solutions.add(makeBoard());
+            return;
+        }
+        for (int c = 0; c < n; c++) {
+            if (col[c] || diag1[r - c + (n - 1)] || diag2[r + c])
+                continue;
+            // place queen
+            board[r][c] = 'Q';
+            col[c] = true;
+            diag1[r - c + (n - 1)] = true;
+            diag2[r + c] = true;
+            backtrack(r + 1);
+            // remove queen
+            board[r][c] = '.';
+            col[c] = false;
+            diag1[r - c + (n - 1)] = false;
+            diag2[r + c] = false;
+        }
+    }
+    private List<String> makeBoard() {
+        List<String> res = new ArrayList<>();
+        for (char[] row : board)
+            res.add(new String(row));
+        return res;
+    }
+}
+```
+
+## 18.
