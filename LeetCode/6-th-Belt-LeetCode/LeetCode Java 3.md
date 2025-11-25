@@ -263,7 +263,6 @@ class Solution {
         backtrack(0, nums, new ArrayList<>(), result);
         return result;
     }
-
     private void backtrack(int index, int[] nums, List<Integer> path, List<List<Integer>> result) {
         if (path.size() >= 2) {
             result.add(new ArrayList<>(path));
@@ -277,12 +276,50 @@ class Solution {
             if (!path.isEmpty() && nums[i] < path.get(path.size() - 1)) continue;
             used.add(nums[i]);    // mark used at this recursion level
             path.add(nums[i]);
-
             backtrack(i + 1, nums, path, result);
-
             path.remove(path.size() - 1);
         }
     }
 }
 
+```
+
+## 22. Generate Parentheses
+
+```embed
+title: "Generate Parentheses - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Generate Parentheses - Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.     Example 1:  Input: n = 3 Output: [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]   Example 2:  Input: n = 1 Output: [\"()\"]      Constraints:   * 1 <= n <= 8"
+url: "https://leetcode.com/problems/generate-parentheses/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backtrack(result, new StringBuilder(), 0, 0, n);
+        return result;
+    }
+    private void backtrack(List<String> result, StringBuilder sb, int open, int close, int n) {
+        // if the constructed string is of length 2*n, it's a valid combo
+        if (sb.length() == 2 * n) {
+            result.add(sb.toString());
+            return;
+        }
+        // add '(' if we can still place more opens
+        if (open < n) {
+            sb.append('(');
+            backtrack(result, sb, open + 1, close, n);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        // add ')' if close < open
+        if (close < open) {
+            sb.append(')');
+            backtrack(result, sb, open, close + 1, n);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
 ```
