@@ -649,4 +649,46 @@ class Solution {
 }
 ```
 
-## 18.
+## 18.Maximum Value at a Given Index in a Bounded Array
+
+```java
+class Solution {
+    public int maxValue(int n, int index, int maxSum) {
+        int left = 1, right = maxSum, ans = 1;
+        // Binary search for the peak value
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (canBuild(mid, n, index, maxSum)) {
+                ans = mid;
+                left = mid + 1; 
+            } else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+    private boolean canBuild(long peak, int n, int index, long maxSum) {
+        long sum = peak;
+        // left side length
+        int leftLen = index;
+        // right side length
+        int rightLen = n - index - 1;
+        sum += calcSide(peak - 1, leftLen);
+        sum += calcSide(peak - 1, rightLen);
+        return sum <= maxSum;
+    }
+    private long calcSide(long start, int length) {
+        if (start >= length) {
+            // full decreasing sequence
+            long end = start - length + 1;
+            return (start + end) * length / 2;
+        } else {
+            // decreases to 1, remaining must be filled with 1's
+            long decreasingSum = (start * (start + 1)) / 2;
+            long ones = length - start;
+            return decreasingSum + ones;
+        }
+    }
+}
+```
+
