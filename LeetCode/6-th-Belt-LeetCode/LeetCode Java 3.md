@@ -413,3 +413,76 @@ class Solution {
 }
 
 ```
+
+## 78. Subsets
+
+```embed
+title: "Subsets - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Subsets - Given an integer array nums of unique elements, return all possible subsets (the power set).  The solution set must not contain duplicate subsets. Return the solution in any order.     Example 1:   Input: nums = [1,2,3] Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]   Example 2:   Input: nums = [0] Output: [[],[0]]      Constraints:   * 1 <= nums.length <= 10  * -10 <= nums[i] <= 10  * All the numbers of nums are unique."
+url: "https://leetcode.com/problems/subsets/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(0, nums, new ArrayList<>(), res);
+        return res;
+    }
+
+    private void backtrack(int index, int[] nums, List<Integer> path, List<List<Integer>> res) {
+        res.add(new ArrayList<>(path));
+
+        for (int i = index; i < nums.length; i++) {
+            path.add(nums[i]);
+            backtrack(i + 1, nums, path, res);
+            path.remove(path.size() - 1);
+        }
+    }
+}
+
+```
+
+## 1239. Maximum Length of a Concatenated String with Unique Characters
+
+```embed
+title: "Maximum Length of a Concatenated String with Unique Characters - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Maximum Length of a Concatenated String with Unique Characters - You are given an array of strings arr. A string s is formed by the concatenation of a subsequence of arr that has unique characters.  Return the maximum possible length of s.  A subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.     Example 1:   Input: arr = [\"un\",\"iq\",\"ue\"] Output: 4 Explanation: All the valid concatenations are: - \"\" - \"un\" - \"iq\" - \"ue\" - \"uniq\" (\"un\" + \"iq\") - \"ique\" (\"iq\" + \"ue\") Maximum length is 4.   Example 2:   Input: arr = [\"cha\",\"r\",\"act\",\"ers\"] Output: 6 Explanation: Possible longest valid concatenations are \"chaers\" (\"cha\" + \"ers\") and \"acters\" (\"act\" + \"ers\").   Example 3:   Input: arr = [\"abcdefghijklmnopqrstuvwxyz\"] Output: 26 Explanation: The only string in arr has all 26 characters.      Constraints:   * 1 <= arr.length <= 16  * 1 <= arr[i].length <= 26  * arr[i] contains only lowercase English letters."
+url: "https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    int max = 0;
+    public int maxLength(List<String> arr) {
+        backtrack(arr, 0, "", 0);
+        return max;
+    }
+    private void backtrack(List<String> arr, int index, String current, int length) {
+        max = Math.max(max, length);
+        for (int i = index; i < arr.size(); i++) {
+            String next = arr.get(i);
+            if (isUnique(current, next)) {
+                backtrack(arr, i + 1, current + next, length + next.length());
+            }
+        }
+    }
+    private boolean isUnique(String current, String next) {
+        int[] freq = new int[26];
+        for (char c : current.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        for (char c : next.toCharArray()) {
+            if (freq[c - 'a']++ > 0) return false;
+        }
+        return true;
+    }
+}
+```
+
