@@ -525,5 +525,5 @@ class Solution {
         return gold + Math.max(Math.max(up, down), Math.max(left, right));
     }
 }
-
 ```
+
