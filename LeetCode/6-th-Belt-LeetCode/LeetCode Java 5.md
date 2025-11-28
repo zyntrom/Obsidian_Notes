@@ -335,6 +335,7 @@ class Solution {
 
 ```
 
+# Stack/Hash Map
 ## 496. Next Greater Element I
 
 ```embed
