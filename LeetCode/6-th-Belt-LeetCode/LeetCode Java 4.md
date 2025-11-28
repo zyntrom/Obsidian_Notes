@@ -205,3 +205,96 @@ class Solution {
 }
 
 ```
+
+## 904. Fruit Into Baskets
+
+```embed
+title: "Fruit Into Baskets - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Fruit Into Baskets - You are visiting a farm that has a single row of fruit trees arranged from left to right. The trees are represented by an integer array fruits where fruits[i] is the type of fruit the ith tree produces.  You want to collect as much fruit as possible. However, the owner has some strict rules that you must follow:   * You only have two baskets, and each basket can only hold a single type of fruit. There is no limit on the amount of fruit each basket can hold.  * Starting from any tree of your choice, you must pick exactly one fruit from every tree (including the start tree) while moving to the right. The picked fruits must fit in one of your baskets.  * Once you reach a tree with fruit that cannot fit in your baskets, you must stop.  Given the integer array fruits, return the maximum number of fruits you can pick.     Example 1:   Input: fruits = [1,2,1] Output: 3 Explanation: We can pick from all 3 trees.   Example 2:   Input: fruits = [0,1,2,2] Output: 3 Explanation: We can pick from trees [1,2,2]. If we had started at the first tree, we would only pick from trees [0,1].   Example 3:   Input: fruits = [1,2,3,2,2] Output: 4 Explanation: We can pick from trees [2,3,2,2]. If we had started at the first tree, we would only pick from trees [1,2].      Constraints:   * 1 <= fruits.length <= 105  * 0 <= fruits[i] < fruits.length"
+url: "https://leetcode.com/problems/fruit-into-baskets/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public int totalFruit(int[] fruits) {
+        Map<Integer, Integer> count = new HashMap<>();
+        int left = 0, max = 0;
+        for (int right = 0; right < fruits.length; right++) {
+            count.put(fruits[right], count.getOrDefault(fruits[right], 0) + 1);
+            while (count.size() > 2) {
+                int f = fruits[left];
+                count.put(f, count.get(f) - 1);
+                if (count.get(f) == 0) count.remove(f);
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+        }
+        return max;
+    }
+}
+
+```
+
+## 2024. Maximize the Confusion of an Exam
+
+```embed
+title: "Maximize the Confusion of an Exam - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Maximize the Confusion of an Exam - A teacher is writing a test with n true/false questions, with 'T' denoting true and 'F' denoting false. He wants to confuse the students by maximizing the number of consecutive questions with the same answer (multiple trues or multiple falses in a row).  You are given a string answerKey, where answerKey[i] is the original answer to the ith question. In addition, you are given an integer k, the maximum number of times you may perform the following operation:   * Change the answer key for any question to 'T' or 'F' (i.e., set answerKey[i] to 'T' or 'F').  Return the maximum number of consecutive 'T's or 'F's in the answer key after performing the operation at most k times.     Example 1:   Input: answerKey = \"TTFF\", k = 2 Output: 4 Explanation: We can replace both the 'F's with 'T's to make answerKey = \"TTTT\". There are four consecutive 'T's.   Example 2:   Input: answerKey = \"TFFT\", k = 1 Output: 3 Explanation: We can replace the first 'T' with an 'F' to make answerKey = \"FFFT\". Alternatively, we can replace the second 'T' with an 'F' to make answerKey = \"TFFF\". In both cases, there are three consecutive 'F's.   Example 3:   Input: answerKey = \"TTFTTFTT\", k = 1 Output: 5 Explanation: We can replace the first 'F' to make answerKey = \"TTTTTFTT\" Alternatively, we can replace the second 'F' to make answerKey = \"TTFTTTTT\".  In both cases, there are five consecutive 'T's.      Constraints:   * n == answerKey.length  * 1 <= n <= 5 * 104  * answerKey[i] is either 'T' or 'F'  * 1 <= k <= n"
+url: "https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        return Math.max(maxWindow(answerKey, k, 'T'),
+                        maxWindow(answerKey, k, 'F'));
+    }
+    private int maxWindow(String s, int k, char target) {
+        int left = 0, max = 0, changes = 0;
+        for (int right = 0; right < s.length(); right++) {
+            if (s.charAt(right) != target) changes++;
+            while (changes > k) {
+                if (s.charAt(left) != target) changes--;
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+        }
+        return max;
+    }
+}
+```
+
+## 1004. Max Consecutive Ones III
+
+```embed
+title: "Max Consecutive Ones III - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Max Consecutive Ones III - Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.     Example 1:   Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2 Output: 6 Explanation: [1,1,1,0,0,1,1,1,1,1,1] Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.  Example 2:   Input: nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3 Output: 10 Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1] Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.      Constraints:   * 1 <= nums.length <= 105  * nums[i] is either 0 or 1.  * 0 <= k <= nums.length"
+url: "https://leetcode.com/problems/max-consecutive-ones-iii/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        int left = 0, max = 0, zeros = 0;
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] == 0) zeros++;
+            while (zeros > k) {
+                if (nums[left] == 0) zeros--;
+                left++;
+            }
+            max = Math.max(max, right - left + 1);
+        }
+        return max;
+    }
+}
+
+```
