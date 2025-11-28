@@ -323,3 +323,93 @@ class Solution {
     }
 }
 ```
+
+## 79. Word Search
+
+```embed
+title: "Word Search - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Word Search - Given an m x n grid of characters board and a string word, return true if word exists in the grid.  The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.     Example 1:  [https://assets.leetcode.com/uploads/2020/11/04/word2.jpg]   Input: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\" Output: true   Example 2:  [https://assets.leetcode.com/uploads/2020/11/04/word-1.jpg]   Input: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"SEE\" Output: true   Example 3:  [https://assets.leetcode.com/uploads/2020/10/15/word3.jpg]   Input: board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCB\" Output: false      Constraints:   * m == board.length  * n = board[i].length  * 1 <= m, n <= 6  * 1 <= word.length <= 15  * board and word consists of only lowercase and uppercase English letters.     Follow up: Could you use search pruning to make your solution faster with a larger board?"
+url: "https://leetcode.com/problems/word-search/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length, n = board[0].length;
+        char[] w = word.toCharArray();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == w[0] && dfs(board, i, j, w, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean dfs(char[][] board, int i, int j, char[] w, int k) {
+        if (board[i][j] != w[k]) return false;
+        if (k == w.length - 1) return true;
+        char tmp = board[i][j];
+        board[i][j] = '#'; // mark visited
+        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+        for (int[] d : dirs) {
+            int ni = i + d[0], nj = j + d[1];
+            if (ni >= 0 && ni < board.length && nj >= 0 && nj < board[0].length && board[ni][nj] != '#') {
+                if (dfs(board, ni, nj, w, k + 1)) {
+                    board[i][j] = tmp;
+                    return true;
+                }
+            }
+        }
+        board[i][j] = tmp; // unmark
+        return false;
+    }
+}
+
+```
+
+## 131. Palindrome Partitioning
+
+```embed
+title: "Palindrome Partitioning - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Palindrome Partitioning - Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.     Example 1:  Input: s = \"aab\" Output: [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]   Example 2:  Input: s = \"a\" Output: [[\"a\"]]      Constraints:   * 1 <= s.length <= 16  * s contains only lowercase English letters."
+url: "https://leetcode.com/problems/palindrome-partitioning/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        backtrack(0, s, new ArrayList<>(), res);
+        return res;
+    }
+    private void backtrack(int start, String s, List<String> path, List<List<String>> res) {
+        if (start == s.length()) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                path.add(s.substring(start, end + 1));
+                backtrack(end + 1, s, path, res);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+    private boolean isPalindrome(String s, int l, int r) {
+        while (l < r) {
+            if (s.charAt(l++) != s.charAt(r--)) return false;
+        }
+        return true;
+    }
+}
+
+```
