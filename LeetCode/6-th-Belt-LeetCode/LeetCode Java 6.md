@@ -202,3 +202,125 @@ class Solution {
 
 ```
 
+## 19. Remove Nth Node From End of List
+
+```embed
+title: "Remove Nth Node From End of List - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Remove Nth Node From End of List - Given the head of a linked list, remove the nth node from the end of the list and return its head.     Example 1:  [https://assets.leetcode.com/uploads/2020/10/03/remove_ex1.jpg]   Input: head = [1,2,3,4,5], n = 2 Output: [1,2,3,5]   Example 2:   Input: head = [1], n = 1 Output: []   Example 3:   Input: head = [1,2], n = 1 Output: [1]      Constraints:   * The number of nodes in the list is sz.  * 1 <= sz <= 30  * 0 <= Node.val <= 100  * 1 <= n <= sz     Follow up: Could you do this in one pass?"
+url: "https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode first = dummy;
+        ListNode second = dummy;
+        // Move first n+1 steps ahead
+        for (int i = 0; i <= n; i++) {
+            first = first.next;
+        }
+        // Move both pointers until first reaches the end
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        // Remove the n-th node from end
+        second.next = second.next.next;
+        return dummy.next;
+    }
+}
+
+```
+# Two Pointers/Greedy
+
+## 948. Bag of Tokens
+
+```embed
+title: "Bag of Tokens - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Bag of Tokens - You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, where each tokens[i] denotes the value of tokeni.  Your goal is to maximize the total score by strategically playing these tokens. In one move, you can play an unplayed token in one of the two ways (but not both for the same token):   * Face-up: If your current power is at least tokens[i], you may play tokeni, losing tokens[i] power and gaining 1 score.  * Face-down: If your current score is at least 1, you may play tokeni, gaining tokens[i] power and losing 1 score.  Return the maximum possible score you can achieve after playing any number of tokens.     Example 1:  Input: tokens = [100], power = 50  Output: 0  Explanation: Since your score is 0 initially, you cannot play the token face-down. You also cannot play it face-up since your power (50) is less than tokens[0] (100).  Example 2:  Input: tokens = [200,100], power = 150  Output: 1  Explanation: Play token1 (100) face-up, reducing your power to 50 and increasing your score to 1.  There is no need to play token0, since you cannot play it face-up to add to your score. The maximum score achievable is 1.  Example 3:  Input: tokens = [100,200,300,400], power = 200  Output: 2  Explanation: Play the tokens in this order to get a score of 2:   1. Play token0 (100) face-up, reducing power to 100 and increasing score to 1.  2. Play token3 (400) face-down, increasing power to 500 and reducing score to 0.  3. Play token1 (200) face-up, reducing power to 300 and increasing score to 1.  4. Play token2 (300) face-up, reducing power to 0 and increasing score to 2.  The maximum score achievable is 2.     Constraints:   * 0 <= tokens.length <= 1000  * 0 <= tokens[i], power < 104"
+url: "https://leetcode.com/problems/bag-of-tokens/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+import java.util.Arrays;
+
+class Solution {
+    public int bagOfTokensScore(int[] tokens, int power) {
+        Arrays.sort(tokens);
+        int i = 0, j = tokens.length - 1;
+        int score = 0, maxScore = 0;
+        while (i <= j) {
+            if (power >= tokens[i]) {
+                // Play face up
+                power -= tokens[i++];
+                score++;
+                maxScore = Math.max(maxScore, score);
+            } else if (score > 0) {
+                // Play face down
+                power += tokens[j--];
+                score--;
+            } else {
+                break; // Cannot play any more
+            }
+        }
+        return maxScore;
+    }
+}
+
+```
+
+## 1679. Max Number of K-Sum Pairs
+
+```embed
+title: "Max Number of K-Sum Pairs - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Max Number of K-Sum Pairs - You are given an integer array nums and an integer k.  In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.  Return the maximum number of operations you can perform on the array.     Example 1:   Input: nums = [1,2,3,4], k = 5 Output: 2 Explanation: Starting with nums = [1,2,3,4]: - Remove numbers 1 and 4, then nums = [2,3] - Remove numbers 2 and 3, then nums = [] There are no more pairs that sum up to 5, hence a total of 2 operations.  Example 2:   Input: nums = [3,1,3,4,3], k = 6 Output: 1 Explanation: Starting with nums = [3,1,3,4,3]: - Remove the first two 3's, then nums = [1,4,3] There are no more pairs that sum up to 6, hence a total of 1 operation.     Constraints:   * 1 <= nums.length <= 105  * 1 <= nums[i] <= 109  * 1 <= k <= 109"
+url: "https://leetcode.com/problems/max-number-of-k-sum-pairs/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+        Map<Integer, Integer> count = new HashMap<>();
+        int pairs = 0;
+        for (int num : nums) {
+            int complement = k - num;
+            if (count.getOrDefault(complement, 0) > 0) {
+                // Pair found
+                pairs++;
+                count.put(complement, count.get(complement) - 1);
+            } else {
+                count.put(num, count.getOrDefault(num, 0) + 1);
+            }
+        }
+        return pairs;
+    }
+}
+
+```
+
+
