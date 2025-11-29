@@ -1,6 +1,6 @@
 # Binary Search
 ## 875. Koko Eating Bananas
-
+- [ ] Check 
 ```embed
 title: "Koko Eating Bananas - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -37,7 +37,7 @@ class Solution {
 ```
 
 ## 1802. Maximum Value at a Given Index in a Bounded Array
-
+- [ ] Check 
 ```embed
 title: "Maximum Value at a Given Index in a Bounded Array - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -97,7 +97,7 @@ class Solution {
 ```
 
 ## 2300. Successful Pairs of Spells and Potions
-
+- [ ] Check 
 ```embed
 title: "Successful Pairs of Spells and Potions - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -139,7 +139,7 @@ class Solution {
 ```
 
 ## 300. Longest Increasing Subsequence
-
+- [ ] Check 
 ```embed
 title: "Longest Increasing Subsequence - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -167,7 +167,7 @@ class Solution {
 
 # Sliding Window
 ## 567. Permutation in String
-
+- [ ] Check 
 ```embed
 title: "Permutation in String - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -209,7 +209,7 @@ class Solution {
 ```
 
 ## 904. Fruit Into Baskets
-
+- [ ] Check 
 ```embed
 title: "Fruit Into Baskets - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -241,7 +241,7 @@ class Solution {
 ```
 
 ## 2024. Maximize the Confusion of an Exam
-
+- [ ] Check 
 ```embed
 title: "Maximize the Confusion of an Exam - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -273,7 +273,7 @@ class Solution {
 ```
 
 ## 1004. Max Consecutive Ones III
-
+- [ ] Check 
 ```embed
 title: "Max Consecutive Ones III - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -304,7 +304,7 @@ class Solution {
 # Sliding Window/Deque
 
 ## 239. Sliding Window Maximum
-
+- [ ] Check 
 ```embed
 title: "Sliding Window Maximum - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"

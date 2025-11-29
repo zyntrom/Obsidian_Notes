@@ -1,7 +1,7 @@
 # Stack
 
 ## 735. Asteroid Collision
-
+- [ ] Check 
 ```embed
 title: "Asteroid Collision - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -41,7 +41,7 @@ class Solution {
 ```
 
 ## 150. Evaluate Reverse Polish Notation
-
+- [ ] Check 
 ```embed
 title: "Evaluate Reverse Polish Notation - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -76,7 +76,7 @@ class Solution {
 ```
 
 ## 84. Largest Rectangle in Histogram
-
+- [ ] Check 
 ```embed
 title: "Largest Rectangle in Histogram - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -108,7 +108,7 @@ class Solution {
 ```
 
 ## 2104. Sum of Subarray Ranges
-
+- [ ] Check 
 ```embed
 title: "Sum of Subarray Ranges - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -138,7 +138,7 @@ class Solution {
 ```
 
 ## 907. Sum of Subarray Minimums
-
+- [ ] Check 
 ```embed
 title: "Sum of Subarray Minimums - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -181,7 +181,7 @@ class Solution {
 
 # <>-Fix
 ## 1. Infix → Prefix
-
+- [ ] Check 
 ```java
 import java.util.*;
 
@@ -235,7 +235,7 @@ class InfixToPrefix {
 ```
 
 ## 2. Postfix → Prefix
-
+- [ ] Check 
 ```java
 import java.util.*;
 
@@ -262,7 +262,7 @@ class PostfixToPrefix {
 ```
 
 ## 3. Prefix → Infix
-
+- [ ] Check 
 ```java
 import java.util.*;
 
@@ -291,7 +291,7 @@ class PrefixToInfix {
 
 # Stack/Greedy
 ## 402. Remove K Digits
-
+- [ ] Check 
 ```embed
 title: "Remove K Digits - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -337,7 +337,7 @@ class Solution {
 
 # Stack/Hash Map
 ## 496. Next Greater Element I
-
+- [ ] Check 
 ```embed
 title: "Next Greater Element I - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"

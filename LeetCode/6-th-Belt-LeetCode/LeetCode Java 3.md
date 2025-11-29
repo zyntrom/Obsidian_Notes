@@ -1,6 +1,6 @@
 # Backtracking --
 ## 17. Letter Combinations of a Phone Number
-
+- [ ] Check 
 ```embed
 title: "Letter Combinations of a Phone Number - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -39,7 +39,7 @@ class Solution {
 ```
 
 ## 46. Permutations
-
+- [ ] Check 
 ```embed
 title: "Permutations - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -76,7 +76,7 @@ class Solution {
 ```
 
 ## 51. N-Queens
-
+- [ ] Check 
 ```embed
 title: "N-Queens - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -134,7 +134,7 @@ class Solution {
 ```
 
 ## 526. Beautiful Arrangement
-
+- [ ] Check 
 ```embed
 title: "Beautiful Arrangement - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -170,7 +170,7 @@ class Solution {
 ```
 
 ## 39. Combination Sum
-
+- [ ] Check 
 ```embed
 title: "Combination Sum - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -206,7 +206,7 @@ class Solution {
 ```
 
 ## 40. Combination Sum II
-
+- [ ] Check 
 ```embed
 title: "Combination Sum II - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -246,7 +246,7 @@ class Solution {
 ```
 
 ## 491. Non-decreasing Subsequences
-
+- [ ] Check 
 ```embed
 title: "Non-decreasing Subsequences - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -285,7 +285,7 @@ class Solution {
 ```
 
 ## 22. Generate Parentheses
-
+- [ ] Check 
 ```embed
 title: "Generate Parentheses - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -325,7 +325,7 @@ class Solution {
 ```
 
 ## 79. Word Search
-
+- [ ] Check 
 ```embed
 title: "Word Search - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -373,7 +373,7 @@ class Solution {
 ```
 
 ## 131. Palindrome Partitioning
-
+- [ ] Check 
 ```embed
 title: "Palindrome Partitioning - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -415,7 +415,7 @@ class Solution {
 ```
 
 ## 78. Subsets
-
+- [ ] Check 
 ```embed
 title: "Subsets - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -447,7 +447,7 @@ class Solution {
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
-
+- [ ] Check 
 ```embed
 title: "Maximum Length of a Concatenated String with Unique Characters - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -487,7 +487,7 @@ class Solution {
 ```
 
 ## 1219. Path with Maximum Gold
-
+- [ ] Check 
 ```embed
 title: "Path with Maximum Gold - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"

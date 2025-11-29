@@ -1,4 +1,5 @@
-- [ ] ## 31. Next Permutation 
+## 31. Next Permutation 
+- [ ] Check 
 ### Array Manipulation
 
 ```embed
@@ -42,7 +43,7 @@ class Solution {
 ```
 
 ## 50. Pow(x, n)
-
+- [ ] Check 
 ### Divide and Conquer
 
 ```embed
@@ -78,7 +79,7 @@ class Solution {
 ```
 
 ## 1040. Moving Stones Until Consecutive II
-
+- [ ] Check 
 ### Greedy/Sliding Window
 
 ```embed
@@ -115,7 +116,7 @@ class Solution {
 ```
 
 ## 2592. Maximize Greatness of an Array
-
+- [ ] Check 
 ### Greedy/Sorting
 
 ```embed
@@ -151,7 +152,7 @@ class Solution {
 ```
 
 ## 128. Longest Consecutive Sequence
-
+- [ ] Check 
 ### Hash Table
 
 ```embed
@@ -192,7 +193,7 @@ class Solution {
 ```
 
 ## 786. K-th Smallest Prime Fraction
-
+- [ ] Check 
 ### Heap
 
 ```embed

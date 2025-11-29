@@ -1,5 +1,5 @@
 ## 60. Permutation Sequence
-
+- [ ] Check 
 ### Math/Factorial
 
 ```embed
@@ -42,7 +42,7 @@ class Solution {
 ```
 
 ## 1823. Find the Winner of the Circular Game
-
+- [ ] Check 
 ### Queue/Simulation
 
 ```embed
@@ -69,7 +69,7 @@ class Solution {
 ```
 
 ## 53. Maximum Subarray
-
+- [ ] Check 
 ```embed
 title: "Maximum Subarray - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -97,7 +97,7 @@ class Solution {
 ```
 
 ## 416. Partition Equal Subset Sum
-
+- [ ] Check 
 ```embed
 title: "Partition Equal Subset Sum - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -129,7 +129,7 @@ class Solution {
 ```
 
 ## 5. Longest Palindromic Substring
-
+- [ ] Check 
 ```embed
 title: "Longest Palindromic Substring - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -169,7 +169,7 @@ class Solution {
 ```
 
 ## 646. Maximum Length of Pair Chain
-
+- [ ] Check 
 ```embed
 title: "Maximum Length of Pair Chain - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -203,7 +203,7 @@ class Solution {
 ```
 
 ## 21. Merge Two Sorted Lists
-
+- [ ] Check 
 ### Linked List Manipulation
 
 ```embed
@@ -239,7 +239,7 @@ class Solution {
 ```
 
 ## 234. Palindrome Linked List
-
+- [ ] Check 
 ### Linked List/Two Pointers
 
 ```embed
