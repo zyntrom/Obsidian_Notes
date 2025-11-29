@@ -1,7 +1,7 @@
 
 # Two Pointers
 ## 11. Container With Most Water
-
+- [ ] Check 
 ```embed
 title: "Container With Most Water - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -37,7 +37,7 @@ class Solution {
 ```
 
 ## 838. Push Dominoes
-
+- [ ] Check 
 ```embed
 title: "Push Dominoes - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -97,7 +97,7 @@ class Solution {
 ```
 
 ## 881. Boats to Save People
-
+- [ ] Check 
 ```embed
 title: "Boats to Save People - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -138,7 +138,7 @@ url: "https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/des
 favicon: ""
 aspectRatio: "52"
 ```
-
+- [ ] Check 
 ```java
 class Solution {
     public int numSubarrayBoundedMax(int[] nums, int left, int right) {
@@ -160,7 +160,7 @@ class Solution {
 ```
 
 ## 16. 3Sum Closest
-
+- [ ] Check 
 ```embed
 title: "3Sum Closest - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -203,7 +203,7 @@ class Solution {
 ```
 
 ## 19. Remove Nth Node From End of List
-
+- [ ] Check 
 ```embed
 title: "Remove Nth Node From End of List - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -250,7 +250,7 @@ class Solution {
 # Two Pointers/Greedy
 
 ## 948. Bag of Tokens
-
+- [ ] Check 
 ```embed
 title: "Bag of Tokens - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -290,7 +290,7 @@ class Solution {
 
 # Two Pointers/Hash Table
 ## 1679. Max Number of K-Sum Pairs
-
+- [ ] Check 
 ```embed
 title: "Max Number of K-Sum Pairs - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -326,7 +326,7 @@ class Solution {
 
 # Two Pointers/Sorting
 ## 825. Friends Of Appropriate Ages
-
+- [ ] Check 
 ```embed
 title: "Friends Of Appropriate Ages - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -366,7 +366,7 @@ class Solution {
 # Two Pointers/Stack
 
 ## 42. Trapping Rain Water
-
+- [ ] Check 
 ```embed
 title: "Trapping Rain Water - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
