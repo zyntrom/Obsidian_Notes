@@ -43,7 +43,7 @@ class Solution {
 ```
 
 ## 50. Pow(x, n)
-- [ ] Check 
+- [x] Check 
 ### Divide and Conquer
 
 ```embed
