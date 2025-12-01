@@ -109,9 +109,12 @@ class Solution {
             }
             int inWindow = right - left + 1;
             int missing = n - inWindow;
-            if (inWindow == n - 1 &&
-                stones[right] - stones[left] + 1 == n - 1) {
-                missing = 2;
+            
+            
+            if (inWindow == n - 1 && 
+	            stones[right] - stones[left] + 1 == n - 1) 
+	        {
+	            missing = 2;
             }
             minMoves = Math.min(minMoves, missing);
         }
