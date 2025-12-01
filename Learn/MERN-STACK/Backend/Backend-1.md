@@ -1,7 +1,5 @@
 ## Express.js (Backend Framework)
 
-### Basic Server
-
 - Install Express for the server
 ```bash
 npm i express
@@ -11,7 +9,14 @@ npm i express
 npm i nodemon
 ```
 
-- In pac
+- In package.json add:
+```json
+//in script session add
+"start":"node src/index.js",
+"dev":"nodemon src/index.js"
+```
+
+### Basic Server
 
 ```js
 const express =require("express");
@@ -31,6 +36,37 @@ app.listen(PORT,()=>{
 
 ## Basic Folder Structure
 
+```bash
+backend/
+│── src/
+│   │── index.js              # Entry point              
+│   │
+│   ├── service/
+│   │   └── db.js             # Database connection
+│   │
+│   ├── controllers/          # All controller functions
+│   │   └── userController.js
+│   │
+│   ├── models/               # Mongoose schemas/models
+│   │   └── User.js
+│   │
+│   ├── routes/               # Express routes
+│   │   └── userRoutes.js
+│   │
+│   ├── middleware/           # Middleware (auth, error handler, etc.)
+│   │   ├── auth.js
+│   │   └── errorHandler.js
+│   │
+│   ├── utils/                # Helper functions (JWT, email, etc.)
+│   │
+├── .env                      # Environment variables
+├── package.json
+└── README.md
+
+```
+
+
+## Basic Code Flow
 ### index.js
 
 ```js
