@@ -92,22 +92,28 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
     public int[] numMovesStonesII(int[] stones) {
         Arrays.sort(stones);
-        int x = stones[0], y = stones[1], z = stones[2];
-        // Maximum moves
-        int maxMoves = (y - x - 1) + (z - y - 1);
-        // Minimum moves
-        int minMoves;
-        if (y - x == 1 && z - y == 1) {
-            minMoves = 0;  // already consecutive
-        } else if (y - x <= 2 || z - y <= 2) {
-            minMoves = 1;  // one move enough
-        } else {
-            minMoves = 2;  // otherwise need 2 moves
+        int n = stones.length;
+        int max1 = stones[n - 1] - stones[1] - (n - 1);
+        int max2 = stones[n - 2] - stones[0] - (n - 1);
+        int maxMoves = Math.max(max1, max2);
+        int minMoves = Integer.MAX_VALUE;
+        int left = 0;
+        for (int right = 0; right < n; right++) {
+            while (stones[right] - stones[left] + 1 > n) {
+                left++;
+            }
+            int inWindow = right - left + 1;
+            int missing = n - inWindow;
+            if (inWindow == n - 1 &&
+                stones[right] - stones[left] + 1 == n - 1) {
+                missing = 2;
+            }
+            minMoves = Math.min(minMoves, missing);
         }
         return new int[]{minMoves, maxMoves};
     }
