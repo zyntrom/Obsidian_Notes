@@ -195,7 +195,7 @@ app.listen(PORT,()=>{
 npm i mongoose
 ```
 
-### Creating Models
+### Creating Models (User.js)
 
 ```js
 const mongoose = require("mongoose");
@@ -219,7 +219,7 @@ const userSchema= new mongoose.Schema({
 module.exports= mongoose.model("User",userSchema);
 ```
 
-### CRUD controller Operations
+### CRUD controller Operations (userController.js)
 
 ```js
 const User= require("../models/User.js")
@@ -298,4 +298,26 @@ exports.deleteById= async (req,res,next)=>{
 }
 ```
 
-### Rou
+### Router for the DB controllers (userRouter.js)
+
+```js
+const express= require("express");
+const userController= require("../controllers/userController.js");
+
+const router= express.Router();
+
+router.post("/user/create",userController.createUser);
+router.get("/user/",userController.getUsers);
+router.get("/user/:id",userController.getUserById);
+router.put("/user/:id",userController.updateUserById);
+router.delete("/user/:d",userController.deleteById);
+
+module.exports= router; 
+```
+
+### index.js
+
+```js
+const userRouter= require("./routes/userRouter.js");
+app.use("/api/auth",userRouter);
+```
