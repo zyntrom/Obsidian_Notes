@@ -58,7 +58,7 @@ aspectRatio: "52"
 ```java
 class Solution {
     public double myPow(double x, int n) {
-        long N = n;            // convert to long to avoid overflow
+        long N = n;            
         if (N < 0) {
             x = 1 / x;
             N = -N;
@@ -184,7 +184,6 @@ class Solution {
         }
         int longest = 0;
         for (int num : set) {
-            // check if this is the start of a sequence
             if (!set.contains(num - 1)) {
                 int current = num;
                 int streak = 1;
@@ -219,23 +218,15 @@ import java.util.*;
 
 class Solution {
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        List<int[]> fractions = new ArrayList<>();
         int n = arr.length;
-        PriorityQueue<int[]> pq = new PriorityQueue<>(
-            (a, b) -> arr[a[0]] * arr[b[1]] - arr[b[0]] * arr[a[1]]
-        );
-        // push fractions arr[i] / arr[n-1]
-        for (int i = 0; i < n - 1; i++) {
-            pq.offer(new int[]{i, n - 1});
-        }
-        while (k-- > 1) {
-            int[] top = pq.poll();
-            int i = top[0], j = top[1];
-            if (j - 1 > i) {
-                pq.offer(new int[]{i, j - 1});
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                fractions.add(new int[]{arr[i], arr[j]});
             }
         }
-        int[] ans = pq.poll();
-        return new int[]{arr[ans[0]], arr[ans[1]]};
+        fractions.sort((a, b) -> a[0] * b[1] - b[0] * a[1]);
+        return fractions.get(k - 1);
     }
 }
 
