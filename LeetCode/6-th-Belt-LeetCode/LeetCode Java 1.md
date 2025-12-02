@@ -201,7 +201,7 @@ class Solution {
 ```
 
 ## 786. K-th Smallest Prime Fraction
-- [ ] Check 
+- [x] Check 
 ### Heap
 
 ```embed
