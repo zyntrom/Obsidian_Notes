@@ -21,6 +21,7 @@ process.env.VARIABLE
 ## Setting up bcrypt
 
 - Install bcrypt 
+
 ```bash
 npm i bcrypt
 ```
@@ -38,10 +39,13 @@ const isMatching= bcrypt.compare(password,hashPassword);
 ## Setting up JWT (jsonwebtoken)
 
 - Install jwt (jsonwebtoken)
+
 ```bash
 npm install jsonwebtoken
 ```
+
 - Generate a jwt token
+
 ```js
 const jwt =require("jsonwebtoken);
 
