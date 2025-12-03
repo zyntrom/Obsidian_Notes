@@ -18,3 +18,15 @@ dotenv.config();
 process.env.VARIABLE
 ```
 
+## Setting up bcrypt
+
+- Install bcrypt 
+```bash
+npm i bcrypt
+```
+
+- Usage of bcrypt
+
+```js
+const bcrypt = require()
+```
