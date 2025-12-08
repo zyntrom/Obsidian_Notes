@@ -221,7 +221,10 @@ printf("%d", *p);  // prints 10
 
 ### Pointer Arithmetic 
 
-
+```c
+arr[1];   // 20
+*(arr + 1); // 20
+```
 ---
 
 ### 🟦 12. Structures
