@@ -1,10 +1,10 @@
 ### 🟦 1. Basic Structure
 
-|Component|Syntax|Description|
-|---|---|---|
-|Header file|`#include <stdio.h>`|Includes standard input/output library|
-|Main function|`int main() { /*...*/ return 0; }`|Entry point of a C program|
-|Return|`return 0;`|Ends the function, returns value|
+| Component     | Syntax                             | Description                            |
+| ------------- | ---------------------------------- | -------------------------------------- |
+| Header file   | `#include <stdio.h>`               | Includes standard input/output library |
+| Main function | `int main() { /*...*/ return 0; }` | Entry point of a C program             |
+| Return        | `return 0;`                        | Ends the function, returns value       |
 
 ---
 
