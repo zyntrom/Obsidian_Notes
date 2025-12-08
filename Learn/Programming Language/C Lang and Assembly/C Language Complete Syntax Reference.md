@@ -37,7 +37,19 @@ Modifiers:
 | ------------------------ | ----------------------------------- |
 | `int a = 10;`            | Declaring and initializing variable |
 | `const float PI = 3.14;` | Constant (read-only after init)     |
+```c
+#include <stdio.h>
 
+int main() {
+    int age = 20;
+    float height = 5.9;
+    char grade = 'A';
+    printf("Age = %d\n", age);
+    printf("Height = %.1f\n", height);
+    printf("Grade = %c\n", grade);
+}
+
+```
 ---
 
 ### 🟦 4. Input/Output
@@ -172,12 +184,17 @@ String Functions:
 
 ### 🟦 11. Pointers
 
-|Syntax Example|Description|
-|---|---|
-|`int *p;`|Pointer declaration|
-|`p = &a;`|Store address of variable in `p`|
-|`*p`|Dereference (get value)|
+| Syntax Example | Description                      |
+| -------------- | -------------------------------- |
+| `int *p;`      | Pointer declaration              |
+| `p = &a;`      | Store address of variable in `p` |
+| `*p`           | Dereference (get value)          |
+```c
+int x = 10;
+int *p = &x;
 
+printf("%d", *p);  // prints 10
+```
 ---
 
 ### 🟦 12. Structures
@@ -287,10 +304,55 @@ free(arr);
 
 ### 🟦 20. Misc
 
-|Syntax|Use|
-|---|---|
-|`sizeof(var)`|Returns size of variable in bytes|
-|`goto label;`|Jump to label (avoid using)|
-|`volatile`|
-## Advanced
+| Syntax        | Use                               |
+| ------------- | --------------------------------- |
+| `sizeof(var)` | Returns size of variable in bytes |
+| `goto label;` | Jump to label (avoid using)       |
+| `volatile`    |                                   |
 
+### **Memory Layout**
+
+C memory is divided into:
+
+|Area|Purpose|
+|---|---|
+|**Stack**|function-local variables|
+|**Heap**|dynamic memory (`malloc`)|
+|**Data segment**|global + static vars|
+|**Text segment**|machine code|
+
+Example:
+
+```c
+int global_var;      // data segment
+
+int main() {
+    int local = 10;  // stack
+    int *ptr = malloc(sizeof(int)); // heap
+    *ptr = 50;
+}
+```
+
+### **Build Process**
+
+### Compilation pipeline:
+
+```bash
+source.c → (preprocess) → .i  
+.i → (compile) → .s  
+.s → (assemble) → .o  
+.o + libs → (link) → executable
+```
+
+### Using GCC:
+
+```bash
+gcc main.c -o main
+```
+
+### Makefile example:
+
+```bash
+all:
+    gcc main.c utils.c -o app
+```
