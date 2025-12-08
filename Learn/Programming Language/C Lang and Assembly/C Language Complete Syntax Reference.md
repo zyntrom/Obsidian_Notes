@@ -1,3 +1,5 @@
+
+## Basics
 ### 🟦 1. Basic Structure
 
 | Component     | Syntax                             | Description                            |
@@ -189,23 +191,33 @@ struct Student {
 
 Usage:
 
-```
-struct Student s1; strcpy(s1.name, "Alen"); s1.age = 21;
+```c
+struct Student s1; 
+strcpy(s1.name, "Alen"); 
+s1.age = 21;
 ```
 
 ---
 
 ### 🟦 13. Unions
 
-`union Data {   int i;   float f; }; union Data d1; d1.i = 5;`
+```c
+union Data {   
+	int i;   
+	float f; 
+}; 
+union Data d1; d1.i = 5;
+```
 
 - Memory shared for all fields.
-    
 ---
 
 ### 🟦 14. Enums
 
-`enum Day {Mon, Tue, Wed}; enum Day today = Tue;`
+```c
+enum Day {Mon, Tue, Wed}; 
+enum Day today = Tue;
+```
 
 - Assigns names to integral constants.
 
@@ -213,7 +225,10 @@ struct Student s1; strcpy(s1.name, "Alen"); s1.age = 21;
 
 ### 🟦 15. Typedef
 
-`typedef unsigned int uint; uint a = 100;`
+```c
+typedef unsigned int uint; 
+uint a = 100;
+```
 
 - Creates an alias name for types.
 
@@ -230,7 +245,10 @@ struct Student s1; strcpy(s1.name, "Alen"); s1.age = 21;
 
 Example:
 
-`int *arr = (int*)malloc(5 * sizeof(int)); free(arr);`
+```c
+int *arr = (int*)malloc(5 * sizeof(int)); 
+free(arr);
+```
 
 ---
 
@@ -274,3 +292,5 @@ Example:
 |`sizeof(var)`|Returns size of variable in bytes|
 |`goto label;`|Jump to label (avoid using)|
 |`volatile`|
+## Advanced
+
