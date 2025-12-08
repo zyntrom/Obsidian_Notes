@@ -7,18 +7,38 @@
 | Header file   | `#include <stdio.h>`               | Includes standard input/output library |
 | Main function | `int main() { /*...*/ return 0; }` | Entry point of a C program             |
 | Return        | `return 0;`                        | Ends the function, returns value       |
+```c
+#include <stdio.h>
 
+int main() {
+    printf("Hello");
+    return 0;
+}
+```
 ---
 
 ### 🟦 2. Data Types
 
-|Type|Description|Example|
-|---|---|---|
-|`int`|Integer (4 bytes)|`int a = 10;`|
-|`float`|Single precision decimal|`float x = 3.14;`|
-|`double`|Double precision decimal|`double y = 2.718;`|
-|`char`|Single character (1 byte)|`char c = 'A';`|
-|`void`|No value (used for functions)|`void func() {}`|
+| Type     | Description                   | Example             |
+| -------- | ----------------------------- | ------------------- |
+| `int`    | Integer (4 bytes)             | `int a = 10;`       |
+| `float`  | Single precision decimal      | `float x = 3.14;`   |
+| `double` | Double precision decimal      | `double y = 2.718;` |
+| `char`   | Single character (1 byte)     | `char c = 'A';`     |
+| `void`   | No value (used for functions) | `void func() {}`    |
+### What happens in memory?
+
+```c
+int age = 21;
+```
+
+```c
+Address: 0x7ffdac10
+Value:   21
+Type:    int (4 bytes)
+```
+
+C stores variables on the **stack** unless dynamic or global.
 
 Modifiers:
 
@@ -314,12 +334,27 @@ free(arr);
 
 C memory is divided into:
 
-|Area|Purpose|
-|---|---|
-|**Stack**|function-local variables|
-|**Heap**|dynamic memory (`malloc`)|
-|**Data segment**|global + static vars|
-|**Text segment**|machine code|
+| Area             | Purpose                   |
+| ---------------- | ------------------------- |
+| **Stack**        | function-local variables  |
+| **Heap**         | dynamic memory (`malloc`) |
+| **Data segment** | global + static vars      |
+| **Text segment** | machine code              |
+## **Your Program’s Memory Layout**
+
+Every C program is divided into **4 major memory regions**:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+| TEXT (code)                |
+|----------------------------|
+| DATA (global + static)    |
+|----------------------------|
+| HEAP (malloc memory)      |
+|----------------------------|
+| STACK (function variables)|
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 
 Example:
 
