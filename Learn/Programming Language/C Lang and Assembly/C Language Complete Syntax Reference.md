@@ -340,7 +340,7 @@ C memory is divided into:
 | **Heap**         | dynamic memory (`malloc`) |
 | **Data segment** | global + static vars      |
 | **Text segment** | machine code              |
-## **Your Program’s Memory Layout**
+###  **Your Program’s Memory Layout**
 
 Every C program is divided into **4 major memory regions**:
 
@@ -368,6 +368,95 @@ int main() {
 }
 ```
 
+### 🔹 1. **TEXT Segment (Code Section)**
+
+Contains:
+
+- compiled machine code
+- instructions CPU executes
+
+Example:
+
+```c
+printf("hi");
+```
+
+The binary code for `printf` call lives here.
+
+You **cannot change** this memory at runtime.
+
+---
+
+### 🔹 2. **DATA Segment (globals & static)**
+
+Contains:
+
+- variables outside `main()`
+- static variables inside functions
+- global arrays
+- initialized variables
+
+Example:
+
+```c
+int globalCount = 5;   // in DATA segment
+
+void test() {
+    static int x = 10; // also DATA segment
+}
+```
+
+These exist **from program start to end**.
+
+---
+
+### 🔹 3. **HEAP (Dynamic Memory)**
+
+This is memory you manually request:
+
+```c
+int *p = malloc(sizeof(int)); 
+*p = 50;
+
+free(p)
+```
+Characteristics:  
+✔ large memory area  
+✔ you control allocation & freeing  
+✔ must use `free()`
+
+If you forget to free → **memory leak**  
+If you access after freeing → **use-after-free bug**
+
+This is where we build:
+
+- dynamic arrays
+- linked lists
+- trees
+- buffers
+- file content loaders
+- networking buffers
+- our future tools (copy-tool, editor, shell)
+
+---
+
+### 🔹 4. **STACK (local variables, function calls)**
+
+Stack contains:  
+✔ function parameters  
+✔ return addresses  
+✔ local variables  
+✔ saved registers
+
+Example:
+
+```c
+int main() {     
+	int x = 5;  // stored on stack 
+}
+```
+
+Stack grows downward, automatically cleaned after function returns.
 ### **Build Process**
 
 ### Compilation pipeline:
