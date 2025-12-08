@@ -215,6 +215,9 @@ int *p = &x;
 
 printf("%d", *p);  // prints 10
 ```
+
+- `&` is address (address-of)
+- `*` is value (dereference)
 ---
 
 ### 🟦 12. Structures
