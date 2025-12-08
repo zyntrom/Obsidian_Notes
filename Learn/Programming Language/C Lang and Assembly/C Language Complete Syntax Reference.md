@@ -74,7 +74,7 @@ Format Specifiers:
 | Type       | Operators            | Description    |
 | ---------- | -------------------- | -------------- |
 | Relational | ==, !=, <, >, <=, >= | Compare values |
-| Logical    | `&&`, `              |                |
+| Logical    | `&&,` \|\|           |                |
 
 #### Assignment Operators
 
@@ -180,11 +180,18 @@ String Functions:
 
 ### 🟦 12. Structures
 
-`struct Student {   char name[20];   int age; };`
+```c
+struct Student {   
+	char name[20];   
+	int age; 
+};
+```
 
 Usage:
 
-`struct Student s1; strcpy(s1.name, "Alen"); s1.age = 21;`
+```
+struct Student s1; strcpy(s1.name, "Alen"); s1.age = 21;
+```
 
 ---
 
