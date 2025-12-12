@@ -221,5 +221,5 @@
 
 - Greatest Sliding window value  in array:
 
-![[Pasted image 20250917104336.png]]System.out.print(stack.pop());
+![[Pasted image 20250917104336.png]]
 
