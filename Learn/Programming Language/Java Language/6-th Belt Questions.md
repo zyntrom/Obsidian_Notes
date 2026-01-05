@@ -547,5 +547,68 @@ public class Solution {
 ![[Pasted image 20260105115312.png]]
 
 ```java
+import java.util.*;
+
+public class Solution {
+	//Answer
+    // Function to generate all subsets
+    public static List<List<Integer>> subsets(List<Integer> arr) {
+        List<List<Integer>> result = new ArrayList<>();
+        
+        // Sort the array to ensure lexicographical order
+        Collections.sort(arr);
+        
+        // Backtracking to generate subsets
+        backtrack(arr, 0, new ArrayList<>(), result);
+        
+        return result;
+    }
+    
+    private static void backtrack(List<Integer> arr, int index,
+                                  List<Integer> current,
+                                  List<List<Integer>> result) {
+        // Add current subset to result
+        result.add(new ArrayList<>(current));
+        
+        for (int i = index; i < arr.size(); i++) {
+            current.add(arr.get(i));
+            backtrack(arr, i + 1, current, result);
+            current.remove(current.size() - 1);
+        }
+    }
+    //Answer
+    //Template
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+        
+        List<List<Integer>> ans = subsets(arr);
+        
+        for (List<Integer> subset : ans) {
+            for (int num : subset) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+        
+        if (ans.isEmpty()) {
+            System.out.println(-1);
+        }
+        
+        sc.close();
+    }
+    //Template
+}
+
+```
+
+![[Pasted image 20260105120030.png]]
+
+```java
 
 ```
