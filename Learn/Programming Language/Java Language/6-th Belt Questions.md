@@ -416,5 +416,54 @@ public class Solution {
 ![[Pasted image 20260105113210.png]]
 
 ```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Solution {
+	//Answer
+	
+    public static void backtrack(int open, int close, int n, String current, List<String> result) {
+        // If the current string is complete
+        if (current.length() == 2 * n) {
+            result.add(current);
+            return;
+        }
+        // Add '(' if we still can
+        if (open < n) {
+            backtrack(open + 1, close, n, current + "(", result);
+        }
+        // Add ')' only if it keeps the sequence valid
+        if (close < open) {
+            backtrack(open, close + 1, n, current + ")", result);
+        }
+    }
+    public static List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backtrack(0, 0, n, "", result);
+        return result;
+    }
+    
+    //Answer
+    //Template
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        List<String> combinations = generateParenthesis(n);
+        for (int i = 0; i < combinations.size(); i++) {
+            if (i > 0) System.out.print(" ");
+            System.out.print(combinations.get(i));
+        }
+        System.out.println();
+        sc.close();
+    }
+    //Template
+}
+
+```
+
+![[Pasted image 20260105114045.png]]
+
+```java
 
 ```
