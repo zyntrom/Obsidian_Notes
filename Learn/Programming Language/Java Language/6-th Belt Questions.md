@@ -610,5 +610,57 @@ public class Solution {
 ![[Pasted image 20260105120030.png]]
 
 ```java
+import java.util.*;
+
+public class Solution {
+
+    public static int getMaximumGold(int[][] grid) {
+        int maxGold = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] > 0) {
+                    maxGold = Math.max(maxGold, dfs(grid, i, j));
+                }
+            }
+        }
+        return maxGold;
+    }
+    private static int dfs(int[][] grid, int i, int j) {
+        // Boundary or invalid cell
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j] == 0) {
+            return 0;
+        }
+        int gold = grid[i][j];
+        grid[i][j] = 0; // mark visited
+        int max = 0;
+        max = Math.max(max, dfs(grid, i + 1, j));
+        max = Math.max(max, dfs(grid, i - 1, j));
+        max = Math.max(max, dfs(grid, i, j + 1));
+        max = Math.max(max, dfs(grid, i, j - 1));
+
+        grid[i][j] = gold; // backtrack
+
+        return gold + max;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+
+        int[][] grid = new int[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                grid[i][j] = sc.nextInt();
+            }
+        }
+
+        System.out.println(getMaximumGold(grid));
+    }
+}
 
 ```
