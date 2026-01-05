@@ -130,3 +130,51 @@ public class Solution {
 }
 
 ```
+
+![[Pasted image 20260105091611.png]]
+
+```java
+import java.util.*;
+
+public class PostfixToInfix {
+
+    // Check if token is an operator
+    static boolean isOperator(String token) {
+        return token.equals("+") || token.equals("-") ||
+               token.equals("*") || token.equals("/");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Read the postfix expression
+        String postfix = sc.nextLine();
+        Stack<String> stack = new Stack<>();
+        // Split input by spaces
+        String[] tokens = postfix.split("\\s+");
+        for (String token : tokens) {
+            // If operand (number)
+            if (!isOperator(token)) {
+                stack.push(token);
+            }
+            // If operator
+            else {
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                // Form infix expression with parentheses
+                String infix = "(" + operand1 + " " + token + " " + operand2 + ")";
+
+                stack.push(infix);
+            }
+        }
+        // Final infix expression
+        System.out.println(stack.pop());
+        sc.close();
+    }
+}
+
+```
+
+![[Pasted image 20260105091714.png]]
+
+```java
+
+```
