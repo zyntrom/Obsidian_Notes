@@ -465,5 +465,77 @@ public class Solution {
 ![[Pasted image 20260105114045.png]]
 
 ```java
+import java.util.*;
+
+public class Solution {
+
+    // Helper backtracking function
+    public static void backtrack(
+            int index,
+            List<Integer> candidates,
+            int target,
+            List<Integer> current,
+            List<List<Integer>> result
+    ) {
+        // If target becomes 0, we found a valid combination
+        if (target == 0) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        // If target goes negative or index out of bounds
+        if (target < 0 || index == candidates.size()) {
+            return;
+        }
+        // Include current number (can be reused)
+        current.add(candidates.get(index));
+        backtrack(index, candidates, target - candidates.get(index), current, result);
+        current.remove(current.size() - 1);
+        // Exclude current number and move to next index
+        backtrack(index + 1, candidates, target, current, result);
+    }
+    // Function to find all unique combinations that sum to the target
+    public static List<List<Integer>> combinationSum(List<Integer> candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(0, candidates, target, new ArrayList<>(), result);
+        return result;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Input the number of elements in the array
+        int n = sc.nextInt();
+        List<Integer> arr = new ArrayList<>();
+        // Input the elements of the array
+        for (int i = 0; i < n; i++) {
+            arr.add(sc.nextInt());
+        }
+        // Input the target sum
+        int target = sc.nextInt();
+        // Sort the array
+        Collections.sort(arr);
+        // Get all unique combinations
+        List<List<Integer>> ans = combinationSum(arr, target);
+        // Sort result lexicographically
+        ans.sort((a, b) -> {
+            for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
+                if (!a.get(i).equals(b.get(i))) {
+                    return a.get(i) - b.get(i);
+                }
+            }
+            return a.size() - b.size();
+        });
+        // Print the result
+        if (ans.isEmpty()) {
+            System.out.println(-1);
+        } else {
+            for (List<Integer> combination : ans) {
+                for (int num : combination) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}
 
 ```
