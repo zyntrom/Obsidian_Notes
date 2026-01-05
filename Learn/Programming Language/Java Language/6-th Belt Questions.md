@@ -371,3 +371,50 @@ public class Solution {
 ```
 
 ![[Pasted image 20260105112721.png]]
+
+```java
+import java.util.*;
+
+public class Solution {
+
+    public static void solve(int i, String s, String f, List<String> svt) {
+    //Answer
+    
+        // Base case: reached end of string
+        if (i == s.length()) {
+            if (f.length() > 0) {   // ignore empty subsequence
+                svt.add(f);
+            }
+            return;
+        }
+        // Include current character
+        solve(i + 1, s, f + s.charAt(i), svt);
+        // Exclude current character
+        solve(i + 1, s, f, svt);
+    }
+    
+    //Answer 
+    //Template
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        List<String> svt = new ArrayList<>();
+        // Generate all subsequences
+        solve(0, s, "", svt);
+        // Sort the subsequences lexicographically
+        Collections.sort(svt);
+        // Output all subsequences
+        for (String subseq : svt) {
+            System.out.print(subseq + " ");
+        }
+    }
+    //Template
+}
+
+```
+
+![[Pasted image 20260105113210.png]]
+
+```java
+
+```
