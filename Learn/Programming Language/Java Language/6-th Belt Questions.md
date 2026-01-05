@@ -338,5 +338,36 @@ public class Solution {
 ![[Pasted image 20260105112133.png]]
 
 ```java
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Read size of array
+        int N = sc.nextInt();
+        // Read array elements
+        long[] nums = new long[N];
+        for (int i = 0; i < N; i++) {
+            nums[i] = sc.nextLong();
+        }
+        long sum = 0;
+        // Generate all subarrays
+        for (int i = 0; i < N; i++) {
+            long min = nums[i];
+            long max = nums[i];
+            for (int j = i; j < N; j++) {
+                min = Math.min(min, nums[j]);
+                max = Math.max(max, nums[j]);
+                sum += (max - min);
+            }
+        }
+        // Print result
+        System.out.println(sum);
+    }
+}
 
 ```
+
+![[Pasted image 20260105112721.png]]
