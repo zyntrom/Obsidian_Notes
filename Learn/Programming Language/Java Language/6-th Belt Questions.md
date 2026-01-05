@@ -176,5 +176,61 @@ public class PostfixToInfix {
 ![[Pasted image 20260105091714.png]]
 
 ```java
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    static int precedence(char ch) {
+        if (ch == '+' || ch == '-') return 1;
+        if (ch == '*' || ch == '/') return 2;
+        return 0;
+    }
+    static boolean isOperator(char ch) {
+        return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+    }
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String infix = br.readLine();
+        Stack<Character> operators = new Stack<>();
+        Stack<String> operands = new Stack<>();
+        for (int i = 0; i < infix.length(); i++) {
+            char ch = infix.charAt(i);
+            if (ch == ' ') continue;
+            if (Character.isDigit(ch)) {
+                operands.push(String.valueOf(ch));
+            }
+            else if (ch == '(') {
+                operators.push(ch);
+            }
+            else if (ch == ')') {
+                while (operators.peek() != '(') {
+                    char op = operators.pop();
+                    String b = operands.pop();
+                    String a = operands.pop();
+                    operands.push(op + a + b);
+                }
+                operators.pop();
+            }
+            else if (isOperator(ch)) {
+                while (!operators.isEmpty() &&
+                       precedence(operators.peek()) > precedence(ch)) {
+                    char op = operators.pop();
+                    String b = operands.pop();
+                    String a = operands.pop();
+                    operands.push(op + a + b);
+                }
+                operators.push(ch);
+            }
+        }
+        while (!operators.isEmpty()) {
+            char op = operators.pop();
+            String b = operands.pop();
+            String a = operands.pop();
+            operands.push(op + a + b);
+        }
+        System.out.println(operands.pop());
+    }
+}
 
 ```
