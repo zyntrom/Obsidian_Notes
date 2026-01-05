@@ -334,3 +334,9 @@ public class Solution {
 }
 
 ```
+
+![[Pasted image 20260105112133.png]]
+
+```java
+
+```
