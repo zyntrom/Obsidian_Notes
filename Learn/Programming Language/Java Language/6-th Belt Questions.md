@@ -468,7 +468,7 @@ public class Solution {
 import java.util.*;
 
 public class Solution {
-
+	//Answer
     // Helper backtracking function
     public static void backtrack(
             int index,
@@ -499,6 +499,9 @@ public class Solution {
         backtrack(0, candidates, target, new ArrayList<>(), result);
         return result;
     }
+    //Answer
+    
+    //Template
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // Input the number of elements in the array
@@ -536,6 +539,13 @@ public class Solution {
         }
         sc.close();
     }
+    //Template
 }
+
+```
+
+![[Pasted image 20260105115312.png]]
+
+```java
 
 ```
