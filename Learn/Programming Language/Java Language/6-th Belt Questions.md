@@ -176,11 +176,9 @@ public class PostfixToInfix {
 ![[Pasted image 20260105091714.png]]
 
 ```java
-import java.io.*;
 import java.util.*;
 
 public class Solution {
-
     static int precedence(char ch) {
         if (ch == '+' || ch == '-') return 1;
         if (ch == '*' || ch == '/') return 2;
@@ -189,20 +187,23 @@ public class Solution {
     static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String infix = br.readLine();
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String infix = sc.nextLine();   // Read infix expression
         Stack<Character> operators = new Stack<>();
         Stack<String> operands = new Stack<>();
         for (int i = 0; i < infix.length(); i++) {
             char ch = infix.charAt(i);
             if (ch == ' ') continue;
+            // Operand
             if (Character.isDigit(ch)) {
                 operands.push(String.valueOf(ch));
             }
+            // Opening parenthesis
             else if (ch == '(') {
                 operators.push(ch);
             }
+            // Closing parenthesis
             else if (ch == ')') {
                 while (operators.peek() != '(') {
                     char op = operators.pop();
@@ -210,8 +211,9 @@ public class Solution {
                     String a = operands.pop();
                     operands.push(op + a + b);
                 }
-                operators.pop();
+                operators.pop(); // remove '('
             }
+            // Operator
             else if (isOperator(ch)) {
                 while (!operators.isEmpty() &&
                        precedence(operators.peek()) > precedence(ch)) {
@@ -223,13 +225,61 @@ public class Solution {
                 operators.push(ch);
             }
         }
+        // Process remaining operators
         while (!operators.isEmpty()) {
             char op = operators.pop();
             String b = operands.pop();
             String a = operands.pop();
             operands.push(op + a + b);
         }
+        // Output prefix expression
         System.out.println(operands.pop());
+        sc.close();
+    }
+}
+
+```
+
+![[Pasted image 20260105095207.png]]
+
+```java
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Read n
+        int n = sc.nextInt();
+        int[] height = new int[n];
+        // Read heights
+        for (int i = 0; i < n; i++) {
+            height[i] = sc.nextInt();
+        }
+        int left = 0, right = n - 1;
+        int leftMax = 0, rightMax = 0;
+        int water = 0;
+        // Two-pointer logic
+        while (left < right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= leftMax) {
+                    leftMax = height[left];
+                } else {
+                    water += leftMax - height[left];
+                }
+                left++;
+            } else {
+                if (height[right] >= rightMax) {
+                    rightMax = height[right];
+                } else {
+                    water += rightMax - height[right];
+                }
+                right--;
+            }
+        }
+        // Output result
+        System.out.println(water);
+        sc.close();
     }
 }
 
