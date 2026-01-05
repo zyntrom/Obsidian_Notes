@@ -664,5 +664,38 @@ public class Solution {
 ![[Pasted image 20260105121653.png]]
 
 ```java
+import java.util.Arrays;
+
+public class Solution {
+	//Answer
+    static int count;
+    public static int countArrangement(int n) {
+        count = 0;
+        boolean[] used = new boolean[n + 1];
+        backtrack(1, n, used);
+        return count;
+    }
+    private static void backtrack(int pos, int n, boolean[] used) {
+        if (pos > n) {
+            count++;
+            return;
+        }
+        for (int num = 1; num <= n; num++) {
+            if (!used[num] && (num % pos == 0 || pos % num == 0)) {
+                used[num] = true;
+                backtrack(pos + 1, n, used);
+                used[num] = false; // backtrack
+            }
+        }
+    }
+    //Answer
+    //T
+    public static void main(String[] args) {
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.println(countArrangement(n));
+        sc.close();
+    }
+}
 
 ```
