@@ -288,5 +288,49 @@ public class Solution {
 ![[Pasted image 20260105100045.png]]
 
 ```java
+import java.util.*;
+
+public class Solution {
+
+    static final long MOD = 1000000007L;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextLong();
+        }
+        int[] left = new int[n];
+        int[] right = new int[n];
+        // Primitive stack
+        int[] stack = new int[n];
+        int top = -1;
+        // Previous Less Element (strict)
+        for (int i = 0; i < n; i++) {
+            while (top != -1 && arr[stack[top]] > arr[i]) {
+                top--;
+            }
+            left[i] = (top == -1) ? i + 1 : i - stack[top];
+            stack[++top] = i;
+        }
+        // Reset stack
+        top = -1;
+        // Next Less or Equal Element
+        for (int i = n - 1; i >= 0; i--) {
+            while (top != -1 && arr[stack[top]] >= arr[i]) {
+                top--;
+            }
+            right[i] = (top == -1) ? n - i : stack[top] - i;
+            stack[++top] = i;
+        }
+        long result = 0;
+        for (int i = 0; i < n; i++) {
+            long contribution = (arr[i] % MOD) * left[i] % MOD * right[i] % MOD;
+            result = (result + contribution) % MOD;
+        }
+        System.out.println(result);
+        sc.close();
+    }
+}
 
 ```
