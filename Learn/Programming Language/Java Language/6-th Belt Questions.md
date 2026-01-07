@@ -899,3 +899,56 @@ public class Solution {
 
 ```
 
+![[Pasted image 20260107092238.png]]
+
+```java
+import java.util.*;
+
+class Solution {
+    public int kthElement(int[] a, int[] b, int k) {
+        int i = 0, j = 0;
+        int count = 0;
+        // Merge until we reach the k-th element
+        while (i < a.length && j < b.length) {
+            if (a[i] <= b[j]) {
+                count++;
+                if (count == k) return a[i];
+                i++;
+            } else {
+                count++;
+                if (count == k) return b[j];
+                j++;
+            }
+        }
+        // Remaining elements in array a
+        while (i < a.length) {
+            count++;
+            if (count == k) return a[i];
+            i++;
+        }
+        // Remaining elements in array b
+        while (j < b.length) {
+            count++;
+            if (count == k) return b[j];
+            j++;
+        }
+        return -1; // if k is invalid
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Read m, n
+        int m = sc.nextInt(), n = sc.nextInt();
+        // Read k
+        int k = sc.nextInt();
+        int[] a = new int[m];
+        int[] b = new int[n];
+        // Read first array
+        for (int i = 0; i < m; i++) a[i] = sc.nextInt();
+        // Read second array
+        for (int i = 0; i < n; i++) b[i] = sc.nextInt();
+        Solution solution = new Solution();
+        System.out.println(solution.kthElement(a, b, k));
+    }
+}
+
+```
