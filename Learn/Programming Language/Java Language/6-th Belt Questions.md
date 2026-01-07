@@ -995,3 +995,43 @@ class Solution {
 ```
 
 ![[Pasted image 20260107093454.png]]
+
+```java
+import java.util.*;
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        // Start from top-right corner
+        int row = 0;
+        int col = n - 1;
+        while (row < m && col >= 0) {
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] > target) {
+                col--; // move left
+            } else {
+                row++; // move down
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int m = scanner.nextInt(); // Read matrix rows
+        int n = scanner.nextInt(); // Read matrix columns
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        int target = scanner.nextInt(); // Read target value
+        scanner.close();
+        Solution solution = new Solution();
+        System.out.println(solution.searchMatrix(matrix, target) ? "true" : "false");
+    }
+}
+
+```
