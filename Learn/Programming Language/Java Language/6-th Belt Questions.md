@@ -1038,3 +1038,52 @@ class Solution {
 
 ![[Pasted image 20260107103740.png]]
 
+```java
+import java.util.*;
+
+public class Solution {
+    public static int[] findPeakGrid(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int midCol = left + (right - left) / 2;
+            // Find row index of maximum element in midCol
+            int maxRow = 0;
+            for (int i = 0; i < m; i++) {
+                if (mat[i][midCol] > mat[maxRow][midCol]) {
+                    maxRow = i;
+                }
+            }
+            int leftVal = (midCol - 1 >= 0) ? mat[maxRow][midCol - 1] : -1;
+            int rightVal = (midCol + 1 < n) ? mat[maxRow][midCol + 1] : -1;
+            // Check if peak
+            if (mat[maxRow][midCol] > leftVal && mat[maxRow][midCol] > rightVal) {
+                return new int[]{maxRow, midCol};
+            } 
+            // Move search space
+            else if (mat[maxRow][midCol] < rightVal) {
+                left = midCol + 1;
+            } else {
+                right = midCol - 1;
+            }
+        }
+        return new int[]{-1, -1}; // fallback (won't happen as per problem)
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        int[][] mat = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                mat[i][j] = sc.nextInt();
+            }
+        }
+        int[] result = findPeakGrid(mat);
+        System.out.println(result[0] + " " + result[1]);
+        sc.close();
+    }
+}
+
+```
