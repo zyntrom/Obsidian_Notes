@@ -703,6 +703,72 @@ public class Solution {
 ![[Pasted image 20260107084601.png]]
 
 ```java
+import java.util.*;
+
+public class Solution {
+
+    // Function to find all non-decreasing subsequences
+    public static List<List<Integer>> findSubsequences(int[] nums) {
+        // Use a Set to avoid duplicate subsequences
+        Set<List<Integer>> resultSet = new HashSet<>();
+        // Start backtracking
+        backtrack(nums, 0, new ArrayList<>(), resultSet);
+        // Convert set to list
+        List<List<Integer>> result = new ArrayList<>(resultSet);
+        // Sort lexicographically
+        Collections.sort(result, (a, b) -> {
+            int len = Math.min(a.size(), b.size());
+            for (int i = 0; i < len; i++) {
+                if (!a.get(i).equals(b.get(i))) {
+                    return a.get(i) - b.get(i);
+                }
+            }
+            return a.size() - b.size();
+        });
+        return result;
+    }
+    // Backtracking helper
+    private static void backtrack(int[] nums, int index,
+                                  List<Integer> current,
+                                  Set<List<Integer>> resultSet) {
+        // If length >= 2, add to result
+        if (current.size() >= 2) {
+            resultSet.add(new ArrayList<>(current));
+        }
+        for (int i = index; i < nums.length; i++) {
+            // Check non-decreasing condition
+            if (current.isEmpty() || nums[i] >= current.get(current.size() - 1)) {
+                current.add(nums[i]);
+                backtrack(nums, i + 1, current, resultSet);
+                current.remove(current.size() - 1); // backtrack
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); // Input size of the array
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt(); // Input array elements
+        }
+        // Get the subsequences
+        List<List<Integer>> subsequences = findSubsequences(nums);
+        // Print the sorted subsequences
+        for (List<Integer> seq : subsequences) {
+            for (int num : seq) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
+
+```
+
+![[Pasted image 20260107085821.png]]
+
+```java
 
 ```
 
