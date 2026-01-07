@@ -952,3 +952,45 @@ class Solution {
 }
 
 ```
+
+![[Pasted image 20260107092740.png]]
+
+```java
+import java.util.*;
+
+class Solution {
+    public boolean searchMatrix(int m, int n, int[][] matrix, int target) {
+        int low = 0;
+        int high = m * n - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            // Convert 1D index to 2D index
+            int row = mid / n;
+            int col = mid % n;
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt(), n = sc.nextInt();
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        int target = sc.nextInt();
+        Solution solution = new Solution();
+        System.out.println(solution.searchMatrix(m, n, matrix, target) ? "true" : "false");
+    }
+}
+
+```
+
