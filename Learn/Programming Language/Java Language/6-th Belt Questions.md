@@ -822,6 +822,40 @@ class Solution {
 ![[Pasted image 20260107090500.png]]
 
 ```java
+import java.util.HashMap;
+
+class Solution {
+    public int totalFruit(int[] fruits) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int left = 0;
+        int maxFruits = 0;
+        for (int right = 0; right < fruits.length; right++) {
+            // Add current fruit to map
+            map.put(fruits[right], map.getOrDefault(fruits[right], 0) + 1);
+            // If more than 2 types, shrink window
+            while (map.size() > 2) {
+                map.put(fruits[left], map.get(fruits[left]) - 1);
+                if (map.get(fruits[left]) == 0) {
+                    map.remove(fruits[left]);
+                }
+                left++;
+            }
+            // Update maximum fruits collected
+            maxFruits = Math.max(maxFruits, right - left + 1);
+        }
+        return maxFruits;
+    }
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        int n = sc.nextInt(); // Number of trees
+        int[] fruits = new int[n];
+        for (int i = 0; i < n; i++) {
+            fruits[i] = sc.nextInt(); // Fruit types on the trees
+        }
+        System.out.println(solution.totalFruit(fruits)); // Output result
+    }
+}
 
 ```
 
