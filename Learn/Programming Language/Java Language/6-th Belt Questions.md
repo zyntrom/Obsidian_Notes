@@ -769,6 +769,59 @@ public class Solution {
 ![[Pasted image 20260107085821.png]]
 
 ```java
+import java.util.*;
+
+class Solution {
+    public int bagOfTokensScore(int[] tokens, int power) {
+        // Sort tokens
+        Arrays.sort(tokens);
+        int left = 0;
+        int right = tokens.length - 1;
+        int score = 0;
+        int maxScore = 0;
+        while (left <= right) {
+            // Face-up move (gain score)
+            if (power >= tokens[left]) {
+                power -= tokens[left];
+                score++;
+                left++;
+                maxScore = Math.max(maxScore, score);
+            }
+            // Face-down move (gain power)
+            else if (score >= 1) {
+                power += tokens[right];
+                score--;
+                right--;
+            }
+            // No valid move
+            else {
+                break;
+            }
+        }
+        return maxScore;
+    }
+    public static void main(String[] args) {
+        // Input number of tokens
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        // Input the tokens array
+        int[] tokens = new int[n];
+        for (int i = 0; i < n; i++) {
+            tokens[i] = scanner.nextInt();
+        }
+        // Input the initial power
+        int power = scanner.nextInt();
+        // Create a solution object and call the function
+        Solution solution = new Solution();
+        System.out.println(solution.bagOfTokensScore(tokens, power));
+        scanner.close();
+    }
+}
+```
+
+![[Pasted image 20260107090500.png]]
+
+```java
 
 ```
 
