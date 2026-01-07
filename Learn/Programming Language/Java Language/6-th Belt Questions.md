@@ -698,6 +698,11 @@ public class Solution {
     }
     //Template
 }
+```
+
+![[Pasted image 20260107084601.png]]
+
+```java
 
 ```
 
