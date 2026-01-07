@@ -856,6 +856,46 @@ class Solution {
         System.out.println(solution.totalFruit(fruits)); // Output result
     }
 }
+```
+
+![[Pasted image 20260107091118.png]]
+
+```java
+import java.util.Scanner;
+
+public class Solution {
+
+    public static int longestOnes(int[] nums, int k) {
+        int left = 0;
+        int zeroCount = 0;
+        int maxLen = 0;
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] == 0) {
+                zeroCount++;
+            }
+            // Shrink window if zero flips exceed k
+            while (zeroCount > k) {
+                if (nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++;
+            }
+            // Update max length
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); // Length of the array
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt(); // Binary array
+        }
+        int k = sc.nextInt(); // Maximum flips allowed
+        System.out.println(longestOnes(nums, k));
+    }
+}
 
 ```
 
