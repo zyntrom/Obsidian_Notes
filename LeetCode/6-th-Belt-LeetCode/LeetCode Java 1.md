@@ -117,35 +117,30 @@ aspectRatio: "52"
 
 ```java
 import java.util.*;
-
 class Solution {
-    public int[] numMovesStonesII(int[] stones) {
-        Arrays.sort(stones);
-        int n = stones.length;
-        int max1 = stones[n - 1] - stones[1] - (n - 1);
-        int max2 = stones[n - 2] - stones[0] - (n - 1);
-        int maxMoves = Math.max(max1, max2);
-        int minMoves = Integer.MAX_VALUE;
-        int left = 0;
-        for (int right = 0; right < n; right++) {
-            while (stones[right] - stones[left] + 1 > n) {
-                left++;
-            }
-            int inWindow = right - left + 1;
-            int missing = n - inWindow;
-            
-            
-            if (inWindow == n - 1 && 
-	            stones[right] - stones[left] + 1 == n - 1) 
-	        {
-	            missing = 2;
-            }
-            minMoves = Math.min(minMoves, missing);
-        }
-        return new int[]{minMoves, maxMoves+1};
-    }
+	public int[] numMovesStonesII(int[] stones) {
+		Arrays.sort(stones);
+		int n =stones.length;
+		int max1= stones[n-1] -stones[1] -(n-2);
+		int max2 =stones[n-2] -stones[0]-(n-2);
+		int maxMoves =Math.max(max1,max2);
+		int minMoves = Integer.MAX_VALUE;
+		for(int i=0;i<n;i++){
+			int j=i;
+			while((j+1) <n && stones[j+1]-stones[i]+1<=n){
+				j++;
+			}
+			int stonesInWindow=j-i+1;
+			if(stonesInWindow ==n-1 && stones[j]-stones[i]+1 ==n-1){
+				minMoves = Math.min(minMoves,2);
+			}
+			else{
+				minMoves =Math.min(minMoves,n-stonesInWindow);
+			}
+		}
+		return new int[] {minMoves,minMoves};
+	}
 }
-
 ```
 
 ## 2592. Maximize Greatness of an Array
