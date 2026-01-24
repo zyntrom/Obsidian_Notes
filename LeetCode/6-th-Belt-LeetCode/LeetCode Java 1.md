@@ -21,7 +21,7 @@ class Solution {
         }
         if (i >= 0) {
             int j = n - 1;
-            while (nums[j] <= nums[i]) {
+            while (nums[i] >= nums[j]) {
                 j--;
             }
             swap(nums, i, j);
