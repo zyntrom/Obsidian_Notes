@@ -1,3 +1,20 @@
+## Important inbuilt functions in all Lang--
+
+### Sort
+
+```java
+import java.util.Arrays;
+Arrays.sort(arr);
+```
+
+```c++
+#include <algorithm>
+sort(arr,arr+n) //pass in first and last pointer of the array
+```
+
+```python
+
+```
 ## 31. Next Permutation 
 - [x] Check 
 ### Array Manipulation
