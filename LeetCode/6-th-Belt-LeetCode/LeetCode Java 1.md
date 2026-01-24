@@ -18,8 +18,10 @@ sorted(arr) #returns new sorted array
 ```
 
 ```js
-
+arr.sort((a,b)=> a-b) //Sorts in accending order b-a for decending order
 ```
+
+
 ## 31. Next Permutation 
 - [x] Check 
 ### Array Manipulation
