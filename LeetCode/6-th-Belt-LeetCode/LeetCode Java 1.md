@@ -138,7 +138,7 @@ class Solution {
 				minMoves =Math.min(minMoves,n-stonesInWindow);
 			}
 		}
-		return new int[] {minMoves,minMoves};
+		return new int[] {minMoves,maxMoves};
 	}
 }
 ```
