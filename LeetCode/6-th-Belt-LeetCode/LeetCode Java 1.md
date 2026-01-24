@@ -233,18 +233,21 @@ aspectRatio: "52"
 
 ```java
 import java.util.*;
-
 class Solution {
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        List<int[]> fractions = new ArrayList<>();
+        List<int[]> frac = new ArrayList<>();
         int n = arr.length;
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                fractions.add(new int[]{arr[i], arr[j]});
+                frac.add(new int[]{arr[i], arr[j]});
             }
         }
-        fractions.sort((a, b) -> a[0] * b[1] - b[0] * a[1]);
-        return fractions.get(k - 1);
+        Collections.sort(frac, (a, b) -> {
+            double f1 = (double) a[0] / a[1];
+            double f2 = (double) b[0] / b[1];
+            return Double.compare(f1, f2);
+        });
+        return frac.get(k - 1);
     }
 }
 
