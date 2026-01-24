@@ -4,7 +4,7 @@
 
 ```java
 import java.util.Arrays;
-Arrays.sort(arr);
+Arrays.sort(arr); //sorts in place
 ```
 
 ```c++
@@ -13,6 +13,11 @@ sort(arr,arr+n) //pass in first and last pointer of the array
 ```
 
 ```python
+arr.sort(); # sorts in place
+sorted(arr) #returns new sorted array 
+```
+
+```js
 
 ```
 ## 31. Next Permutation 
