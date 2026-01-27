@@ -164,7 +164,7 @@ class Solution {
 ```
 
 ## 646. Maximum Length of Pair Chain
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Maximum Length of Pair Chain - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
