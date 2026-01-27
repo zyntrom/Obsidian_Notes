@@ -250,15 +250,13 @@ aspectRatio: "52"
 class Solution {
     public boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) return true;
-        // Step 1: find middle (slow stops at midpoint)
+        
         ListNode slow = head, fast = head;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-        // Step 2: reverse second half
         ListNode second = reverse(slow);
-        // Step 3: compare both halves
         ListNode first = head;
         while (second != null) {
             if (first.val != second.val) 
@@ -279,5 +277,4 @@ class Solution {
         return prev;
     }
 }
-
 ```
