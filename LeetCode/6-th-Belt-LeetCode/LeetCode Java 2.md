@@ -267,12 +267,14 @@ class Solution {
         return true;
     }
     private ListNode reverse(ListNode head) {
+        ListNode next = null;
+        ListNode curr=head;
         ListNode prev = null;
         while (head != null) {
-            ListNode next = head.next;
-            head.next = prev;
-            prev = head;
-            head = next;
+			next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
         return prev;
     }
