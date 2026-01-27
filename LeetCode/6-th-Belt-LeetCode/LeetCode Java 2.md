@@ -1,5 +1,5 @@
 ## 60. Permutation Sequence
-- [ ] Check 
+- [x] Check 
 ### Math/Factorial
 
 ```embed

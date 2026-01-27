@@ -21,6 +21,28 @@ sorted(arr) #returns new sorted array
 arr.sort((a,b)=> a-b) //Sorts in accending order b-a for decending order
 ```
 
+### Math max and min
+
+```java
+int mx = Math.max(a, b);
+int mn = Math.min(a, b);
+```
+
+```c++
+#include <algorithm>
+int mx = max(a, b);
+int mn = min(a, b);
+```
+
+```python
+mx = max(a, b)
+mn = min(a, b)
+```
+
+```js
+let mx = Math.max(a, b);
+let mn = Math.min(a, b);
+```
 
 ## 31. Next Permutation 
 - [x] Check 
