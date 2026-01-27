@@ -68,7 +68,7 @@ class Solution {
 ```
 
 ## 53. Maximum Subarray
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Maximum Subarray - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
