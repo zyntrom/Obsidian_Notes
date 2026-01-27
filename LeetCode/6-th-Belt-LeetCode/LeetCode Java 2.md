@@ -126,7 +126,7 @@ class Solution {
 ```
 
 ## 5. Longest Palindromic Substring
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Longest Palindromic Substring - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
