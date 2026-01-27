@@ -35,7 +35,7 @@ class Solution {
 ```
 
 ## 1823. Find the Winner of the Circular Game
-- [ ] Check 
+- [x] Check 
 ### Queue/Simulation
 
 ```embed
@@ -48,17 +48,23 @@ aspectRatio: "52"
 ```
 
 ```java
+import java.util.*;
 class Solution {
     public int findTheWinner(int n, int k) {
-        int winner = 0; // 0-based index
+        List<Integer> players = new ArrayList<>();
         
         for (int i = 1; i <= n; i++) {
-            winner = (winner + k) % i;
+            players.add(i);
         }
-        
-        return winner + 1; // convert to 1-based
+        int index = 0;
+        while (players.size() > 1) {
+            index = (index + k - 1) % players.size();
+            players.remove(index);
+        }
+        return players.get(0);
     }
 }
+
 ```
 
 ## 53. Maximum Subarray
