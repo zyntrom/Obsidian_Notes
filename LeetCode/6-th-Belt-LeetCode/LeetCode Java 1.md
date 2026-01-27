@@ -272,5 +272,61 @@ class Solution {
         return frac.get(k - 1);
     }
 }
+```
+
+```c++
+#include <vector>
+#include <algorithm>
+using namespace std;
+class Solution {
+public:
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+        vector<vector<int>> frac;
+        int n = arr.size();
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                frac.push_back({arr[i], arr[j]});
+            }
+        }
+        sort(frac.begin(), frac.end(), [](auto &a, auto &b) {
+            double f1 = (double)a[0] / a[1];
+            double f2 = (double)b[0] / b[1];
+            return f1 < f2;
+        });
+        return frac[k - 1];
+    }
+};
+
+```
+
+```python
+class Solution:
+    def kthSmallestPrimeFraction(self, arr, k):
+        frac = []
+        n = len(arr)
+        for i in range(n):
+            for j in range(i + 1, n):
+                frac.append([arr[i], arr[j]])
+        frac.sort(key=lambda x: x[0] / x[1])
+        return frac[k - 1]
+
+```
+
+```js
+var kthSmallestPrimeFraction = function(arr, k) {
+    let frac = [];
+    let n = arr.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            frac.push([arr[i], arr[j]]);
+        }
+    }
+    frac.sort((a, b) => {
+        let f1 = a[0] / a[1];
+        let f2 = b[0] / b[1];
+        return f1 - f2;
+    });
+    return frac[k - 1];
+};
 
 ```
