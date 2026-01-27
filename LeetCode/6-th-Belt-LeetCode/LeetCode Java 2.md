@@ -15,30 +15,23 @@ aspectRatio: "52"
 class Solution {
     public String getPermutation(int n, int k) {
         List<Integer> nums = new ArrayList<>();
-        int[] fact = new int[n];
-        
-        // prepare factorials
-        fact[0] = 1;
-        for(int i = 1; i < n; i++) 
-            fact[i] = fact[i - 1] * i;
-        
-        // list of numbers 1 to n
-        for(int i = 1; i <= n; i++)
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
             nums.add(i);
-        
-        // convert k to 0-based index
-        k--;
+            fact *= i;
+        }
+        k--;  
         StringBuilder sb = new StringBuilder();
-        
-        for(int i = n; i >= 1; i--) {
-            int idx = k / fact[i - 1];
-            sb.append(nums.get(idx));
-            nums.remove(idx);
-            k %= fact[i - 1];
+        for (int i = n; i > 0; i--) {
+            fact /= i;          
+            int idx = k / fact;      
+            sb.append(nums.remove(idx)); 
+            k %= fact;               
         }
         return sb.toString();
     }
 }
+
 ```
 
 ## 1823. Find the Winner of the Circular Game
