@@ -48,23 +48,15 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.*;
 class Solution {
-    public int findTheWinner(int n, int k) {
-        List<Integer> players = new ArrayList<>();
-        
-        for (int i = 1; i <= n; i++) {
-            players.add(i);
-        }
-        int index = 0;
-        while (players.size() > 1) {
-            index = (index + k - 1) % players.size();
-            players.remove(index);
-        }
-        return players.get(0);
-    }
+	public int findTheWinner(int n, int k) {
+		int winner =0;
+		for(int i=1;i<=n;i++){
+			winner= (winner+k)%i;
+		}
+		return winner+1;
+	}
 }
-
 ```
 
 ## 53. Maximum Subarray
