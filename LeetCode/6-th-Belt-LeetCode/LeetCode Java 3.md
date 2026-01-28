@@ -12,30 +12,29 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    private static final String[] KEYPAD = {
-        "", "", "abc", "def", "ghi", 
-        "jkl", "mno", "pqrs", "tuv", "wxyz"
-    };
+
+    String[] map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    List<String> ans = new ArrayList<>();
+
     public List<String> letterCombinations(String digits) {
-        List<String> result = new ArrayList<>();
-        if (digits.length() == 0) return result;
-        backtrack(result, new StringBuilder(), digits, 0);
-        return result;
+        if (digits.isEmpty()) return ans;
+        backtrack(digits, 0, new StringBuilder());
+        return ans;
     }
-    private void backtrack(List<String> result, StringBuilder current, String digits, int index) {
+    void backtrack(String digits, int index, StringBuilder cur) {
         if (index == digits.length()) {
-            result.add(current.toString());
+            ans.add(cur.toString());
             return;
         }
-        String letters = KEYPAD[digits.charAt(index) - '0'];
-        for (char c : letters.toCharArray()) {
-            current.append(c);
-            backtrack(result, current, digits, index + 1);
-            current.deleteCharAt(current.length() - 1); // undo
+        
+        String letters = map[digits.charAt(index) - '0'];
+        for (char ch : letters.toCharArray()) {
+            cur.append(ch);                 // choose
+            backtrack(digits, index + 1, cur); // explore
+            cur.deleteCharAt(cur.length() - 1); // un-choose (undo)
         }
     }
 }
-
 ```
 
 ## 46. Permutations
