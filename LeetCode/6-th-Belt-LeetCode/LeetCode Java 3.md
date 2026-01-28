@@ -57,7 +57,12 @@ class Solution {
         backtrack(nums, used, new ArrayList<>(), result);
         return result;
     }
-    private void backtrack(int[] nums, boolean[] used, List<Integer> current, List<List<Integer>> result) {
+    private void backtrack(
+	    int[] nums, 
+	    boolean[] used, 
+	    List<Integer> current, 
+	    List<List<Integer>> result
+	) {
         if (current.size() == nums.length) {
             result.add(new ArrayList<>(current));
             return;
