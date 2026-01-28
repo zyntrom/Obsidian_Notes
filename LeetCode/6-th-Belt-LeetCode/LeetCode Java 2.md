@@ -180,7 +180,7 @@ class Solution {
             if (pairs[i][0] > lastEnd) {
                 count++;
                 lastEnd = pairs[i][1];
-            }
+            } 
         }
         
         return count;
