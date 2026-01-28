@@ -51,32 +51,30 @@ aspectRatio: "52"
 
 ```java
 class Solution {
+
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        boolean[] used = new boolean[num.length];
-        backtrack(nums, used, new ArrayList<>(), result);
-        return result;
+        List<List<Integer>> ans = new ArrayList<>();
+        backtrack(nums, new ArrayList<>(), ans);
+        return ans;
     }
-    private void backtrack(
+    void backtrack(
 	    int[] nums, 
-	    boolean[] used, 
-	    List<Integer> current, 
-	    List<List<Integer>> result
+	    List<Integer> curr, 
+	    List<List<Integer>> ans
 	) {
-        if (current.size() == nums.length) {
-            result.add(new ArrayList<>(current));
+        if (curr.size() == nums.length) {
+            ans.add(new ArrayList<>(curr));
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (used[i]) continue;
-            used[i] = true;
-            current.add(nums[i]);
-            backtrack(nums, used, current, result);
-            current.remove(current.size() - 1);
-            used[i] = false;
+            if (curr.contains(nums[i])) continue; // already used
+            curr.add(nums[i]);        // choose
+            backtrack(nums, curr, ans); // explore
+            curr.remove(curr.size() - 1); // undo
         }
     }
 }
+
 ```
 
 ## 51. N-Queens
