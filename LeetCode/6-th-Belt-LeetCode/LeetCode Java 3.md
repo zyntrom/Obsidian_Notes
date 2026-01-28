@@ -77,7 +77,6 @@ class Solution {
         }
     }
 }
-
 ```
 
 ## 51. N-Queens
