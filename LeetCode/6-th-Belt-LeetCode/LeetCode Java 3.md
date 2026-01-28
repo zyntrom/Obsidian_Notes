@@ -13,7 +13,8 @@ aspectRatio: "52"
 ```java
 class Solution {
 
-    String[] map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    String[] map = 
+    {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     List<String> ans = new ArrayList<>();
 
     public List<String> letterCombinations(String digits) {
