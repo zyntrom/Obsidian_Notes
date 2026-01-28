@@ -67,10 +67,10 @@ class Solution {
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if (curr.contains(nums[i])) continue; // already used
-            curr.add(nums[i]);        // choose
-            backtrack(nums, curr, ans); // explore
-            curr.remove(curr.size() - 1); // undo
+            if (curr.contains(nums[i])) continue; 
+            curr.add(nums[i]);        
+            backtrack(nums, curr, ans); 
+            curr.remove(curr.size() - 1); 
         }
     }
 }
