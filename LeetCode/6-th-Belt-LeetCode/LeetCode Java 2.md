@@ -190,7 +190,7 @@ class Solution {
 ```
 
 ## 21. Merge Two Sorted Lists
-- [ ] Check 
+- [x] Check 
 ### Linked List Manipulation
 
 ```embed
@@ -226,7 +226,7 @@ class Solution {
 ```
 
 ## 234. Palindrome Linked List
-- [ ] Check 
+- [x] Check 
 ### Linked List/Two Pointers
 
 ```embed
