@@ -411,24 +411,29 @@ class Solution {
         backtrack(0, s, new ArrayList<>(), res);
         return res;
     }
-    private void backtrack(int start, String s, List<String> path, List<List<String>> res) {
-        if (start == s.length()) {
+    void backtrack(
+	    int start, 
+	    String s,
+        List<String> path, 
+        List<List<String>> res
+    ) {
+        if (start == s.length()) {     
             res.add(new ArrayList<>(path));
             return;
         }
-
         for (int end = start; end < s.length(); end++) {
-            if (isPalindrome(s, start, end)) {
-                path.add(s.substring(start, end + 1));
-                backtrack(end + 1, s, path, res);
-                path.remove(path.size() - 1);
+            if (isPal(s, start, end)) {
+                path.add(s.substring(start, end + 1)); 
+                backtrack(end + 1, s, path, res);      
+                path.remove(path.size() - 1);          
             }
         }
     }
-    private boolean isPalindrome(String s, int l, int r) {
-        while (l < r) {
-            if (s.charAt(l++) != s.charAt(r--)) return false;
-        }
+
+    boolean isPal(String s, int l, int r) {
+        while (l < r)
+            if (s.charAt(l++) != s.charAt(r--))
+                return false;
         return true;
     }
 }
@@ -454,9 +459,12 @@ class Solution {
         return res;
     }
 
-    private void backtrack(int index, int[] nums, List<Integer> path, List<List<Integer>> res) {
+    private void backtrack(
+	    int index, int[] nums, 
+	    List<Integer> path, 
+	    List<List<Integer>> res
+	) {
         res.add(new ArrayList<>(path));
-
         for (int i = index; i < nums.length; i++) {
             path.add(nums[i]);
             backtrack(i + 1, nums, path, res);
@@ -485,23 +493,26 @@ class Solution {
         backtrack(arr, 0, "", 0);
         return max;
     }
-    private void backtrack(List<String> arr, int index, String current, int length) {
-        max = Math.max(max, length);
-        for (int i = index; i < arr.size(); i++) {
-            String next = arr.get(i);
-            if (isUnique(current, next)) {
-                backtrack(arr, i + 1, current + next, length + next.length());
+    void backtrack(List<String> arr, int idx,
+                   String cur, int len) {
+        max = Math.max(max, len);
+        for (int i = idx; i < arr.size(); i++) {
+            if (isUnique(cur, arr.get(i))) {
+                backtrack(
+	                arr, i + 1,
+                    cur + arr.get(i),
+                    len + arr.get(i).length()
+                );
             }
         }
     }
-    private boolean isUnique(String current, String next) {
+    boolean isUnique(String a, String b) {
         int[] freq = new int[26];
-        for (char c : current.toCharArray()) {
+        for (char c : a.toCharArray())
             freq[c - 'a']++;
-        }
-        for (char c : next.toCharArray()) {
-            if (freq[c - 'a']++ > 0) return false;
-        }
+        for (char c : b.toCharArray())
+            if (freq[c - 'a']++ > 0)
+                return false;
         return true;
     }
 }
