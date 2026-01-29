@@ -181,38 +181,32 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(candidates);  
-        backtrack(candidates, target, 0, new ArrayList<>(), result);
-        return result;
+    public List<List<Integer>> combinationSum(int[] nums, int target) {
+        Arrays.sort(nums); 
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(nums, target, 0, new ArrayList<>(), res);
+        return res;
     }
-    private void backtrack(
-	    int[] candidates, 
+
+    void backtrack(
+	    int[] nums, 
 	    int target, 
-	    int start, 
-        List<Integer> temp, 
-        List<List<Integer>> result
+	    int start,
+        List<Integer> curr, 
+        List<List<Integer>> res
     ) {
         if (target == 0) {
-            result.add(new ArrayList<>(temp));
+            res.add(new ArrayList<>(curr));
             return;
         }
-        for (int i = start; i < candidates.length; i++) {
-            if (candidates[i] > target) break;  // optimization
-            temp.add(candidates[i]);
-            backtrack(
-	            candidates, 
-	            target - candidates[i], 
-	            i, 
-	            temp, 
-	            result
-	        ); 
-            temp.remove(temp.size() - 1);
+        for (int i = start; i < nums.length; i++) {
+            if (nums[i] > target) break;
+            curr.add(nums[i]);
+            backtrack(nums, target - nums[i], i, curr, res);
+            curr.remove(curr.size() - 1);
         }
     }
 }
-
 ```
 
 ## 40. Combination Sum II
@@ -228,27 +222,32 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(candidates); // important to skip duplicates
-        backtrack(candidates, target, 0, new ArrayList<>(), result);
-        return result;
+    public List<List<Integer>> combinationSum2(
+	    int[] nums, 
+	    int target
+	) {
+        Arrays.sort(nums);   
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(nums, target, 0, new ArrayList<>(), res);
+        return res;
     }
-    private void backtrack(int[] nums, int target, int start,
-            List<Integer> temp, List<List<Integer>> result) {
+    void backtrack(
+	    int[] nums, 
+	    int target, 
+	    int start,
+        List<Integer> curr, 
+        List<List<Integer>> res
+    ){
         if (target == 0) {
-            result.add(new ArrayList<>(temp));
+            res.add(new ArrayList<>(curr));
             return;
         }
         for (int i = start; i < nums.length; i++) {
-            // 🔥 Avoid duplicates at the same tree level
             if (i > start && nums[i] == nums[i - 1]) continue;
-            // If the number exceeds target, no need to continue
             if (nums[i] > target) break;
-            temp.add(nums[i]);
-            backtrack(nums, target - nums[i], i + 1, temp, result); 
-            // move i+1 because we can't reuse
-            temp.remove(temp.size() - 1);
+            curr.add(nums[i]);
+            backtrack(nums, target - nums[i], i + 1, curr, res); 
+            curr.remove(curr.size() - 1);
         }
     }
 }
