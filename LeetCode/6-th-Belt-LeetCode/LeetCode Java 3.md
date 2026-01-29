@@ -88,6 +88,47 @@ aspectRatio: "52"
 ```
 
 ```java
+class Solution {
+    List<List<String>> ans = new ArrayList<>();
+    boolean[] col, diag1, diag2;
+    int n;
+
+    public List<List<String>> solveNQueens(int n) {
+        this.n = n;
+        col = new boolean[n];
+        diag1 = new boolean[2 * n];
+        diag2 = new boolean[2 * n];
+        char[][] board = new char[n][n];
+        for (char[] r : board) Arrays.fill(r, '.');
+        backtrack(0, board);
+        return ans;
+    }
+    void backtrack(int row, char[][] board) {
+        if (row == n) {
+            ans.add(toList(board));
+            return;
+        }
+        
+        for (int c = 0; c < n; c++) {
+            int d1 = row - c + n;
+            int d2 = row + c;
+            
+            if (col[c] || diag1[d1] || diag2[d2]) continue;
+            board[row][c] = 'Q';
+            col[c] = diag1[d1] = diag2[d2] = true;
+            
+            backtrack(row + 1, board); 
+            
+            board[row][c] = '.';
+            col[c] = diag1[d1] = diag2[d2] = false;
+        }
+    }
+    List<String> toList(char[][] board) {
+        List<String> res = new ArrayList<>();
+        for (char[] r : board) res.add(new String(r));
+        return res;
+    }
+}
 
 ```
 
