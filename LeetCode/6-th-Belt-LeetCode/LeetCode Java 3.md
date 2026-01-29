@@ -531,31 +531,36 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-
+    int max = 0;
     public int getMaximumGold(int[][] grid) {
-        int m = grid.length, n = grid[0].length;
-        int max = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] != 0) {
-                    max = Math.max(max, dfs(grid, i, j));
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] > 0) {
+                    backtrack(grid, i, j, 0);
                 }
             }
         }
         return max;
     }
-    private int dfs(int[][] grid, int i, int j) {
-        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0)
-            return 0;
+    void backtrack(int[][] grid, int i, int j, int sum) {
+        if (
+	        i < 0 || 
+	        j < 0 || 
+	        i == grid.length || 
+	        j == grid[0].length || 
+	        grid[i][j] == 0
+	    )return;
         int gold = grid[i][j];
-        grid[i][j] = 0;  // mark visited
-        int up = dfs(grid, i - 1, j);
-        int down = dfs(grid, i + 1, j);
-        int left = dfs(grid, i, j - 1);
-        int right = dfs(grid, i, j + 1);
-        grid[i][j] = gold; // unmark
-        return gold + Math.max(Math.max(up, down), Math.max(left, right));
+        grid[i][j] = 0;
+        sum += gold;
+        max = Math.max(max, sum);
+        backtrack(grid, i + 1, j, sum);
+        backtrack(grid, i - 1, j, sum);
+        backtrack(grid, i, j + 1, sum);
+        backtrack(grid, i, j - 1, sum);
+        grid[i][j] = gold;
     }
 }
+
 ```
 
