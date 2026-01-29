@@ -217,20 +217,23 @@ import java.util.*;
 
 class Solution {
     public int longestConsecutive(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        int maxLength = 1;
-        int currLength = 1;
-        if (n <= 0) return 0;
-        for (int i = 1; i < n; i++) {
-            if (nums[i] == nums[i - 1]) {
-                continue;
-            } else if (nums[i] == nums[i - 1] + 1) {
-                currLength++;
-            } else {
-                currLength = 1;
+        if (nums.length == 0) return 0;
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int maxLength = 0;
+        for (int num : set) {
+        
+            if (!set.contains(num - 1)) {
+                int currNum = num;
+                int currLength = 1;
+                while (set.contains(currNum + 1)) {
+                    currNum++;
+                    currLength++;
+                }
+                maxLength = Math.max(maxLength, currLength);
             }
-            maxLength = Math.max(maxLength, currLength);
         }
         return maxLength;
     }
