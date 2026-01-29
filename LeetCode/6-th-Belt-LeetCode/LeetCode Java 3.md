@@ -352,34 +352,42 @@ aspectRatio: "52"
 class Solution {
     public boolean exist(char[][] board, String word) {
         int m = board.length, n = board[0].length;
-        char[] w = word.toCharArray();
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (board[i][j] == w[0] && dfs(board, i, j, w, 0)) {
+                if (backtrack(board, word, i, j, 0))
                     return true;
-                }
             }
         }
         return false;
     }
-    private boolean dfs(char[][] board, int i, int j, char[] w, int k) {
-        if (board[i][j] != w[k]) return false;
-        if (k == w.length - 1) return true;
-        char tmp = board[i][j];
-        board[i][j] = '#'; // mark visited
-        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
-        for (int[] d : dirs) {
-            int ni = i + d[0], nj = j + d[1];
-            if (ni >= 0 && ni < board.length && nj >= 0 && nj < board[0].length && board[ni][nj] != '#') {
-                if (dfs(board, ni, nj, w, k + 1)) {
-                    board[i][j] = tmp;
-                    return true;
-                }
-            }
-        }
-        board[i][j] = tmp; // unmark
-        return false;
+
+    boolean backtrack(
+	    char[][] board, 
+	    String word,
+        int i, 
+        int j, 
+        int idx
+    ) {
+        if (idx == word.length()) return true;
+        if (
+	        i < 0 || 
+	        j < 0 || 
+	        i == board.length || 
+	        j == board[0].length
+	    )return false;
+	    
+        if (board[i][j] != word.charAt(idx))
+            return false;
+        char temp = board[i][j];
+        board[i][j] = '#';        
+        boolean found =
+              backtrack(board, word, i + 1, j, idx + 1)
+           || backtrack(board, word, i - 1, j, idx + 1)
+           || backtrack(board, word, i, j + 1, idx + 1)
+           || backtrack(board, word, i, j - 1, idx + 1);
+        board[i][j] = temp;
+        return found;
     }
 }
 
