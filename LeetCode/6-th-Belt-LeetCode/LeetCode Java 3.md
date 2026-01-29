@@ -1,6 +1,6 @@
 # Backtracking --
 ## 17. Letter Combinations of a Phone Number
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Letter Combinations of a Phone Number - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
