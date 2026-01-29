@@ -268,29 +268,33 @@ aspectRatio: "52"
 ```java
 class Solution {
     public List<List<Integer>> findSubsequences(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), result);
-        return result;
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(0, nums, new ArrayList<>(), res);
+        return res;
     }
-    private void backtrack(int index, int[] nums, List<Integer> path, List<List<Integer>> result) {
+    void backtrack(
+	    int idx, 
+	    int[] nums,
+        List<Integer> path, 
+        List<List<Integer>> res
+    ) {
         if (path.size() >= 2) {
-            result.add(new ArrayList<>(path));
+            res.add(new ArrayList<>(path));
         }
-        HashSet<Integer> used = new HashSet<>(); 
-        // avoid duplicates at same level
-        for (int i = index; i < nums.length; i++) {
-            // skip duplicates at this depth
-            if (used.contains(nums[i])) continue;
-            // enforce non-decreasing order
-            if (!path.isEmpty() && nums[i] < path.get(path.size() - 1)) continue;
-            used.add(nums[i]);    // mark used at this recursion level
+        HashSet<Integer> used = new HashSet<>();
+        for (int i = idx; i < nums.length; i++) {
+            if (used.contains(nums[i])) continue; 
+            if (
+	            !path.isEmpty() && 
+	            nums[i] < path.get(path.size() - 1)
+	        ) continue;
+            used.add(nums[i]);      
             path.add(nums[i]);
-            backtrack(i + 1, nums, path, result);
-            path.remove(path.size() - 1);
+            backtrack(i + 1, nums, path, res);
+            path.remove(path.size() - 1); 
         }
     }
 }
-
 ```
 
 ## 22. Generate Parentheses
@@ -307,30 +311,30 @@ aspectRatio: "52"
 ```java
 class Solution {
     public List<String> generateParenthesis(int n) {
-        List<String> result = new ArrayList<>();
-        backtrack(result, new StringBuilder(), 0, 0, n);
-        return result;
+        List<String> res = new ArrayList<>();
+        backtrack(res, new StringBuilder(), 0, 0, n);
+        return res;
     }
-    private void backtrack(List<String> result, StringBuilder sb, int open, int close, int n) {
-        // if the constructed string is of length 2*n, it's a valid combo
-        if (sb.length() == 2 * n) {
-            result.add(sb.toString());
+    void backtrack(List<String> res, StringBuilder cur,
+                   int open, int close, int n) {
+        if (cur.length() == 2 * n) {   
+            res.add(cur.toString());
             return;
         }
-        // add '(' if we can still place more opens
         if (open < n) {
-            sb.append('(');
-            backtrack(result, sb, open + 1, close, n);
-            sb.deleteCharAt(sb.length() - 1);
+            cur.append('(');
+            backtrack(res, cur, open + 1, close, n);
+            cur.deleteCharAt(cur.length() - 1);
         }
-        // add ')' if close < open
+
         if (close < open) {
-            sb.append(')');
-            backtrack(result, sb, open, close + 1, n);
-            sb.deleteCharAt(sb.length() - 1);
+            cur.append(')');
+            backtrack(res, cur, open, close + 1, n);
+            cur.deleteCharAt(cur.length() - 1);
         }
     }
 }
+
 ```
 
 ## 79. Word Search
