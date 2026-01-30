@@ -298,7 +298,7 @@ class Solution {
 ```
 
 ## 22. Generate Parentheses
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Generate Parentheses - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
