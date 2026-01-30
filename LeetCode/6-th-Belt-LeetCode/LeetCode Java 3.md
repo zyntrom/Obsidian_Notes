@@ -460,7 +460,8 @@ class Solution {
     }
 
     private void backtrack(
-	    int index, int[] nums, 
+	    int index, 
+	    int[] nums, 
 	    List<Integer> path, 
 	    List<List<Integer>> res
 	) {
