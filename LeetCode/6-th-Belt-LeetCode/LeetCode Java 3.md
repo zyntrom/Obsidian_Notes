@@ -39,7 +39,7 @@ class Solution {
 ```
 
 ## 46. Permutations
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Permutations - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -77,7 +77,7 @@ class Solution {
 ```
 
 ## 51. N-Queens
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "N-Queens - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -133,7 +133,7 @@ class Solution {
 ```
 
 ## 526. Beautiful Arrangement
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Beautiful Arrangement - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -169,7 +169,7 @@ class Solution {
 ```
 
 ## 39. Combination Sum
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Combination Sum - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -210,7 +210,7 @@ class Solution {
 ```
 
 ## 40. Combination Sum II
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Combination Sum II - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -255,7 +255,7 @@ class Solution {
 ```
 
 ## 491. Non-decreasing Subsequences
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Non-decreasing Subsequences - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
