@@ -224,7 +224,6 @@ class Solution {
         }
         int maxLength = 0;
         for (int num : set) {
-        
             if (!set.contains(num - 1)) {
                 int currNum = num;
                 int currLength = 1;
