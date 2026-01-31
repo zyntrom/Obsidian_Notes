@@ -511,8 +511,8 @@ class Solution {
         for (char c : a.toCharArray())
             freq[c - 'a']++;
         for (char c : b.toCharArray())
-            if (freq[c - 'a']++ > 0)
-                return false;
+	        if (freq[c - 'a']++ > 0)
+		        return false;
         return true;
     }
 }
