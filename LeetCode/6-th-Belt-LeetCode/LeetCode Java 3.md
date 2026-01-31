@@ -337,7 +337,7 @@ class Solution {
 ```
 
 ## 79. Word Search
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Word Search - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -393,7 +393,7 @@ class Solution {
 ```
 
 ## 131. Palindrome Partitioning
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Palindrome Partitioning - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -440,7 +440,7 @@ class Solution {
 ```
 
 ## 78. Subsets
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Subsets - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -476,7 +476,7 @@ class Solution {
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Maximum Length of a Concatenated String with Unique Characters - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -519,7 +519,7 @@ class Solution {
 ```
 
 ## 1219. Path with Maximum Gold
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Path with Maximum Gold - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
