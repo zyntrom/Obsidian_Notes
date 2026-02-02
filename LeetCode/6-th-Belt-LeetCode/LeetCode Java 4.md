@@ -173,7 +173,7 @@ class Solution {
             if (matches(freq1, freq2)) return true;
         }
         return false;
-    }
+    } 
     boolean matches(int[] a, int[] b) {
         for (int i = 0; i < 26; i++) {
             if (a[i] != b[i]) return false;
