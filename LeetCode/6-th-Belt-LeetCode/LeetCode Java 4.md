@@ -81,33 +81,32 @@ aspectRatio: "52"
 
 ```java 
 class Solution {
-    public int[] successfulPairs(int[] spells, int[] potions, long success) {
+    public int[] successfulPairs(
+	    int[] spells, 
+	    int[] potions, 
+	    long success
+) {
         Arrays.sort(potions);
         int n = potions.length;
-        int[] res = new int[spells.length];
+        int[] ans = new int[spells.length];
         for (int i = 0; i < spells.length; i++) {
-            long need = (success + spells[i] - 1) / spells[i]; // minimum potion needed
-            int idx = lowerBound(potions, need);
-            res[i] = (idx == -1) ? 0 : (n - idx);
-        }
-        return res;
-    }
-    private int lowerBound(int[] arr, long target) {
-        int left = 0, right = arr.length - 1;
-        int ans = -1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] >= target) {
-                ans = mid;
-                right = mid - 1;
-            } else {
-                left = mid + 1;
+            long need = (success + spells[i] - 1) / spells[i];
+            int left = 0, right = n - 1;
+            int idx = n; 
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                if (potions[mid] >= need) {
+                    idx = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
             }
+            ans[i] = n - idx;
         }
         return ans;
     }
 }
-
 ```
 
 ## 300. Longest Increasing Subsequence
