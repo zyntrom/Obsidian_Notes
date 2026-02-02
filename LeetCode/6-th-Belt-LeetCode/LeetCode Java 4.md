@@ -126,10 +126,17 @@ class Solution {
         int[] dp = new int[nums.length];
         int len = 0;
         for (int num : nums) {
-            int i = Arrays.binarySearch(dp, 0, len, num);
-            if (i < 0) i = -(i + 1); 
-            dp[i] = num;
-            if (i == len) len++;
+            int left = 0, right = len;
+            while (left < right) {
+                int mid = (left + right) / 2;
+                if (dp[mid] < num)
+                    left = mid + 1;
+                else
+                    right = mid;
+            }
+            dp[left] = num;
+            if (left == len)
+                len++;
         }
         return len;
     }
