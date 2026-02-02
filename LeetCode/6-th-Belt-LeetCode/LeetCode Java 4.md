@@ -43,50 +43,29 @@ aspectRatio: "52"
 ```java
 class Solution {
     public int maxValue(int n, int index, int maxSum) {
-        int left = 1, right = maxSum;
-        while (left < right) {
-            int mid = right - (right - left) / 2;
-            if (canPlace(n, index, maxSum, mid)) {
-                left = mid;
-            } else {
-                right = mid - 1;
-            }
+        int low = 1, high = maxSum;
+        while (low < high) {
+            int mid = (low + high + 1) / 2;
+            if (valid(n, index, maxSum, mid))
+                low = mid;
+            else
+                high = mid - 1;
         }
-        return left;
+        return low;
     }
-    private boolean canPlace(int n, int index, int maxSum, int val) {
+    private boolean valid(int n, int index, int maxSum, int val) {
         long sum = val;
-        // left side
-        int leftLen = index;
-        if (val > 1) {
-            long needed = calc(val - 1, leftLen);
-            sum += needed;
-        } else {
-            sum += leftLen;  // all must be 1
-        }
-        // right side
-        int rightLen = n - index - 1;
-        if (val > 1) {
-            long needed = calc(val - 1, rightLen);
-            sum += needed;
-        } else {
-            sum += rightLen;
-        }
+        sum += sideSum(val - 1, index);             
+        sum += sideSum(val - 1, n - index - 1);     
         return sum <= maxSum;
     }
-    private long calc(int start, int len) {
-        if (len <= start) {
-            // full decreasing sequence until 1
-            long last = start - len + 1;
-            return (long)(start + last) * len / 2;
-        } else {
-            // decreasing sequence to 1, then fill rest with ones
-            long full = (long)(start + 1) * start / 2;
-            return full + (len - start);
+    private long sideSum(int peak, int len) {
+        if (len <= peak) {
+            return (long)(peak + peak - len + 1) * len / 2;
         }
+        return (long)(peak + 1) * peak / 2 + (len - peak);
     }
 }
-
 ```
 
 ## 2300. Successful Pairs of Spells and Potions
