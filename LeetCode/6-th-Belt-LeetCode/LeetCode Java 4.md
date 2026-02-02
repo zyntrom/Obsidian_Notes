@@ -159,31 +159,28 @@ aspectRatio: "52"
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
         if (s1.length() > s2.length()) return false;
-        int[] need = new int[26];
-        int[] window = new int[26];
-        for (char c : s1.toCharArray()) need[c - 'a']++;
-        int left = 0, right = 0, required = s1.length();
-        while (right < s2.length()) {
-            char c = s2.charAt(right);
-            window[c - 'a']++;
-            if (need[c - 'a'] > 0 && window[c - 'a'] <= need[c - 'a']) {
-                required--;
+        int[] freq1 = new int[26];
+        int[] freq2 = new int[26];
+        for (char c : s1.toCharArray()) {
+            freq1[c - 'a']++;
+        }
+        int k = s1.length();
+        for (int i = 0; i < s2.length(); i++) {
+            freq2[s2.charAt(i) - 'a']++;
+            if (i >= k) {
+                freq2[s2.charAt(i - k) - 'a']--;
             }
-            if (right - left + 1 > s1.length()) {
-                char out = s2.charAt(left);
-                if (need[out - 'a'] > 0 && window[out - 'a'] <= need[out - 'a']) {
-                    required++;
-                }
-                window[out - 'a']--;
-                left++;
-            }
-            if (required == 0) return true;
-            right++;
+            if (matches(freq1, freq2)) return true;
         }
         return false;
     }
+    boolean matches(int[] a, int[] b) {
+        for (int i = 0; i < 26; i++) {
+            if (a[i] != b[i]) return false;
+        }
+        return true;
+    }
 }
-
 ```
 
 ## 904. Fruit Into Baskets
