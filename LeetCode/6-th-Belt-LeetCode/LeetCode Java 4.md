@@ -197,21 +197,25 @@ aspectRatio: "52"
 ```java
 class Solution {
     public int totalFruit(int[] fruits) {
-        Map<Integer, Integer> count = new HashMap<>();
-        int left = 0, max = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        int left = 0, ans = 0;
         for (int right = 0; right < fruits.length; right++) {
-            count.put(fruits[right], count.getOrDefault(fruits[right], 0) + 1);
-            while (count.size() > 2) {
+            map.put(
+	            fruits[right], 
+	            map.getOrDefault(fruits[right], 0) + 1
+	        );
+            while (map.size() > 2) {
                 int f = fruits[left];
-                count.put(f, count.get(f) - 1);
-                if (count.get(f) == 0) count.remove(f);
+                map.put(f, map.get(f) - 1);
+                if (map.get(f) == 0) map.remove(f);
                 left++;
             }
-            max = Math.max(max, right - left + 1);
+            ans = Math.max(ans, right - left + 1);
         }
-        return max;
+        return ans;
     }
 }
+
 ```
 
 ## 2024. Maximize the Confusion of an Exam
