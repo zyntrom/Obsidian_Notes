@@ -84,31 +84,32 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.*;
 class Solution {
-	public int[] numMovesStonesII(int[] stones) {
-		Arrays.sort(stones);
-		int n =stones.length;
-		int max1= stones[n-1] -stones[1] -(n-2);
-		int max2 =stones[n-2] -stones[0]-(n-2);
-		int maxMoves =Math.max(max1,max2);
-		int minMoves = Integer.MAX_VALUE;
-		for(int i=0;i<n;i++){
-			int j=i;
-			while((j+1) <n && stones[j+1]-stones[i]+1<=n){
-				j++;
-			}
-			int stonesInWindow=j-i+1;
-			if(stonesInWindow ==n-1 && stones[j]-stones[i]+1 ==n-1){
-				minMoves = Math.min(minMoves,2);
-			}
-			else{
-				minMoves =Math.min(minMoves,n-stonesInWindow);
-			}
-		}
-		return new int[] {minMoves,maxMoves};
-	}
-}
+public:
+    vector<int> numMovesStonesII(vector<int>& stones) {
+        sort(stones.begin(), stones.end());
+        int n = stones.size();
+        int max1 = stones[n - 1] - stones[1] - (n - 2);
+        int max2 = stones[n - 2] - stones[0] - (n - 2);
+        int maxMoves = max(max1, max2);
+        int minMoves = INT_MAX;
+        for (int i = 0; i < n; i++) {
+            int j = i;
+            while (j + 1 < n && stones[j + 1] - stones[i] + 1 <= n) {
+                j++;
+            }
+            int stonesInWindow = j - i + 1;
+            
+            if(stonesInWindow==n-1 && stones[j]-stones[i]+1 == n - 1) {
+                minMoves = min(minMoves, 2);
+            } else {
+                minMoves = min(minMoves, n - stonesInWindow);
+            }
+        }
+        return {minMoves, maxMoves};
+    }
+};
+
 ```
 
 ## 2592. Maximize Greatness of an Array
@@ -125,12 +126,11 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.Arrays;
-
 class Solution {
-    public int maximizeGreatness(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
+public:
+    int maximizeGreatness(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
         int i = 0, j = 0, greatness = 0;
         while (i < n && j < n) {
             if (nums[j] > nums[i]) {
@@ -143,8 +143,7 @@ class Solution {
         }
         return greatness;
     }
-}
-
+};
 ```
 
 ## 128. Longest Consecutive Sequence
@@ -161,31 +160,29 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.*;
-
 class Solution {
-    public int longestConsecutive(int[] nums) {
-        if (nums.length == 0) return 0;
-        Set<Integer> set = new HashSet<>();
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if (nums.empty()) return 0;
+        unordered_set<int> st;
         for (int num : nums) {
-            set.add(num);
+            st.insert(num);
         }
         int maxLength = 0;
-        for (int num : set) {
-            if (!set.contains(num - 1)) {
+        for (int num : st) {
+            if (st.find(num - 1) == st.end()) {
                 int currNum = num;
                 int currLength = 1;
-                while (set.contains(currNum + 1)) {
+                while (st.find(currNum + 1) != st.end()) {
                     currNum++;
                     currLength++;
                 }
-                maxLength = Math.max(maxLength, currLength);
+                maxLength = max(maxLength, currLength);
             }
         }
         return maxLength;
     }
-}
-
+};
 ```
 
 ## 786. K-th Smallest Prime Fraction
@@ -202,22 +199,20 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.*;
 class Solution {
-    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        List<int[]> frac = new ArrayList<>();
-        int n = arr.length;
+public:
+    vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+        vector<pair<int,int>> frac;
+        int n = arr.size();
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                frac.add(new int[]{arr[i], arr[j]});
+                frac.push_back({arr[i], arr[j]});
             }
         }
-        Collections.sort(frac, (a, b) -> {
-            double f1 = (double) a[0] / a[1];
-            double f2 = (double) b[0] / b[1];
-            return Double.compare(f1, f2);
+        sort(frac.begin(), frac.end(), [](auto &a, auto &b) {
+            return (double)a.first / a.second < (double)b.first / b.second;
         });
-        return frac.get(k - 1);
+        return {frac[k - 1].first, frac[k - 1].second};
     }
-}
+};
 ```
