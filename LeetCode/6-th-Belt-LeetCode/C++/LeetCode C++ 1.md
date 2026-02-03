@@ -11,7 +11,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
@@ -46,7 +46,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     double myPow(double x, int n) {
@@ -83,7 +83,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     vector<int> numMovesStonesII(vector<int>& stones) {
@@ -125,7 +125,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     int maximizeGreatness(vector<int>& nums) {
@@ -159,7 +159,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
@@ -198,7 +198,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {

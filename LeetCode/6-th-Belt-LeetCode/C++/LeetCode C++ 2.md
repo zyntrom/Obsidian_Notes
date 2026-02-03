@@ -11,7 +11,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     string getPermutation(int n, int k) {
@@ -100,14 +100,14 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public boolean canPartition(int[] nums) {
+public:
+    bool canPartition(vector<int>& nums) {
         int total = 0;
         for (int num : nums) total += num;
-        // If total sum is odd → cannot partition
         if (total % 2 != 0) return false;
         int target = total / 2;
-        boolean[] dp = new boolean[target + 1];
-        dp[0] = true; // base case
+        vector<bool> dp(target + 1, false);
+        dp[0] = true;
         for (int num : nums) {
             for (int s = target; s >= num; s--) {
                 dp[s] = dp[s] || dp[s - num];
@@ -115,7 +115,7 @@ class Solution {
         }
         return dp[target];
     }
-}
+};
 ```
 
 ## 5. Longest Palindromic Substring
@@ -131,29 +131,29 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public String longestPalindrome(String s) {
-        String ans = "";
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                String sub = s.substring(i, j + 1);
-                if (isPalindrome(sub) && sub.length() > ans.length()) {
+public:
+    string longestPalindrome(string s) {
+        string ans = "";
+        for (int i = 0; i < (int)s.size(); i++) {
+            for (int j = i; j < (int)s.size(); j++) {
+                string sub = s.substr(i, j - i + 1);
+                if (isPalindrome(sub) && sub.size() > ans.size()) {
                     ans = sub;
                 }
             }
         }
         return ans;
     }
-    boolean isPalindrome(String str) {
-        int l = 0, r = str.length() - 1;
+    bool isPalindrome(string &str) {
+        int l = 0, r = str.size() - 1;
         while (l < r) {
-            if (str.charAt(l) != str.charAt(r)) return false;
+            if (str[l] != str[r]) return false;
             l++;
             r--;
         }
         return true;
     }
-}
-
+};
 ```
 
 ## 646. Maximum Length of Pair Chain
@@ -168,25 +168,23 @@ aspectRatio: "52"
 ```
 
 ```java
-import java.util.*;
-
 class Solution {
-    public int findLongestChain(int[][] pairs) {
-        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);  // sort by ending value
-        
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), [](auto &a, auto &b) {
+            return a[1] < b[1];   
+        });
         int count = 1;
         int lastEnd = pairs[0][1];
-        
-        for (int i = 1; i < pairs.length; i++) {
+        for (int i = 1; i < pairs.size(); i++) {
             if (pairs[i][0] > lastEnd) {
                 count++;
                 lastEnd = pairs[i][1];
-            } 
+            }
         }
-        
         return count;
     }
-}
+};
 
 ```
 
@@ -205,25 +203,26 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode(0);
-        ListNode tail = dummy;
-        while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                tail.next = list1;
-                list1 = list1.next;
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode dummy(0);
+        ListNode* tail = &dummy;
+        while (list1 != nullptr && list2 != nullptr) {
+            if (list1->val < list2->val) {
+                tail->next = list1;
+                list1 = list1->next;
             } else {
-                tail.next = list2;
-                list2 = list2.next;
+                tail->next = list2;
+                list2 = list2->next;
             }
-            tail = tail.next;
+            tail = tail->next;
         }
-        // attach the remaining nodes
-        if (list1 != null) tail.next = list1;
-        else tail.next = list2;
+        if (list1 != nullptr) tail->next = list1;
+        else tail->next = list2;
         return dummy.next;
     }
-}
+};
+
 ```
 
 ## 234. Palindrome Linked List
@@ -241,35 +240,35 @@ aspectRatio: "52"
 
 ```java
 class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) return true;
-        
-        ListNode slow = head, fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
+public:
+    bool isPalindrome(ListNode* head) {
+        if (head == nullptr || head->next == nullptr) return true;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        ListNode second = reverse(slow);
-        ListNode first = head;
-        while (second != null) {
-            if (first.val != second.val) 
-                return false;
-            first = first.next;
-            second = second.next;
+        ListNode* second = reverseList(slow);
+        ListNode* first = head;
+        while (second != nullptr) {
+            if (first->val != second->val) return false;
+            first = first->next;
+            second = second->next;
         }
         return true;
     }
-    private ListNode reverse(ListNode head) {
-        ListNode next = null;
-        ListNode curr=head;
-        ListNode prev = null;
-        while (head != null) {
-			next = curr.next;
-            curr.next = prev;
+private:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        while (curr != nullptr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
             prev = curr;
             curr = next;
         }
         return prev;
     }
-}
+};
 ```
