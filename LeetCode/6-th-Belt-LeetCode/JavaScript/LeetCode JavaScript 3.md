@@ -326,39 +326,32 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new ArrayList<>();
-        backtrack(0, s, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int start, 
-	    String s,
-        List<String> path, 
-        List<List<String>> res
-    ) {
-        if (start == s.length()) {     
-            res.add(new ArrayList<>(path));
+var partition = function(s) {
+    const res = [];
+    const backtrack = (start, path) => {
+        if (start === s.length) {
+            res.push([...path]); 
             return;
         }
-        for (int end = start; end < s.length(); end++) {
+        for (let end = start; end < s.length; end++) {
             if (isPal(s, start, end)) {
-                path.add(s.substring(start, end + 1)); 
-                backtrack(end + 1, s, path, res);      
-                path.remove(path.size() - 1);          
+                path.push(s.substring(start, end + 1)); 
+                backtrack(end + 1, path);              
+                path.pop();                             
             }
         }
-    }
-
-    boolean isPal(String s, int l, int r) {
-        while (l < r)
-            if (s.charAt(l++) != s.charAt(r--))
-                return false;
+    };
+    const isPal = (s, l, r) => {
+        while (l < r) {
+            if (s[l] !== s[r]) return false;
+            l++;
+            r--;
+        }
         return true;
-    }
-}
-
+    };
+    backtrack(0, []);
+    return res;
+};
 ```
 
 ## 78. Subsets
@@ -373,28 +366,19 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
-        return res;
-    }
-
-    private void backtrack(
-	    int index, 
-	    int[] nums, 
-	    List<Integer> path, 
-	    List<List<Integer>> res
-	) {
-        res.add(new ArrayList<>(path));
-        for (int i = index; i < nums.length; i++) {
-            path.add(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1);
+var subsets = function(nums) {
+    const res = [];
+    const backtrack = (index, path) => {
+        res.push([...path]); 
+        for (let i = index; i < nums.length; i++) {
+            path.push(nums[i]);      
+            backtrack(i + 1, path);  
+            path.pop();              
         }
-    }
-}
-
+    };
+    backtrack(0, []);
+    return res;
+};
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
@@ -409,35 +393,29 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    int max = 0;
-    public int maxLength(List<String> arr) {
-        backtrack(arr, 0, "", 0);
-        return max;
-    }
-    void backtrack(List<String> arr, int idx,
-                   String cur, int len) {
+var maxLength = function(arr) {
+    let max = 0;
+
+    const backtrack = (idx, cur, len) => {
         max = Math.max(max, len);
-        for (int i = idx; i < arr.size(); i++) {
-            if (isUnique(cur, arr.get(i))) {
-                backtrack(
-	                arr, i + 1,
-                    cur + arr.get(i),
-                    len + arr.get(i).length()
-                );
+        for (let i = idx; i < arr.length; i++) {
+            if (isUnique(cur, arr[i])) {
+                backtrack(i + 1, cur + arr[i], len + arr[i].length);
             }
         }
-    }
-    boolean isUnique(String a, String b) {
-        int[] freq = new int[26];
-        for (char c : a.toCharArray())
-            freq[c - 'a']++;
-        for (char c : b.toCharArray())
-	        if (freq[c - 'a']++ > 0)
-		        return false;
+    };
+    const isUnique = (a, b) => {
+        const freq = new Array(26).fill(0);
+        for (const c of a) freq[c.charCodeAt(0) - 97]++;
+        for (const c of b) {
+            if (freq[c.charCodeAt(0) - 97]++ > 0) return false;
+        }
         return true;
-    }
-}
+    };
+    backtrack(0, "", 0);
+    return max;
+};
+
 ```
 
 ## 1219. Path with Maximum Gold
@@ -452,37 +430,27 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    int max = 0;
-    public int getMaximumGold(int[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] > 0) {
-                    backtrack(grid, i, j, 0);
-                }
-            }
-        }
-        return max;
-    }
-    void backtrack(int[][] grid, int i, int j, int sum) {
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == grid.length || 
-	        j == grid[0].length || 
-	        grid[i][j] == 0
-	    )return;
-        int gold = grid[i][j];
-        grid[i][j] = 0;
+var getMaximumGold = function(grid) {
+    let max = 0;
+    const m = grid.length, n = grid[0].length;
+    const backtrack = (i, j, sum) => {
+        if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] === 0) return;
+        const gold = grid[i][j];
+        grid[i][j] = 0;   
         sum += gold;
         max = Math.max(max, sum);
-        backtrack(grid, i + 1, j, sum);
-        backtrack(grid, i - 1, j, sum);
-        backtrack(grid, i, j + 1, sum);
-        backtrack(grid, i, j - 1, sum);
-        grid[i][j] = gold;
+        backtrack(i + 1, j, sum);
+        backtrack(i - 1, j, sum);
+        backtrack(i, j + 1, sum);
+        backtrack(i, j - 1, sum)
+        grid[i][j] = gold; 
+    };
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (grid[i][j] > 0) backtrack(i, j, 0);
+        }
     }
-}
-
+    return max;
+};
 ```
 
