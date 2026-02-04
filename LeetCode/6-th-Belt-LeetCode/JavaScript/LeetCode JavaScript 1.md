@@ -44,23 +44,22 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public double myPow(double x, int n) {
-        long pow = n;  
-        if (pow < 0) {
-            x = 1 / x;
-            pow = -pow;
-        }
-        return fastPow(x, pow);
+var myPow = function(x, n) {
+    let pow = n;
+    if (pow < 0) {
+        x = 1 / x;
+        pow = -pow;
     }
-    double fastPow(double x, long n) {
-        if (n == 0) return 1.0;
-        double half = fastPow(x, n / 2);
-        if (n % 2 == 0) {
-            return half * half;
-        } else {
-            return half * half * x;
-        }
+    
+    return fastPow(x, pow);
+};
+function fastPow(x, n) {
+    if (n === 0) return 1.0;
+    const half = fastPow(x, Math.floor(n / 2));
+    if (n % 2 === 0) {
+        return half * half;
+    } else {
+        return half * half * x;
     }
 }
 
