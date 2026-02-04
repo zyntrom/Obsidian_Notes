@@ -232,20 +232,21 @@ aspectRatio: "52"
 ```java
 class Solution {
     public int maxConsecutiveAnswers(String answerKey, int k) {
-        return Math.max(maxWindow(answerKey, k, 'T'),
-                        maxWindow(answerKey, k, 'F'));
+        return Math.max(maxWithChar(answerKey, k, 'T'), maxWithChar(answerKey, k, 'F'));
     }
-    private int maxWindow(String s, int k, char target) {
-        int left = 0, max = 0, changes = 0;
+    private int maxWithChar(String s, int k, char ch) {
+        int left = 0, maxLen = 0, flips = 0;
         for (int right = 0; right < s.length(); right++) {
-            if (s.charAt(right) != target) changes++;
-            while (changes > k) {
-                if (s.charAt(left) != target) changes--;
+            if (s.charAt(right) != ch) flips++;
+            
+            while (flips > k) {
+                if (s.charAt(left) != ch) flips--;
                 left++;
             }
-            max = Math.max(max, right - left + 1);
+            
+            maxLen = Math.max(maxLen, right - left + 1);
         }
-        return max;
+        return maxLen;
     }
 }
 ```

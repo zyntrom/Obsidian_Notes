@@ -160,30 +160,30 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length()) return false;
-        int[] freq1 = new int[26];
-        int[] freq2 = new int[26];
-        for (char c : s1.toCharArray()) {
-            freq1[c - 'a']++;
-        }
-        int k = s1.length();
-        for (int i = 0; i < s2.length(); i++) {
-            freq2[s2.charAt(i) - 'a']++;
-            if (i >= k) {
-                freq2[s2.charAt(i - k) - 'a']--;
-            }
-            if (matches(freq1, freq2)) return true;
-        }
-        return false;
-    } 
-    boolean matches(int[] a, int[] b) {
+private:
+    bool matches(int a[26], int b[26]) {
         for (int i = 0; i < 26; i++) {
             if (a[i] != b[i]) return false;
         }
         return true;
     }
-}
+public:
+    bool checkInclusion(string s1, string s2) {
+        if (s1.size() > s2.size()) return false;
+        int freq1[26] = {0};
+        int freq2[26] = {0};
+        for (char c : s1) freq1[c - 'a']++;
+        int k = s1.size();
+        for (int i = 0; i < s2.size(); i++) {
+            freq2[s2[i] - 'a']++;
+            if (i >= k) {
+                freq2[s2[i - k] - 'a']--;
+            }
+            if (matches(freq1, freq2)) return true;
+        }
+        return false;
+    }
+};
 ```
 
 ## 904. Fruit Into Baskets
@@ -199,26 +199,23 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public int totalFruit(int[] fruits) {
-        Map<Integer, Integer> map = new HashMap<>();
+public:
+    int totalFruit(vector<int>& fruits) {
+        unordered_map<int, int> map;
         int left = 0, ans = 0;
-        for (int right = 0; right < fruits.length; right++) {
-            map.put(
-	            fruits[right], 
-	            map.getOrDefault(fruits[right], 0) + 1
-	        );
+        for (int right = 0; right < fruits.size(); right++) {
+            map[fruits[right]]++;
             while (map.size() > 2) {
                 int f = fruits[left];
-                map.put(f, map.get(f) - 1);
-                if (map.get(f) == 0) map.remove(f);
+                map[f]--;
+                if (map[f] == 0) map.erase(f);
                 left++;
             }
-            ans = Math.max(ans, right - left + 1);
+            ans = max(ans, right - left + 1);
         }
         return ans;
     }
-}
-
+};
 ```
 
 ## 2024. Maximize the Confusion of an Exam
