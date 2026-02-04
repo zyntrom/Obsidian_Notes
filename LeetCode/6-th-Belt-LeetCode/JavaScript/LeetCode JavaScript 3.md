@@ -186,37 +186,25 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<List<Integer>> combinationSum2(
-	    int[] nums, 
-	    int target
-	) {
-        Arrays.sort(nums);   
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ){
-        if (target == 0) {
-            res.add(new ArrayList<>(curr));
+var combinationSum2 = function(nums, target) {
+    nums.sort((a, b) => a - b);
+    const res = [];
+    const backtrack = (start, curr, remaining) => {
+        if (remaining === 0) {
+            res.push([...curr]); 
             return;
         }
-        for (int i = start; i < nums.length; i++) {
-            if (i > start && nums[i] == nums[i - 1]) continue;
-            if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i + 1, curr, res); 
-            curr.remove(curr.size() - 1);
+        for (let i = start; i < nums.length; i++) {
+            if (i > start && nums[i] === nums[i - 1]) continue;
+            if (nums[i] > remaining) break;
+            curr.push(nums[i]);                     
+            backtrack(i + 1, curr, remaining - nums[i]); 
+            curr.pop();
         }
-    }
-}
-
+    };
+    backtrack(0, [], target);
+    return res;
+};
 ```
 
 ## 491. Non-decreasing Subsequences
@@ -231,35 +219,27 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<List<Integer>> findSubsequences(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int idx, 
-	    int[] nums,
-        List<Integer> path, 
-        List<List<Integer>> res
-    ) {
-        if (path.size() >= 2) {
-            res.add(new ArrayList<>(path));
+var findSubsequences = function(nums) {
+    const res = [];
+    const backtrack = (idx, path) => {
+        if (path.length >= 2) {
+            res.push([...path]); 
         }
-        HashSet<Integer> used = new HashSet<>();
-        for (int i = idx; i < nums.length; i++) {
-            if (used.contains(nums[i])) continue; 
-            if (
-	            !path.isEmpty() && 
-	            nums[i] < path.get(path.size() - 1)
-	        ) continue;
-            used.add(nums[i]);      
-            path.add(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1); 
+        const used = new Set();
+        for (let i = idx; i < nums.length; i++) {
+            if (used.has(nums[i])) 
+            continue;
+            if (path.length > 0 && nums[i] < path[path.length - 1])
+            continue;
+            used.add(nums[i]);
+            path.push(nums[i]);          
+            backtrack(i + 1, path);      
+            path.pop();                  
         }
-    }
-}
+    };
+    backtrack(0, []);
+    return res;
+};
 ```
 
 ## 22. Generate Parentheses
@@ -274,32 +254,27 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
-        backtrack(res, new StringBuilder(), 0, 0, n);
-        return res;
-    }
-    void backtrack(List<String> res, StringBuilder cur,
-                   int open, int close, int n) {
-        if (cur.length() == 2 * n) {   
-            res.add(cur.toString());
+var generateParenthesis = function(n) {
+    const res = [];
+    const backtrack = (cur, open, close) => {
+        if (cur.length === 2 * n) {
+            res.push(cur.join('')); 
             return;
         }
         if (open < n) {
-            cur.append('(');
-            backtrack(res, cur, open + 1, close, n);
-            cur.deleteCharAt(cur.length() - 1);
+            cur.push('(');                 
+            backtrack(cur, open + 1, close); 
+            cur.pop();                     
         }
-
         if (close < open) {
-            cur.append(')');
-            backtrack(res, cur, open, close + 1, n);
-            cur.deleteCharAt(cur.length() - 1);
+            cur.push(')');                 
+            backtrack(cur, open, close + 1); 
+            cur.pop();                     
         }
-    }
-}
-
+    };
+    backtrack([], 0, 0);
+    return res;
+};
 ```
 
 ## 79. Word Search
@@ -314,48 +289,29 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public boolean exist(char[][] board, String word) {
-        int m = board.length, n = board[0].length;
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (backtrack(board, word, i, j, 0))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    boolean backtrack(
-	    char[][] board, 
-	    String word,
-        int i, 
-        int j, 
-        int idx
-    ) {
-        if (idx == word.length()) return true;
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == board.length || 
-	        j == board[0].length
-	    )return false;
-	    
-        if (board[i][j] != word.charAt(idx))
-            return false;
-        char temp = board[i][j];
-        board[i][j] = '#';        
-        boolean found =
-              backtrack(board, word, i + 1, j, idx + 1)
-           || backtrack(board, word, i - 1, j, idx + 1)
-           || backtrack(board, word, i, j + 1, idx + 1)
-           || backtrack(board, word, i, j - 1, idx + 1);
-        board[i][j] = temp;
+var exist = function(board, word) {
+    const m = board.length, n = board[0].length;
+    const backtrack = (i, j, idx) => {
+        if (idx === word.length) return true;
+        if (i < 0 || j < 0 || i >= m || j >= n) return false;
+        if (board[i][j] !== word[idx]) return false;
+        const temp = board[i][j];
+        board[i][j] = '#'; 
+        const found = 
+            backtrack(i + 1, j, idx + 1) ||
+            backtrack(i - 1, j, idx + 1) ||
+            backtrack(i, j + 1, idx + 1) ||
+            backtrack(i, j - 1, idx + 1);
+        board[i][j] = temp; 
         return found;
+    };
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (backtrack(i, j, 0)) return true;
+        }
     }
-}
-
+    return false;
+};
 ```
 
 ## 131. Palindrome Partitioning
