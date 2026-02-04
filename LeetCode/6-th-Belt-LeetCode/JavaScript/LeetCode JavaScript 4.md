@@ -84,12 +84,10 @@ var successfulPairs = function(spells, potions, success) {
     potions.sort((a, b) => a - b);
     const n = potions.length;
     const ans = new Array(spells.length);
-
     for (let i = 0; i < spells.length; i++) {
         const need = Math.ceil(success / spells[i]); 
         let left = 0, right = n - 1;
         let idx = n;
-
         while (left <= right) {
             const mid = Math.floor((left + right) / 2);
             if (potions[mid] >= need) {
@@ -99,13 +97,10 @@ var successfulPairs = function(spells, potions, success) {
                 left = mid + 1;
             }
         }
-
-        ans[i] = n - idx; // number of potions that work
+        ans[i] = n - idx; 
     }
-
     return ans;
 };
-
 ```
 
 ## 300. Longest Increasing Subsequence
@@ -120,26 +115,21 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int lengthOfLIS(int[] nums) {
-        int[] dp = new int[nums.length];
-        int len = 0;
-        for (int num : nums) {
-            int left = 0, right = len;
-            while (left < right) {
-                int mid = (left + right) / 2;
-                if (dp[mid] < num)
-                    left = mid + 1;
-                else
-                    right = mid;
-            }
-            dp[left] = num;
-            if (left == len)
-                len++;
+var lengthOfLIS = function(nums) {
+    const dp = [];
+    let len = 0;
+    for (const num of nums) {
+        let left = 0, right = len;
+        while (left < right) {
+            const mid = Math.floor((left + right) / 2);
+            if (dp[mid] < num) left = mid + 1;
+            else right = mid;
         }
-        return len;
+        dp[left] = num;
+        if (left === len) len++;
     }
-}
+    return len;
+};
 ```
 
 # Sliding Window
@@ -155,31 +145,28 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length()) return false;
-        int[] freq1 = new int[26];
-        int[] freq2 = new int[26];
-        for (char c : s1.toCharArray()) {
-            freq1[c - 'a']++;
+var checkInclusion = function(s1, s2) {
+    if (s1.length > s2.length) return false;
+    const freq1 = new Array(26).fill(0);
+    const freq2 = new Array(26).fill(0);
+    const aCode = 'a'.charCodeAt(0);
+    for (const c of s1) freq1[c.charCodeAt(0) - aCode]++;
+    const k = s1.length;
+    for (let i = 0; i < s2.length; i++) {
+        freq2[s2.charCodeAt(i) - aCode]++;
+        if (i >= k) {
+            freq2[s2.charCodeAt(i - k) - aCode]--;
         }
-        int k = s1.length();
-        for (int i = 0; i < s2.length(); i++) {
-            freq2[s2.charAt(i) - 'a']++;
-            if (i >= k) {
-                freq2[s2.charAt(i - k) - 'a']--;
-            }
-            if (matches(freq1, freq2)) return true;
-        }
-        return false;
-    } 
-    boolean matches(int[] a, int[] b) {
-        for (int i = 0; i < 26; i++) {
-            if (a[i] != b[i]) return false;
+        if (matches(freq1, freq2)) return true;
+    }
+    return false;
+    function matches(a, b) {
+        for (let i = 0; i < 26; i++) {
+            if (a[i] !== b[i]) return false;
         }
         return true;
     }
-}
+};
 ```
 
 ## 904. Fruit Into Baskets
@@ -194,27 +181,21 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int totalFruit(int[] fruits) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int left = 0, ans = 0;
-        for (int right = 0; right < fruits.length; right++) {
-            map.put(
-	            fruits[right], 
-	            map.getOrDefault(fruits[right], 0) + 1
-	        );
-            while (map.size() > 2) {
-                int f = fruits[left];
-                map.put(f, map.get(f) - 1);
-                if (map.get(f) == 0) map.remove(f);
-                left++;
-            }
-            ans = Math.max(ans, right - left + 1);
+var totalFruit = function(fruits) {
+    const map = new Map();
+    let left = 0, ans = 0;
+    for (let right = 0; right < fruits.length; right++) {
+        map.set(fruits[right], (map.get(fruits[right]) || 0) + 1);
+        while (map.size > 2) {
+            const f = fruits[left];
+            map.set(f, map.get(f) - 1);
+            if (map.get(f) === 0) map.delete(f);
+            left++;
         }
-        return ans;
+        ans = Math.max(ans, right - left + 1);
     }
-}
-
+    return ans;
+};
 ```
 
 ## 2024. Maximize the Confusion of an Exam
@@ -229,27 +210,23 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int maxConsecutiveAnswers(String answerKey, int k) {
-        return Math.max(
-	        maxWithChar(answerKey, k, 'T'), 
-	        maxWithChar(answerKey, k, 'F')
-	    );
-    }
-    private int maxWithChar(String s, int k, char ch) {
-        int left = 0, maxLen = 0, flips = 0;
-        for (int right = 0; right < s.length(); right++) {
-            if (s.charAt(right) != ch) flips++;
-            
-            while (flips > k) {
-                if (s.charAt(left) != ch) flips--;
-                left++;
-            }
-            
-            maxLen = Math.max(maxLen, right - left + 1);
+var maxConsecutiveAnswers = function(answerKey, k) {
+    return Math.max(
+        maxWithChar(answerKey, k, 'T'),
+        maxWithChar(answerKey, k, 'F')
+    );
+};
+function maxWithChar(s, k, ch) {
+    let left = 0, maxLen = 0, flips = 0;
+    for (let right = 0; right < s.length; right++) {
+        if (s[right] !== ch) flips++;
+        while (flips > k) {
+            if (s[left] !== ch) flips--;
+            left++;
         }
-        return maxLen;
+        maxLen = Math.max(maxLen, right - left + 1);
     }
+    return maxLen;
 }
 ```
 
@@ -265,20 +242,18 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int longestOnes(int[] nums, int k) {
-        int left = 0, maxLen = 0, zeroCount = 0;
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] == 0) zeroCount++;
-            while (zeroCount > k) {
-                if (nums[left] == 0) zeroCount--;
-                left++;
-            }
-            maxLen = Math.max(maxLen, right - left + 1);
+var longestOnes = function(nums, k) {
+    let left = 0, maxLen = 0, zeroCount = 0;
+    for (let right = 0; right < nums.length; right++) {
+        if (nums[right] === 0) zeroCount++;
+        while (zeroCount > k) {
+            if (nums[left] === 0) zeroCount--;
+            left++;
         }
-        return maxLen;
+        maxLen = Math.max(maxLen, right - left + 1);
     }
-}
+    return maxLen;
+};
 ```
 
 # Sliding Window/Deque
@@ -295,28 +270,18 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
-        Deque<Integer> dq = new ArrayDeque<>(); 
-        for (int i = 0; i < n; i++) {
-            if (
-	            !dq.isEmpty() && 
-	            dq.peekFirst() == i - k
-	        ) dq.pollFirst();
-	        
-            while (
-	            !dq.isEmpty() && 
-	            nums[dq.peekLast()] < nums[i]
-	        ) dq.pollLast();
-	        
-            dq.offerLast(i);
-            if (i >= k - 1) 
-            result[i - k + 1] = nums[dq.peekFirst()];
-        }
-        return result;
+var maxSlidingWindow = function(nums, k) {
+    const n = nums.length;
+    const result = new Array(n - k + 1);
+    const dq = [];
+    for (let i = 0; i < n; i++) {
+        if (dq.length && dq[0] === i - k) dq.shift();
+        while (dq.length && nums[dq[dq.length - 1]] < nums[i])\
+        dq.pop();
+        dq.push(i);
+        if (i >= k - 1) result[i - k + 1] = nums[dq[0]];
     }
-}
+    return result;
+};
 ```
 
