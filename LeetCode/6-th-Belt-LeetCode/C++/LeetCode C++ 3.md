@@ -419,25 +419,24 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
-        return res;
-    }
-    private void backtrack(
-	    int index, 
-	    int[] nums, 
-	    List<Integer> path, 
-	    List<List<Integer>> res
-	) {
-        res.add(new ArrayList<>(path));
-        for (int i = index; i < nums.length; i++) {
-            path.add(nums[i]);
+private:
+    void backtrack(int index, vector<int>& nums, vector<int>& path, vector<vector<int>>& res) {
+        res.push_back(path);
+        for (int i = index; i < nums.size(); i++) {
+            path.push_back(nums[i]);
             backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1);
+            path.pop_back();
         }
     }
-}
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> path;
+        backtrack(0, nums, path, res);
+        return res;
+    }
+};
+
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
@@ -453,34 +452,30 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    int max = 0;
-    public int maxLength(List<String> arr) {
-        backtrack(arr, 0, "", 0);
-        return max;
+private:
+    int maxLen = 0;
+    bool isUnique(const string& a, const string& b) {
+        int freq[26] = {0};
+        for (char c : a) freq[c - 'a']++;
+        for (char c : b) {
+            if (freq[c - 'a']++ > 0) return false;
+        }
+        return true;
     }
-    void backtrack(List<String> arr, int idx,
-                   String cur, int len) {
-        max = Math.max(max, len);
+    void backtrack(const vector<string>& arr, int idx, string cur, int len) {
+        maxLen = max(maxLen, len);
         for (int i = idx; i < arr.size(); i++) {
-            if (isUnique(cur, arr.get(i))) {
-                backtrack(
-	                arr, i + 1,
-                    cur + arr.get(i),
-                    len + arr.get(i).length()
-                );
+            if (isUnique(cur, arr[i])) {
+                backtrack(arr, i + 1, cur + arr[i], len + arr[i].size());
             }
         }
     }
-    boolean isUnique(String a, String b) {
-        int[] freq = new int[26];
-        for (char c : a.toCharArray())
-            freq[c - 'a']++;
-        for (char c : b.toCharArray())
-	        if (freq[c - 'a']++ > 0)
-		        return false;
-        return true;
+public:
+    int maxLength(vector<string>& arr) {
+        backtrack(arr, 0, "", 0);
+        return maxLen;
     }
-}
+};
 ```
 
 ## 1219. Path with Maximum Gold
@@ -496,36 +491,33 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    int max = 0;
-    public int getMaximumGold(int[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+private:
+    int maxGold = 0;
+
+    void backtrack(vector<vector<int>>& grid, int i, int j, int sum) {
+        if (i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size() || grid[i][j] == 0)
+            return;
+        int gold = grid[i][j];
+        grid[i][j] = 0;  
+        sum += gold;
+        maxGold = max(maxGold, sum);
+        backtrack(grid, i + 1, j, sum);
+        backtrack(grid, i - 1, j, sum);
+        backtrack(grid, i, j + 1, sum);
+        backtrack(grid, i, j - 1, sum);
+        grid[i][j] = gold; 
+    }
+public:
+    int getMaximumGold(vector<vector<int>>& grid) {
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[0].size(); j++) {
                 if (grid[i][j] > 0) {
                     backtrack(grid, i, j, 0);
                 }
             }
         }
-        return max;
+        return maxGold;
     }
-    void backtrack(int[][] grid, int i, int j, int sum) {
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == grid.length || 
-	        j == grid[0].length || 
-	        grid[i][j] == 0
-	    )return;
-        int gold = grid[i][j];
-        grid[i][j] = 0;
-        sum += gold;
-        max = Math.max(max, sum);
-        backtrack(grid, i + 1, j, sum);
-        backtrack(grid, i - 1, j, sum);
-        backtrack(grid, i, j + 1, sum);
-        backtrack(grid, i, j - 1, sum);
-        grid[i][j] = gold;
-    }
-}
-
+};
 ```
 
