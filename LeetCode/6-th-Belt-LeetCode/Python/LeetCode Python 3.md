@@ -12,28 +12,23 @@ aspectRatio: "52"
 
 ```python
 class Solution:
-    def __init__(self):
-        self.map = [
-	        "", "", "abc", "def", 
-	        "ghi", "jkl", "mno", 
-	        "pqrs", "tuv", "wxyz"
-	    ]
-        self.ans = []
     def letterCombinations(self, digits):
-        if digits == "":
-            return self.ans
-        self.backtrack(digits, 0, "")
-        return self.ans
-    def backtrack(self, digits, index, cur):
-        if index == len(digits):
-            self.ans.append(cur)
-            return
-        letters = self.map[ord(digits[index]) - ord('0')]
-        i = 0
-        while i < len(letters):
-            ch = letters[i]
-            self.backtrack(digits, index + 1, cur + ch) 
-            i = i + 1
+        if not digits:
+            return []
+        mapping = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        ans = []
+        def backtrack(index, path):
+            if index == len(digits):
+                ans.append("".join(path))
+                return
+            letters = mapping[int(digits[index])]
+            for ch in letters:
+                path.append(ch)           
+                backtrack(index + 1, path) 
+                path.pop()                  
+        backtrack(0, [])
+        return ans
+
 ```
 
 ## 46. Permutations
@@ -48,30 +43,21 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        backtrack(nums, new ArrayList<>(), ans);
-        return ans;
-    }
-    void backtrack(
-	    int[] nums, 
-	    List<Integer> curr, 
-	    List<List<Integer>> ans
-	) {
-        if (curr.size() == nums.length) {
-            ans.add(new ArrayList<>(curr));
-            return;
-        }
-        for (int i = 0; i < nums.length; i++) {
-            if (curr.contains(nums[i])) continue; 
-            curr.add(nums[i]);        
-            backtrack(nums, curr, ans); 
-            curr.remove(curr.size() - 1); 
-        }
-    }
-}
+class Solution:
+    def permute(self, nums):
+        ans = []
+        def backtrack(curr):
+            if len(curr) == len(nums):
+                ans.append(curr[:]) 
+                return
+            for num in nums:
+                if num in curr:  
+                    continue
+                curr.append(num)      
+                backtrack(curr)       
+                curr.pop()             
+        backtrack([])
+        return ans
 ```
 
 ## 51. N-Queens
@@ -86,48 +72,35 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    List<List<String>> ans = new ArrayList<>();
-    boolean[] col, diag1, diag2;
-    int n;
-
-    public List<List<String>> solveNQueens(int n) {
-        this.n = n;
-        col = new boolean[n];
-        diag1 = new boolean[2 * n];
-        diag2 = new boolean[2 * n];
-        char[][] board = new char[n][n];
-        for (char[] r : board) Arrays.fill(r, '.');
-        backtrack(0, board);
-        return ans;
-    }
-    void backtrack(int row, char[][] board) {
-        if (row == n) {
-            ans.add(toList(board));
-            return;
-        }
-        
-        for (int c = 0; c < n; c++) {
-            int d1 = row - c + n;
-            int d2 = row + c;
-            
-            if (col[c] || diag1[d1] || diag2[d2]) continue;
-            board[row][c] = 'Q';
-            col[c] = diag1[d1] = diag2[d2] = true;
-            
-            backtrack(row + 1, board); 
-            
-            board[row][c] = '.';
-            col[c] = diag1[d1] = diag2[d2] = false;
-        }
-    }
-    List<String> toList(char[][] board) {
-        List<String> res = new ArrayList<>();
-        for (char[] r : board) res.add(new String(r));
-        return res;
-    }
-}
-
+class Solution:
+    def solveNQueens(self, n):
+        self.n = n
+        self.ans = []
+        self.col = [False] * n
+        self.diag1 = [False] * (2 * n)
+        self.diag2 = [False] * (2 * n)
+        board = [['.'] * n for _ in range(n)]   
+        self.backtrack(0, board)
+        return self.ans
+    def backtrack(self, row, board):
+        if row == self.n:
+            self.ans.append(self.toList(board))
+            return
+        for c in range(self.n):
+            d1 = row - c + self.n
+            d2 = row + c     
+            if self.col[c] or self.diag1[d1] or self.diag2[d2]:
+                continue
+            board[row][c] = 'Q'
+            self.col[c] = self.diag1[d1] = self.diag2[d2] = True
+            self.backtrack(row + 1, board)
+            board[row][c] = '.'
+            self.col[c] = self.diag1[d1] = self.diag2[d2] = False
+    def toList(self, board):
+        res = []
+        for r in board:
+            res.append(''.join(r))
+        return res
 ```
 
 ## 526. Beautiful Arrangement
