@@ -405,37 +405,28 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    int max = 0;
-    public int getMaximumGold(int[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] > 0) {
-                    backtrack(grid, i, j, 0);
-                }
-            }
-        }
-        return max;
-    }
-    void backtrack(int[][] grid, int i, int j, int sum) {
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == grid.length || 
-	        j == grid[0].length || 
-	        grid[i][j] == 0
-	    )return;
-        int gold = grid[i][j];
-        grid[i][j] = 0;
-        sum += gold;
-        max = Math.max(max, sum);
-        backtrack(grid, i + 1, j, sum);
-        backtrack(grid, i - 1, j, sum);
-        backtrack(grid, i, j + 1, sum);
-        backtrack(grid, i, j - 1, sum);
-        grid[i][j] = gold;
-    }
-}
-
+class Solution:
+    def getMaximumGold(self, grid):
+        self.max_gold = 0
+        m = len(grid)
+        n = len(grid[0])
+        def backtrack(i, j, current_sum):
+            if i < 0 or j < 0 or i >= m or j >= n or grid[i][j]==0:
+                return
+            gold = grid[i][j]
+            grid[i][j] = 0   
+            current_sum += gold
+            if current_sum > self.max_gold:
+                self.max_gold = current_sum
+            backtrack(i + 1, j, current_sum)
+            backtrack(i - 1, j, current_sum)
+            backtrack(i, j + 1, current_sum)
+            backtrack(i, j - 1, current_sum)
+            grid[i][j] = gold
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] > 0:
+                    backtrack(i, j, 0)
+        return self.max_gold
 ```
 
