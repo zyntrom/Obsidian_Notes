@@ -62,7 +62,6 @@ function fastPow(x, n) {
         return half * half * x;
     }
 }
-
 ```
 
 ## 1040. Moving Stones Until Consecutive II
