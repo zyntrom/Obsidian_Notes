@@ -11,35 +11,23 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-class Solution {
-    public void nextPermutation(int[] nums) {
-        int n = nums.length;
-        int i = n - 2;
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            i--;
-        }
-        if (i >= 0) {
-            int j = n - 1;
-            while (nums[i] >= nums[j]) {
-                j--;
-            }
-            swap(nums, i, j);
-        }
-        reverse(nums, i + 1, n - 1);
+```js
+var nextPermutation = function(nums) {
+    let n = nums.length;
+    let i = n - 2;
+    while (i >= 0 && nums[i] >= nums[i + 1]) i--;
+    if (i >= 0) {
+        let j = n - 1;
+        while (nums[i] >= nums[j]) j--;
+        [nums[i], nums[j]] = [nums[j], nums[i]];
     }
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+    let left = i + 1, right = n - 1;
+    while (left < right) {
+        [nums[left], nums[right]] = [nums[right], nums[left]];
+        left++;
+        right--;
     }
-    private void reverse(int[] nums, int left, int right) {
-        while (left < right) {
-            swap(nums, left++, right--);
-        }
-    }
-}
-
+};
 ```
 
 ## 50. Pow(x, n)
@@ -55,7 +43,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```js
 class Solution {
     public double myPow(double x, int n) {
         long pow = n;  
@@ -91,8 +79,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```js
+import js.util.*;
 class Solution {
 	public int[] numMovesStonesII(int[] stones) {
 		Arrays.sort(stones);
@@ -132,8 +120,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.Arrays;
+```js
+import js.util.Arrays;
 
 class Solution {
     public int maximizeGreatness(int[] nums) {
@@ -168,8 +156,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```js
+import js.util.*;
 
 class Solution {
     public int longestConsecutive(int[] nums) {
@@ -209,8 +197,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```js
+import js.util.*;
 class Solution {
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
         List<int[]> frac = new ArrayList<>();
