@@ -115,27 +115,23 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    int count = 0;
-    public int countArrangement(int n) {
-        boolean[] used = new boolean[n + 1];
-        backtrack(1, n, used);
-        return count;
-    }
-    private void backtrack(int pos, int n, boolean[] used) {
-        if (pos > n) {
-            count++;
-            return;
-        }
-        for (int num = 1; num <= n; num++) {
-            if (!used[num] && (num % pos == 0 || pos % num == 0)) {
-                used[num] = true;
-                backtrack(pos + 1, n, used);
-                used[num] = false;
-            }
-        }
-    }
-}
+class Solution:
+    def countArrangement(self, n):
+        self.count = 0
+        used = [False] * (n + 1)
+        self.backtrack(1, n, used)
+        return self.count
+
+    def backtrack(self, pos, n, used):
+        if pos > n:
+            self.count += 1
+            return
+
+        for num in range(1, n + 1):
+            if not used[num] and (num % pos == 0 or pos % num == 0):
+                used[num] = True
+                self.backtrack(pos + 1, n, used)
+                used[num] = False
 
 ```
 
@@ -151,33 +147,22 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<List<Integer>> combinationSum(int[] nums, int target) {
-        Arrays.sort(nums); 
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ) {
-        if (target == 0) {
-            res.add(new ArrayList<>(curr));
-            return;
-        }
-        for (int i = start; i < nums.length; i++) {
-            if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i, curr, res);
-            curr.remove(curr.size() - 1);
-        }
-    }
-}
+class Solution:
+    def combinationSum(self, nums, target):
+        nums.sort() 
+        res = []
+        def backtrack(remaining, start, curr):
+            if remaining == 0:
+                res.append(curr[:]) 
+                return
+            for i in range(start, len(nums)):
+                if nums[i] > remaining:
+                    break  
+                curr.append(nums[i])            
+                backtrack(remaining - nums[i], i, curr) 
+                curr.pop()                       
+        backtrack(target, 0, [])
+        return res
 ```
 
 ## 40. Combination Sum II
@@ -192,37 +177,24 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<List<Integer>> combinationSum2(
-	    int[] nums, 
-	    int target
-	) {
-        Arrays.sort(nums);   
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ){
-        if (target == 0) {
-            res.add(new ArrayList<>(curr));
-            return;
-        }
-        for (int i = start; i < nums.length; i++) {
-            if (i > start && nums[i] == nums[i - 1]) continue;
-            if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i + 1, curr, res); 
-            curr.remove(curr.size() - 1);
-        }
-    }
-}
-
+class Solution:
+    def combinationSum2(self, nums, target):
+        nums.sort() 
+        res = []
+        def backtrack(remaining, start, curr):
+            if remaining == 0:
+                res.append(curr[:]) 
+                return
+            for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i - 1]:
+                    continue
+                if nums[i] > remaining:
+                    break
+                curr.append(nums[i])                     
+                backtrack(remaining - nums[i], i + 1, curr)
+                curr.pop()
+        backtrack(target, 0, [])
+        return res
 ```
 
 ## 491. Non-decreasing Subsequences
@@ -237,35 +209,24 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<List<Integer>> findSubsequences(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int idx, 
-	    int[] nums,
-        List<Integer> path, 
-        List<List<Integer>> res
-    ) {
-        if (path.size() >= 2) {
-            res.add(new ArrayList<>(path));
-        }
-        HashSet<Integer> used = new HashSet<>();
-        for (int i = idx; i < nums.length; i++) {
-            if (used.contains(nums[i])) continue; 
-            if (
-	            !path.isEmpty() && 
-	            nums[i] < path.get(path.size() - 1)
-	        ) continue;
-            used.add(nums[i]);      
-            path.add(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1); 
-        }
-    }
-}
+class Solution:
+    def findSubsequences(self, nums):
+        res = []
+        def backtrack(idx, path):
+            if len(path) >= 2:
+                res.append(path[:])  
+            used = set()
+            for i in range(idx, len(nums)):
+                if nums[i] in used:
+                    continue
+                if path and nums[i] < path[-1]:
+                    continue
+                used.add(nums[i])
+                path.append(nums[i])        
+                backtrack(i + 1, path)      
+                path.pop()                  
+        backtrack(0, [])
+        return res
 ```
 
 ## 22. Generate Parentheses
@@ -280,31 +241,26 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
-        backtrack(res, new StringBuilder(), 0, 0, n);
-        return res;
-    }
-    void backtrack(List<String> res, StringBuilder cur,
-                   int open, int close, int n) {
-        if (cur.length() == 2 * n) {   
-            res.add(cur.toString());
-            return;
-        }
-        if (open < n) {
-            cur.append('(');
-            backtrack(res, cur, open + 1, close, n);
-            cur.deleteCharAt(cur.length() - 1);
-        }
+class Solution:
+    def generateParenthesis(self, n):
+        res = []
 
-        if (close < open) {
-            cur.append(')');
-            backtrack(res, cur, open, close + 1, n);
-            cur.deleteCharAt(cur.length() - 1);
-        }
-    }
-}
+        def backtrack(cur, open_count, close_count):
+            if len(cur) == 2 * n:
+                res.append("".join(cur))
+                return
+
+            if open_count < n:
+                cur.append('(')                           # choose '('
+                backtrack(cur, open_count + 1, close_count)  
+                cur.pop()
+            if close_count < open_count:
+                cur.append(')')                           # choose ')'
+                backtrack(cur, open_count, close_count + 1)  # explore
+                cur.pop()                                  # un-choose
+
+        backtrack([], 0, 0)
+        return res
 
 ```
 
