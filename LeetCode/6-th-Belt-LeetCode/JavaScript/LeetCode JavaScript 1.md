@@ -78,31 +78,28 @@ aspectRatio: "52"
 ```
 
 ```js
-import js.util.*;
-class Solution {
-	public int[] numMovesStonesII(int[] stones) {
-		Arrays.sort(stones);
-		int n =stones.length;
-		int max1= stones[n-1] -stones[1] -(n-2);
-		int max2 =stones[n-2] -stones[0]-(n-2);
-		int maxMoves =Math.max(max1,max2);
-		int minMoves = Integer.MAX_VALUE;
-		for(int i=0;i<n;i++){
-			int j=i;
-			while((j+1) <n && stones[j+1]-stones[i]+1<=n){
-				j++;
-			}
-			int stonesInWindow=j-i+1;
-			if(stonesInWindow ==n-1 && stones[j]-stones[i]+1 ==n-1){
-				minMoves = Math.min(minMoves,2);
-			}
-			else{
-				minMoves =Math.min(minMoves,n-stonesInWindow);
-			}
-		}
-		return new int[] {minMoves,maxMoves};
-	}
-}
+var numMovesStonesII = function(stones) {
+    stones.sort((a, b) => a - b); 
+    const n = stones.length;
+    const max1 = stones[n - 1] - stones[1] - (n - 2);
+    const max2 = stones[n - 2] - stones[0] - (n - 2);
+    const maxMoves = Math.max(max1, max2);
+    let minMoves = Infinity;
+    let j = 0;
+    for (let i = 0; i < n; i++) {
+        while (j + 1 < n && stones[j + 1] - stones[i] + 1 <= n) {
+            j++;
+        }
+        const stonesInWindow = j - i + 1;
+        if (stonesInWindow === n - 1 && stones[j] - stones[i] + 1 === n - 1) {
+            minMoves = Math.min(minMoves, 2);
+        } else {
+            minMoves = Math.min(minMoves, n - stonesInWindow);
+        }
+    }
+
+    return [minMoves, maxMoves];
+};
 ```
 
 ## 2592. Maximize Greatness of an Array
@@ -119,25 +116,21 @@ aspectRatio: "52"
 ```
 
 ```js
-import js.util.Arrays;
-
-class Solution {
-    public int maximizeGreatness(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        int i = 0, j = 0, greatness = 0;
-        while (i < n && j < n) {
-            if (nums[j] > nums[i]) {
-                greatness++;
-                i++;
-                j++;
-            } else {
-                j++;
-            }
+var maximizeGreatness = function(nums) {
+    nums.sort((a, b) => a - b); 
+    const n = nums.length;
+    let i = 0, j = 0, greatness = 0;
+    while (i < n && j < n) {
+        if (nums[j] > nums[i]) {
+            greatness++;
+            i++;
+            j++;
+        } else {
+            j++;
         }
-        return greatness;
     }
-}
+    return greatness;
+};
 
 ```
 
@@ -155,30 +148,23 @@ aspectRatio: "52"
 ```
 
 ```js
-import js.util.*;
-
-class Solution {
-    public int longestConsecutive(int[] nums) {
-        if (nums.length == 0) return 0;
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
-        }
-        int maxLength = 0;
-        for (int num : set) {
-            if (!set.contains(num - 1)) {
-                int currNum = num;
-                int currLength = 1;
-                while (set.contains(currNum + 1)) {
-                    currNum++;
-                    currLength++;
-                }
-                maxLength = Math.max(maxLength, currLength);
+var longestConsecutive = function(nums) {
+    if (nums.length === 0) return 0;
+    const set = new Set(nums); 
+    let maxLength = 0;
+    for (const num of set) {
+        if (!set.has(num - 1)) {
+            let currNum = num;
+            let currLength = 1;
+            while (set.has(currNum + 1)) {
+                currNum++;
+                currLength++;
             }
+            maxLength = Math.max(maxLength, currLength);
         }
-        return maxLength;
     }
-}
+    return maxLength;
+};
 
 ```
 
@@ -196,22 +182,15 @@ aspectRatio: "52"
 ```
 
 ```js
-import js.util.*;
-class Solution {
-    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        List<int[]> frac = new ArrayList<>();
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                frac.add(new int[]{arr[i], arr[j]});
-            }
+var kthSmallestPrimeFraction = function(arr, k) {
+    const frac = [];
+    const n = arr.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            frac.push([arr[i], arr[j]]);
         }
-        Collections.sort(frac, (a, b) -> {
-            double f1 = (double) a[0] / a[1];
-            double f2 = (double) b[0] / b[1];
-            return Double.compare(f1, f2);
-        });
-        return frac.get(k - 1);
     }
-}
+    frac.sort((a, b) => (a[0] / a[1]) - (b[0] / b[1]));
+    return frac[k - 1];
+};
 ```
