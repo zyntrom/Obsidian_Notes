@@ -232,7 +232,10 @@ aspectRatio: "52"
 ```java
 class Solution {
     public int maxConsecutiveAnswers(String answerKey, int k) {
-        return Math.max(maxWithChar(answerKey, k, 'T'), maxWithChar(answerKey, k, 'F'));
+        return Math.max(
+	        maxWithChar(answerKey, k, 'T'), 
+	        maxWithChar(answerKey, k, 'F')
+	    );
     }
     private int maxWithChar(String s, int k, char ch) {
         int left = 0, maxLen = 0, flips = 0;
@@ -265,19 +268,18 @@ aspectRatio: "52"
 ```java
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int left = 0, max = 0, zeros = 0;
+        int left = 0, maxLen = 0, zeroCount = 0;
         for (int right = 0; right < nums.length; right++) {
-            if (nums[right] == 0) zeros++;
-            while (zeros > k) {
-                if (nums[left] == 0) zeros--;
+            if (nums[right] == 0) zeroCount++;
+            while (zeroCount > k) {
+                if (nums[left] == 0) zeroCount--;
                 left++;
             }
-            max = Math.max(max, right - left + 1);
+            maxLen = Math.max(maxLen, right - left + 1);
         }
-        return max;
+        return maxLen;
     }
 }
-
 ```
 
 # Sliding Window/Deque
@@ -297,24 +299,25 @@ aspectRatio: "52"
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        int[] res = new int[n - k + 1];
+        int[] result = new int[n - k + 1];
         Deque<Integer> dq = new ArrayDeque<>(); 
-        // stores indices, values in decreasing order
         for (int i = 0; i < n; i++) {
-            // remove out-of-window indices
-            if (!dq.isEmpty() && dq.peekFirst() == i - k)
-                dq.pollFirst();
-            // maintain decreasing deque (remove smaller elements)
-            while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i])
-                dq.pollLast();
+            if (
+	            !dq.isEmpty() && 
+	            dq.peekFirst() == i - k
+	        ) dq.pollFirst();
+	        
+            while (
+	            !dq.isEmpty() && 
+	            nums[dq.peekLast()] < nums[i]
+	        ) dq.pollLast();
+	        
             dq.offerLast(i);
-            // record answer once window size >= k
-            if (i >= k - 1)
-                res[i - k + 1] = nums[dq.peekFirst()];
+            if (i >= k - 1) 
+            result[i - k + 1] = nums[dq.peekFirst()];
         }
-        return res;
+        return result;
     }
 }
-
 ```
 
