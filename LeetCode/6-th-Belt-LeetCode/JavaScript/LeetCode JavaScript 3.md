@@ -11,30 +11,30 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
+var letterCombinations = function(digits) {
+    if (digits.length === 0) return [];
 
-    String[] map = 
-    {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    List<String> ans = new ArrayList<>();
-    public List<String> letterCombinations(String digits) {
-        if (digits.isEmpty()) return ans;
-        backtrack(digits, 0, new StringBuilder());
-        return ans;
-    }
-    void backtrack(String digits, int index, StringBuilder cur) {
-        if (index == digits.length()) {
-            ans.add(cur.toString());
+    const map = ["", "", "abc", 
+			    "def", "ghi", "jkl", 
+			    "mno", "pqrs", "tuv", 
+			    "wxyz"
+	];
+    const ans = [];
+    const backtrack = (index, cur) => {
+        if (index === digits.length) {
+            ans.push(cur.join(''));
             return;
         }
-        
-        String letters = map[digits.charAt(index) - '0'];
-        for (char ch : letters.toCharArray()) {
-            cur.append(ch);                 // choose
-            backtrack(digits, index + 1, cur); // explore
-            cur.deleteCharAt(cur.length() - 1); // un-choose (undo)
+        const letters = map[digits[index] - '0'];
+        for (const ch of letters) {
+            cur.push(ch);                
+            backtrack(index + 1, cur);   
+            cur.pop();                    
         }
-    }
-}
+    };
+    backtrack(0, []);
+    return ans;
+};
 ```
 
 ## 46. Permutations
@@ -49,30 +49,23 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        backtrack(nums, new ArrayList<>(), ans);
-        return ans;
-    }
-    void backtrack(
-	    int[] nums, 
-	    List<Integer> curr, 
-	    List<List<Integer>> ans
-	) {
-        if (curr.size() == nums.length) {
-            ans.add(new ArrayList<>(curr));
+var permute = function(nums) {
+    const ans = [];
+    const backtrack = (curr) => {
+        if (curr.length === nums.length) {
+            ans.push([...curr]); 
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
-            if (curr.contains(nums[i])) continue; 
-            curr.add(nums[i]);        
-            backtrack(nums, curr, ans); 
-            curr.remove(curr.size() - 1); 
+        for (const num of nums) {
+            if (curr.includes(num)) continue; 
+            curr.push(num);                  
+            backtrack(curr);                 
+            curr.pop();                      
         }
-    }
-}
+    };
+    backtrack([]);
+    return ans;
+};
 ```
 
 ## 51. N-Queens
@@ -87,47 +80,31 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    List<List<String>> ans = new ArrayList<>();
-    boolean[] col, diag1, diag2;
-    int n;
-
-    public List<List<String>> solveNQueens(int n) {
-        this.n = n;
-        col = new boolean[n];
-        diag1 = new boolean[2 * n];
-        diag2 = new boolean[2 * n];
-        char[][] board = new char[n][n];
-        for (char[] r : board) Arrays.fill(r, '.');
-        backtrack(0, board);
-        return ans;
-    }
-    void backtrack(int row, char[][] board) {
-        if (row == n) {
-            ans.add(toList(board));
+var solveNQueens = function(n) {
+    const ans = [];
+    const col = new Array(n).fill(false);
+    const diag1 = new Array(2 * n).fill(false); 
+    const diag2 = new Array(2 * n).fill(false); 
+    const board = Array.from({ length: n }, () => Array(n).fill('.'));
+    const backtrack = (row) => {
+        if (row === n) {
+            ans.push(board.map(r => r.join('')));
             return;
         }
-        
-        for (int c = 0; c < n; c++) {
-            int d1 = row - c + n;
-            int d2 = row + c;
-            
+        for (let c = 0; c < n; c++) {
+            const d1 = row - c + n;
+            const d2 = row + c;
             if (col[c] || diag1[d1] || diag2[d2]) continue;
             board[row][c] = 'Q';
             col[c] = diag1[d1] = diag2[d2] = true;
-            
-            backtrack(row + 1, board); 
-            
+            backtrack(row + 1);
             board[row][c] = '.';
             col[c] = diag1[d1] = diag2[d2] = false;
         }
-    }
-    List<String> toList(char[][] board) {
-        List<String> res = new ArrayList<>();
-        for (char[] r : board) res.add(new String(r));
-        return res;
-    }
-}
+    };
+    backtrack(0);
+    return ans;
+};
 
 ```
 
@@ -143,28 +120,26 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    int count = 0;
-    public int countArrangement(int n) {
-        boolean[] used = new boolean[n + 1];
-        backtrack(1, n, used);
-        return count;
-    }
-    private void backtrack(int pos, int n, boolean[] used) {
+var countArrangement = function(n) {
+    let count = 0;
+    const used = new Array(n + 1).fill(false);
+    const backtrack = (pos) => {
         if (pos > n) {
             count++;
             return;
         }
-        for (int num = 1; num <= n; num++) {
-            if (!used[num] && (num % pos == 0 || pos % num == 0)) {
+        for (let num = 1; num <= n; num++) {
+            if (!used[num] && (num % pos === 0 || pos % num === 0))
+            {
                 used[num] = true;
-                backtrack(pos + 1, n, used);
+                backtrack(pos + 1);
                 used[num] = false;
             }
         }
-    }
-}
-
+    };
+    backtrack(1);
+    return count;
+};
 ```
 
 ## 39. Combination Sum
@@ -179,33 +154,24 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public List<List<Integer>> combinationSum(int[] nums, int target) {
-        Arrays.sort(nums); 
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ) {
-        if (target == 0) {
-            res.add(new ArrayList<>(curr));
+var combinationSum = function(nums, target) {
+    nums.sort((a, b) => a - b); 
+    const res = [];
+    const backtrack = (start, curr, remaining) => {
+        if (remaining === 0) {
+            res.push([...curr]); 
             return;
         }
-        for (int i = start; i < nums.length; i++) {
-            if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i, curr, res);
-            curr.remove(curr.size() - 1);
+        for (let i = start; i < nums.length; i++) {
+            if (nums[i] > remaining) break; 
+            curr.push(nums[i]); 
+            backtrack(i, curr, remaining - nums[i]); 
+            curr.pop(); 
         }
-    }
-}
+    };
+    backtrack(0, [], target);
+    return res;
+};
 ```
 
 ## 40. Combination Sum II
