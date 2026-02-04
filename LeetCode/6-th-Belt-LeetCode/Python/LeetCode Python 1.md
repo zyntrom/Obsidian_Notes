@@ -80,31 +80,20 @@ aspectRatio: "52"
 ```
 
 ```python
-import python.util.*;
-class Solution {
-	public int[] numMovesStonesII(int[] stones) {
-		Arrays.sort(stones);
-		int n =stones.length;
-		int max1= stones[n-1] -stones[1] -(n-2);
-		int max2 =stones[n-2] -stones[0]-(n-2);
-		int maxMoves =Math.max(max1,max2);
-		int minMoves = Integer.MAX_VALUE;
-		for(int i=0;i<n;i++){
-			int j=i;
-			while((j+1) <n && stones[j+1]-stones[i]+1<=n){
-				j++;
-			}
-			int stonesInWindow=j-i+1;
-			if(stonesInWindow ==n-1 && stones[j]-stones[i]+1 ==n-1){
-				minMoves = Math.min(minMoves,2);
-			}
-			else{
-				minMoves =Math.min(minMoves,n-stonesInWindow);
-			}
-		}
-		return new int[] {minMoves,maxMoves};
-	}
-}
+class Solution:
+    def myPow(self, x, n):
+        pow_val = n
+        if pow_val < 0:
+            x = 1.0 / x
+            pow_val = -pow_val
+        result = 1.0
+        current_product = x
+        while pow_val > 0:
+            if pow_val % 2 == 1:
+                result = result * current_product
+            current_product = current_product * current_product
+            pow_val = pow_val // 2
+        return result
 ```
 
 ## 2592. Maximize Greatness of an Array
@@ -121,26 +110,21 @@ aspectRatio: "52"
 ```
 
 ```python
-import python.util.Arrays;
-
-class Solution {
-    public int maximizeGreatness(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        int i = 0, j = 0, greatness = 0;
-        while (i < n && j < n) {
-            if (nums[j] > nums[i]) {
-                greatness++;
-                i++;
-                j++;
-            } else {
-                j++;
-            }
-        }
-        return greatness;
-    }
-}
-
+class Solution:
+    def maximizeGreatness(self, nums):
+        nums.sort()
+        n = len(nums)
+        i = 0
+        j = 0
+        greatness = 0
+        while i < n and j < n:
+            if nums[j] > nums[i]:
+                greatness = greatness + 1
+                i = i + 1
+                j = j + 1
+            else:
+                j = j + 1
+        return greatness
 ```
 
 ## 128. Longest Consecutive Sequence
@@ -157,31 +141,24 @@ aspectRatio: "52"
 ```
 
 ```python
-import python.util.*;
-
-class Solution {
-    public int longestConsecutive(int[] nums) {
-        if (nums.length == 0) return 0;
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
-        }
-        int maxLength = 0;
-        for (int num : set) {
-            if (!set.contains(num - 1)) {
-                int currNum = num;
-                int currLength = 1;
-                while (set.contains(currNum + 1)) {
-                    currNum++;
-                    currLength++;
-                }
-                maxLength = Math.max(maxLength, currLength);
-            }
-        }
-        return maxLength;
-    }
-}
-
+class Solution:
+    def longestConsecutive(self, nums):
+        if len(nums) == 0:
+            return 0
+        num_set = set()
+        for i in range(len(nums)):
+            num_set.add(nums[i])
+        max_length = 0
+        for num in num_set:
+            if (num - 1) not in num_set:
+                curr_num = num
+                curr_length = 1
+                while (curr_num + 1) in num_set:
+                    curr_num = curr_num + 1
+                    curr_length = curr_length + 1
+                if curr_length > max_length:
+                    max_length = curr_length
+        return max_length
 ```
 
 ## 786. K-th Smallest Prime Fraction
