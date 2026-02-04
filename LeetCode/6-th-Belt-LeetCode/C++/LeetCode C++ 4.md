@@ -231,23 +231,28 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public int maxConsecutiveAnswers(String answerKey, int k) {
-        return Math.max(maxWindow(answerKey, k, 'T'),
-                        maxWindow(answerKey, k, 'F'));
-    }
-    private int maxWindow(String s, int k, char target) {
-        int left = 0, max = 0, changes = 0;
-        for (int right = 0; right < s.length(); right++) {
-            if (s.charAt(right) != target) changes++;
-            while (changes > k) {
-                if (s.charAt(left) != target) changes--;
+private:
+    int maxWithChar(const string& s, int k, char ch) {
+        int left = 0, maxLen = 0, flips = 0;
+        for (int right = 0; right < s.size(); right++) {
+            if (s[right] != ch) flips++;
+            while (flips > k) {
+                if (s[left] != ch) flips--;
                 left++;
             }
-            max = Math.max(max, right - left + 1);
+            maxLen = max(maxLen, right - left + 1);
         }
-        return max;
+        return maxLen;
     }
-}
+public:
+    int maxConsecutiveAnswers(string answerKey, int k) {
+        return max(
+	        maxWithChar(answerKey, k, 'T'), 
+	        maxWithChar(answerKey, k, 'F')
+	    );
+    }
+};
+
 ```
 
 ## 1004. Max Consecutive Ones III
@@ -263,19 +268,20 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public int longestOnes(int[] nums, int k) {
-        int left = 0, max = 0, zeros = 0;
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] == 0) zeros++;
-            while (zeros > k) {
-                if (nums[left] == 0) zeros--;
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int left = 0, maxLen = 0, zeroCount = 0;
+        for (int right = 0; right < nums.size(); right++) {
+            if (nums[right] == 0) zeroCount++;
+            while (zeroCount > k) {
+                if (nums[left] == 0) zeroCount--;
                 left++;
             }
-            max = Math.max(max, right - left + 1);
+            maxLen = max(maxLen, right - left + 1);
         }
-        return max;
+        return maxLen;
     }
-}
+};
 
 ```
 
@@ -294,26 +300,21 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        int n = nums.length;
-        int[] res = new int[n - k + 1];
-        Deque<Integer> dq = new ArrayDeque<>(); 
-        // stores indices, values in decreasing order
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> result(n - k + 1);
+        deque<int> dq; 
         for (int i = 0; i < n; i++) {
-            // remove out-of-window indices
-            if (!dq.isEmpty() && dq.peekFirst() == i - k)
-                dq.pollFirst();
-            // maintain decreasing deque (remove smaller elements)
-            while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i])
-                dq.pollLast();
-            dq.offerLast(i);
-            // record answer once window size >= k
-            if (i >= k - 1)
-                res[i - k + 1] = nums[dq.peekFirst()];
+            if (!dq.empty() && dq.front() == i - k) dq.pop_front();
+            while (!dq.empty() && nums[dq.back()] < nums[i]) 
+            dq.pop_back();
+            dq.push_back(i);
+            if (i >= k - 1) result[i - k + 1] = nums[dq.front()];
         }
-        return res;
+        return result;
     }
-}
+};
 
 ```
 
