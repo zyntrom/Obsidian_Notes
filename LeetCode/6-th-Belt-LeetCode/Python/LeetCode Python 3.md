@@ -244,24 +244,20 @@ aspectRatio: "52"
 class Solution:
     def generateParenthesis(self, n):
         res = []
-
         def backtrack(cur, open_count, close_count):
             if len(cur) == 2 * n:
                 res.append("".join(cur))
                 return
-
             if open_count < n:
-                cur.append('(')                           # choose '('
+                cur.append('(')
                 backtrack(cur, open_count + 1, close_count)  
                 cur.pop()
             if close_count < open_count:
-                cur.append(')')                           # choose ')'
-                backtrack(cur, open_count, close_count + 1)  # explore
-                cur.pop()                                  # un-choose
-
+                cur.append(')')
+                backtrack(cur, open_count, close_count + 1)  
+                cur.pop()                                  
         backtrack([], 0, 0)
         return res
-
 ```
 
 ## 79. Word Search
@@ -276,48 +272,31 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public boolean exist(char[][] board, String word) {
-        int m = board.length, n = board[0].length;
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (backtrack(board, word, i, j, 0))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    boolean backtrack(
-	    char[][] board, 
-	    String word,
-        int i, 
-        int j, 
-        int idx
-    ) {
-        if (idx == word.length()) return true;
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == board.length || 
-	        j == board[0].length
-	    )return false;
-	    
-        if (board[i][j] != word.charAt(idx))
-            return false;
-        char temp = board[i][j];
-        board[i][j] = '#';        
-        boolean found =
-              backtrack(board, word, i + 1, j, idx + 1)
-           || backtrack(board, word, i - 1, j, idx + 1)
-           || backtrack(board, word, i, j + 1, idx + 1)
-           || backtrack(board, word, i, j - 1, idx + 1);
-        board[i][j] = temp;
-        return found;
-    }
-}
-
+class Solution:
+    def exist(self, board, word):
+        m, n = len(board), len(board[0])
+        def backtrack(i, j, idx):
+            if idx == len(word):
+                return True
+            if i < 0 or j < 0 or i >= m or j >= n:
+                return False
+            if board[i][j] != word[idx]:
+                return False
+            temp = board[i][j]
+            board[i][j] = '#'
+            found = (
+                backtrack(i + 1, j, idx + 1) or
+                backtrack(i - 1, j, idx + 1) or
+                backtrack(i, j + 1, idx + 1) or
+                backtrack(i, j - 1, idx + 1)
+            )
+            board[i][j] = temp
+            return found
+        for i in range(m):
+            for j in range(n):
+                if backtrack(i, j, 0):
+                    return True
+        return False
 ```
 
 ## 131. Palindrome Partitioning
@@ -332,39 +311,27 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new ArrayList<>();
-        backtrack(0, s, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int start, 
-	    String s,
-        List<String> path, 
-        List<List<String>> res
-    ) {
-        if (start == s.length()) {     
-            res.add(new ArrayList<>(path));
-            return;
-        }
-        for (int end = start; end < s.length(); end++) {
-            if (isPal(s, start, end)) {
-                path.add(s.substring(start, end + 1)); 
-                backtrack(end + 1, s, path, res);      
-                path.remove(path.size() - 1);          
-            }
-        }
-    }
-
-    boolean isPal(String s, int l, int r) {
-        while (l < r)
-            if (s.charAt(l++) != s.charAt(r--))
-                return false;
-        return true;
-    }
-}
-
+class Solution:
+    def partition(self, s):
+        res = []
+        def is_palindrome(l, r):
+            while l < r:
+                if s[l] != s[r]:
+                    return False
+                l += 1
+                r -= 1
+            return True
+        def backtrack(start, path):
+            if start == len(s):
+                res.append(path[:])  
+                return
+            for end in range(start, len(s)):
+                if is_palindrome(start, end):
+                    path.append(s[start:end + 1])  
+                    backtrack(end + 1, path)       
+                    path.pop()                      
+        backtrack(0, [])
+        return res
 ```
 
 ## 78. Subsets
@@ -379,28 +346,17 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
-        return res;
-    }
-
-    private void backtrack(
-	    int index, 
-	    int[] nums, 
-	    List<Integer> path, 
-	    List<List<Integer>> res
-	) {
-        res.add(new ArrayList<>(path));
-        for (int i = index; i < nums.length; i++) {
-            path.add(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1);
-        }
-    }
-}
-
+class Solution:
+    def subsets(self, nums):
+        res = []
+        def backtrack(index, path):
+            res.append(path[:])  
+            for i in range(index, len(nums)):
+                path.append(nums[i])        
+                backtrack(i + 1, path)     
+                path.pop()                  
+        backtrack(0, [])
+        return res
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
@@ -415,35 +371,26 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    int max = 0;
-    public int maxLength(List<String> arr) {
-        backtrack(arr, 0, "", 0);
-        return max;
-    }
-    void backtrack(List<String> arr, int idx,
-                   String cur, int len) {
-        max = Math.max(max, len);
-        for (int i = idx; i < arr.size(); i++) {
-            if (isUnique(cur, arr.get(i))) {
-                backtrack(
-	                arr, i + 1,
-                    cur + arr.get(i),
-                    len + arr.get(i).length()
-                );
-            }
-        }
-    }
-    boolean isUnique(String a, String b) {
-        int[] freq = new int[26];
-        for (char c : a.toCharArray())
-            freq[c - 'a']++;
-        for (char c : b.toCharArray())
-	        if (freq[c - 'a']++ > 0)
-		        return false;
-        return true;
-    }
-}
+class Solution:
+    def maxLength(self, arr):
+        self.max_len = 0
+        def is_unique(a, b):
+            freq = [0] * 26
+            for c in a:
+                freq[ord(c) - ord('a')] += 1
+            for c in b:
+                if freq[ord(c) - ord('a')] > 0:
+                    return False
+                freq[ord(c) - ord('a')] += 1
+            return True
+        def backtrack(idx, cur, length):
+            self.max_len = max(self.max_len, length)
+            for i in range(idx, len(arr)):
+                if is_unique(cur, arr[i]):
+                    backtrack(i + 1, cur + arr[i], length + len(arr[i]))
+        backtrack(0, "", 0)
+        return self.max_len
+
 ```
 
 ## 1219. Path with Maximum Gold
