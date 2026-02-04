@@ -180,32 +180,28 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<List<Integer>> combinationSum(int[] nums, int target) {
-        Arrays.sort(nums); 
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ) {
+private:
+    void backtrack(vector<int>& nums, int target, int start, vector<int>& curr, vector<vector<int>>& res) {
         if (target == 0) {
-            res.add(new ArrayList<>(curr));
+            res.push_back(curr);
             return;
         }
-        for (int i = start; i < nums.length; i++) {
+        for (int i = start; i < nums.size(); i++) {
             if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i, curr, res);
-            curr.remove(curr.size() - 1);
+            curr.push_back(nums[i]);
+            backtrack(nums, target - nums[i], i, curr, res); 
+            curr.pop_back();
         }
     }
-}
+public:
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        vector<int> curr;
+        backtrack(nums, target, 0, curr, res);
+        return res;
+    }
+};
 ```
 
 ## 40. Combination Sum II
@@ -221,36 +217,29 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<List<Integer>> combinationSum2(
-	    int[] nums, 
-	    int target
-	) {
-        Arrays.sort(nums);   
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(nums, target, 0, new ArrayList<>(), res);
-        return res;
-    }
-    void backtrack(
-	    int[] nums, 
-	    int target, 
-	    int start,
-        List<Integer> curr, 
-        List<List<Integer>> res
-    ){
+private:
+    void backtrack(vector<int>& nums, int target, int start, vector<int>& curr, vector<vector<int>>& res) {
         if (target == 0) {
-            res.add(new ArrayList<>(curr));
+            res.push_back(curr);
             return;
         }
-        for (int i = start; i < nums.length; i++) {
+        for (int i = start; i < nums.size(); i++) {
             if (i > start && nums[i] == nums[i - 1]) continue;
             if (nums[i] > target) break;
-            curr.add(nums[i]);
-            backtrack(nums, target - nums[i], i + 1, curr, res); 
-            curr.remove(curr.size() - 1);
+            curr.push_back(nums[i]);
+            backtrack(nums, target - nums[i], i + 1, curr, res);
+            curr.pop_back();
         }
     }
-}
-
+public:
+    vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+        vector<int> curr;
+        backtrack(nums, target, 0, curr, res);
+        return res;
+    }
+};
 ```
 
 ## 491. Non-decreasing Subsequences
@@ -266,34 +255,32 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<List<Integer>> findSubsequences(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(0, nums, new ArrayList<>(), res);
+private:
+    void backtrack(int idx, vector<int>& nums, vector<int>& path, vector<vector<int>>& res) {
+        if (path.size() >= 2) {
+            res.push_back(path);
+        }
+
+        unordered_set<int> used; 
+        for (int i = idx; i < nums.size(); i++) {
+            if (used.count(nums[i])) continue; 
+            if (!path.empty() && nums[i] < path.back()) continue;
+            used.insert(nums[i]);
+            path.push_back(nums[i]);
+            backtrack(i + 1, nums, path, res);
+            path.pop_back();
+        }
+    }
+
+public:
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> path;
+        backtrack(0, nums, path, res);
         return res;
     }
-    void backtrack(
-	    int idx, 
-	    int[] nums,
-        List<Integer> path, 
-        List<List<Integer>> res
-    ) {
-        if (path.size() >= 2) {
-            res.add(new ArrayList<>(path));
-        }
-        HashSet<Integer> used = new HashSet<>();
-        for (int i = idx; i < nums.length; i++) {
-            if (used.contains(nums[i])) continue; 
-            if (
-	            !path.isEmpty() && 
-	            nums[i] < path.get(path.size() - 1)
-	        ) continue;
-            used.add(nums[i]);      
-            path.add(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.remove(path.size() - 1); 
-        }
-    }
-}
+};
+
 ```
 
 ## 22. Generate Parentheses
@@ -309,31 +296,31 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
-        backtrack(res, new StringBuilder(), 0, 0, n);
-        return res;
-    }
-    void backtrack(List<String> res, StringBuilder cur,
-                   int open, int close, int n) {
-        if (cur.length() == 2 * n) {   
-            res.add(cur.toString());
+private:
+    void backtrack(vector<string>& res, string& cur, int open, int close, int n) {
+        if (cur.size() == 2 * n) {
+            res.push_back(cur);
             return;
         }
         if (open < n) {
-            cur.append('(');
+            cur.push_back('(');
             backtrack(res, cur, open + 1, close, n);
-            cur.deleteCharAt(cur.length() - 1);
+            cur.pop_back();
         }
-
         if (close < open) {
-            cur.append(')');
+            cur.push_back(')');
             backtrack(res, cur, open, close + 1, n);
-            cur.deleteCharAt(cur.length() - 1);
+            cur.pop_back();
         }
     }
-}
-
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        string cur;
+        backtrack(res, cur, 0, 0, n);
+        return res;
+    }
+};
 ```
 
 ## 79. Word Search
@@ -349,47 +336,31 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public boolean exist(char[][] board, String word) {
-        int m = board.length, n = board[0].length;
-
+private:
+    bool backtrack(vector<vector<char>>& board, string& word, int i, int j, int idx) {
+        if (idx == word.size()) return true;
+        if (i < 0 || j < 0 || i >= board.size() || j >= board[0].size()) return false;
+        if (board[i][j] != word[idx]) return false;
+        char temp = board[i][j];
+        board[i][j] = '#';  
+        bool found = backtrack(board, word, i + 1, j, idx + 1)
+                  || backtrack(board, word, i - 1, j, idx + 1)
+                  || backtrack(board, word, i, j + 1, idx + 1)
+                  || backtrack(board, word, i, j - 1, idx + 1);
+        board[i][j] = temp; 
+        return found;
+    }
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int m = board.size(), n = board[0].size();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (backtrack(board, word, i, j, 0))
-                    return true;
+                if (backtrack(board, word, i, j, 0)) return true;
             }
         }
         return false;
     }
-
-    boolean backtrack(
-	    char[][] board, 
-	    String word,
-        int i, 
-        int j, 
-        int idx
-    ) {
-        if (idx == word.length()) return true;
-        if (
-	        i < 0 || 
-	        j < 0 || 
-	        i == board.length || 
-	        j == board[0].length
-	    )return false;
-	    
-        if (board[i][j] != word.charAt(idx))
-            return false;
-        char temp = board[i][j];
-        board[i][j] = '#';        
-        boolean found =
-              backtrack(board, word, i + 1, j, idx + 1)
-           || backtrack(board, word, i - 1, j, idx + 1)
-           || backtrack(board, word, i, j + 1, idx + 1)
-           || backtrack(board, word, i, j - 1, idx + 1);
-        board[i][j] = temp;
-        return found;
-    }
-}
-
+};
 ```
 
 ## 131. Palindrome Partitioning
@@ -405,38 +376,34 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    public List<List<String>> partition(String s) {
-        List<List<String>> res = new ArrayList<>();
-        backtrack(0, s, new ArrayList<>(), res);
-        return res;
+private:
+    bool isPal(const string& s, int l, int r) {
+        while (l < r) {
+            if (s[l++] != s[r--]) return false;
+        }
+        return true;
     }
-    void backtrack(
-	    int start, 
-	    String s,
-        List<String> path, 
-        List<List<String>> res
-    ) {
-        if (start == s.length()) {     
-            res.add(new ArrayList<>(path));
+    void backtrack(int start, const string& s, vector<string>& path, vector<vector<string>>& res) {
+        if (start == s.size()) {
+            res.push_back(path);
             return;
         }
-        for (int end = start; end < s.length(); end++) {
+        for (int end = start; end < s.size(); end++) {
             if (isPal(s, start, end)) {
-                path.add(s.substring(start, end + 1)); 
-                backtrack(end + 1, s, path, res);      
-                path.remove(path.size() - 1);          
+                path.push_back(s.substr(start, end - start + 1)); 
+                backtrack(end + 1, s, path, res);
+                path.pop_back();
             }
         }
     }
-
-    boolean isPal(String s, int l, int r) {
-        while (l < r)
-            if (s.charAt(l++) != s.charAt(r--))
-                return false;
-        return true;
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> res;
+        vector<string> path;
+        backtrack(0, s, path, res);
+        return res;
     }
-}
-
+};
 ```
 
 ## 78. Subsets
@@ -457,7 +424,6 @@ class Solution {
         backtrack(0, nums, new ArrayList<>(), res);
         return res;
     }
-
     private void backtrack(
 	    int index, 
 	    int[] nums, 
@@ -472,7 +438,6 @@ class Solution {
         }
     }
 }
-
 ```
 
 ## 1239. Maximum Length of a Concatenated String with Unique Characters
