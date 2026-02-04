@@ -11,35 +11,28 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-class Solution {
-    public void nextPermutation(int[] nums) {
-        int n = nums.length;
-        int i = n - 2;
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            i--;
-        }
-        if (i >= 0) {
-            int j = n - 1;
-            while (nums[i] >= nums[j]) {
-                j--;
-            }
-            swap(nums, i, j);
-        }
-        reverse(nums, i + 1, n - 1);
-    }
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-    private void reverse(int[] nums, int left, int right) {
-        while (left < right) {
-            swap(nums, left++, right--);
-        }
-    }
-}
-
+```python
+class Solution:
+    def nextPermutation(self, nums):
+        n = len(nums)
+        i = n - 2
+        while i >= 0 and nums[i] >= nums[i + 1]:
+            i = i - 1
+        if i >= 0:
+            j = n - 1
+            while nums[i] >= nums[j]:
+                j = j - 1
+            self.swap(nums, i, j)
+        self.reverse(nums, i + 1, n - 1)
+    def swap(self, nums, i, j):
+        temp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = temp
+    def reverse(self, nums, left, right):
+        while left < right:
+            self.swap(nums, left, right)
+            left = left + 1
+            right = right - 1
 ```
 
 ## 50. Pow(x, n)
@@ -55,27 +48,22 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-class Solution {
-    public double myPow(double x, int n) {
-        long pow = n;  
-        if (pow < 0) {
-            x = 1 / x;
-            pow = -pow;
-        }
-        return fastPow(x, pow);
-    }
-    double fastPow(double x, long n) {
-        if (n == 0) return 1.0;
-        double half = fastPow(x, n / 2);
-        if (n % 2 == 0) {
-            return half * half;
-        } else {
-            return half * half * x;
-        }
-    }
-}
-
+```python
+class Solution:
+    def myPow(self, x, n):
+        pow_val = n
+        if pow_val < 0:
+            x = 1.0 / x
+            pow_val = -pow_val
+        return self.fastPow(x, pow_val)
+    def fastPow(self, x, n):
+        if n == 0:
+            return 1.0
+        half = self.fastPow(x, n // 2)
+        if n % 2 == 0:
+            return half * half
+        else:
+            return half * half * x
 ```
 
 ## 1040. Moving Stones Until Consecutive II
@@ -91,8 +79,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```python
+import python.util.*;
 class Solution {
 	public int[] numMovesStonesII(int[] stones) {
 		Arrays.sort(stones);
@@ -132,8 +120,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.Arrays;
+```python
+import python.util.Arrays;
 
 class Solution {
     public int maximizeGreatness(int[] nums) {
@@ -168,8 +156,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```python
+import python.util.*;
 
 class Solution {
     public int longestConsecutive(int[] nums) {
@@ -209,8 +197,8 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
-import java.util.*;
+```python
+import python.util.*;
 class Solution {
     public int[] kthSmallestPrimeFraction(int[] arr, int k) {
         List<int[]> frac = new ArrayList<>();
