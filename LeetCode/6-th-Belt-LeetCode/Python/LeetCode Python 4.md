@@ -142,31 +142,31 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public boolean checkInclusion(String s1, String s2) {
-        if (s1.length() > s2.length()) return false;
-        int[] freq1 = new int[26];
-        int[] freq2 = new int[26];
-        for (char c : s1.toCharArray()) {
-            freq1[c - 'a']++;
-        }
-        int k = s1.length();
-        for (int i = 0; i < s2.length(); i++) {
-            freq2[s2.charAt(i) - 'a']++;
-            if (i >= k) {
-                freq2[s2.charAt(i - k) - 'a']--;
-            }
-            if (matches(freq1, freq2)) return true;
-        }
-        return false;
-    } 
-    boolean matches(int[] a, int[] b) {
-        for (int i = 0; i < 26; i++) {
-            if (a[i] != b[i]) return false;
-        }
-        return true;
-    }
-}
+class Solution:
+    def checkInclusion(self, s1, s2):
+        if len(s1) > len(s2):
+            return False
+        freq1 = [0] * 26
+        freq2 = [0] * 26
+        letters = "abcdefghijklmnopqrstuvwxyz"
+        for c in s1:
+            idx = letters.index(c)
+            freq1[idx] += 1
+        k = len(s1)
+        for i in range(len(s2)):
+            idx_add = letters.index(s2[i])
+            freq2[idx_add] += 1
+            if i >= k:
+                idx_remove = letters.index(s2[i - k])
+                freq2[idx_remove] -= 1
+            if self.matches(freq1, freq2):
+                return True
+        return False
+    def matches(self, a, b):
+        for i in range(26):
+            if a[i] != b[i]:
+                return False
+        return True
 ```
 
 ## 904. Fruit Into Baskets
@@ -181,27 +181,27 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public int totalFruit(int[] fruits) {
-        Map<Integer, Integer> map = new HashMap<>();
-        int left = 0, ans = 0;
-        for (int right = 0; right < fruits.length; right++) {
-            map.put(
-	            fruits[right], 
-	            map.getOrDefault(fruits[right], 0) + 1
-	        );
-            while (map.size() > 2) {
-                int f = fruits[left];
-                map.put(f, map.get(f) - 1);
-                if (map.get(f) == 0) map.remove(f);
-                left++;
-            }
-            ans = Math.max(ans, right - left + 1);
-        }
-        return ans;
-    }
-}
-
+class Solution:
+    def totalFruit(self, fruits):
+        count_map = {}
+        left = 0
+        max_len = 0
+        for right in range(len(fruits)):
+            fruit = fruits[right]
+            if fruit in count_map:
+                count_map[fruit] += 1
+            else:
+                count_map[fruit] = 1
+            while len(count_map) > 2:
+                left_fruit = fruits[left]
+                count_map[left_fruit] -= 1
+                if count_map[left_fruit] == 0:
+                    del count_map[left_fruit]
+                left += 1
+            window_len = right - left + 1
+            if window_len > max_len:
+                max_len = window_len
+        return max_len
 ```
 
 ## 2024. Maximize the Confusion of an Exam
@@ -216,28 +216,27 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public int maxConsecutiveAnswers(String answerKey, int k) {
-        return Math.max(
-	        maxWithChar(answerKey, k, 'T'), 
-	        maxWithChar(answerKey, k, 'F')
-	    );
-    }
-    private int maxWithChar(String s, int k, char ch) {
-        int left = 0, maxLen = 0, flips = 0;
-        for (int right = 0; right < s.length(); right++) {
-            if (s.charAt(right) != ch) flips++;
-            
-            while (flips > k) {
-                if (s.charAt(left) != ch) flips--;
-                left++;
-            }
-            
-            maxLen = Math.max(maxLen, right - left + 1);
-        }
-        return maxLen;
-    }
-}
+class Solution:
+    def maxConsecutiveAnswers(self, answerKey, k):
+        return max(
+            self.maxWithChar(answerKey, k, 'T'),
+            self.maxWithChar(answerKey, k, 'F')
+        )
+    def maxWithChar(self, s, k, ch):
+        left = 0
+        max_len = 0
+        flips = 0
+        for right in range(len(s)):
+            if s[right] != ch:
+                flips += 1
+            while flips > k:
+                if s[left] != ch:
+                    flips -= 1
+                left += 1
+            window_len = right - left + 1
+            if window_len > max_len:
+                max_len = window_len
+        return max_len
 ```
 
 ## 1004. Max Consecutive Ones III
@@ -252,20 +251,22 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public int longestOnes(int[] nums, int k) {
-        int left = 0, maxLen = 0, zeroCount = 0;
-        for (int right = 0; right < nums.length; right++) {
-            if (nums[right] == 0) zeroCount++;
-            while (zeroCount > k) {
-                if (nums[left] == 0) zeroCount--;
-                left++;
-            }
-            maxLen = Math.max(maxLen, right - left + 1);
-        }
-        return maxLen;
-    }
-}
+class Solution:
+    def longestOnes(self, nums, k):
+        left = 0
+        max_len = 0
+        zero_count = 0
+        for right in range(len(nums)):
+            if nums[right] == 0:
+                zero_count += 1
+            while zero_count > k:
+                if nums[left] == 0:
+                    zero_count -= 1
+                left += 1
+            window_len = right - left + 1
+            if window_len > max_len:
+                max_len = window_len
+        return max_len
 ```
 
 # Sliding Window/Deque
@@ -282,28 +283,20 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
-        Deque<Integer> dq = new ArrayDeque<>(); 
-        for (int i = 0; i < n; i++) {
-            if (
-	            !dq.isEmpty() && 
-	            dq.peekFirst() == i - k
-	        ) dq.pollFirst();
-	        
-            while (
-	            !dq.isEmpty() && 
-	            nums[dq.peekLast()] < nums[i]
-	        ) dq.pollLast();
-	        
-            dq.offerLast(i);
-            if (i >= k - 1) 
-            result[i - k + 1] = nums[dq.peekFirst()];
-        }
-        return result;
-    }
-}
+from collections import deque
+class Solution:
+    def maxSlidingWindow(self, nums, k):
+        n = len(nums)
+        result = [0] * (n - k + 1)
+        dq = deque()
+        for i in range(n):
+            if dq and dq[0] == i - k:
+                dq.popleft()
+            while dq and nums[dq[-1]] < nums[i]:
+                dq.pop()
+            dq.append(i)
+            if i >= k - 1:
+                result[i - k + 1] = nums[dq[0]]
+        return result
 ```
 
