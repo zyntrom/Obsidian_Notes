@@ -175,22 +175,13 @@ aspectRatio: "52"
 ```
 
 ```python
-import python.util.*;
-class Solution {
-    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
-        List<int[]> frac = new ArrayList<>();
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                frac.add(new int[]{arr[i], arr[j]});
-            }
-        }
-        Collections.sort(frac, (a, b) -> {
-            double f1 = (double) a[0] / a[1];
-            double f2 = (double) b[0] / b[1];
-            return Double.compare(f1, f2);
-        });
-        return frac.get(k - 1);
-    }
-}
+class Solution:
+    def kthSmallestPrimeFraction(self, arr, k):
+        frac = []
+        n = len(arr)
+        for i in range(n):
+            for j in range(i + 1, n):
+                frac.append([arr[i], arr[j]])
+        frac.sort(key=lambda x: x[0] / x[1])
+        return frac[k - 1]
 ```
