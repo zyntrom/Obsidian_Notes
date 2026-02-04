@@ -96,7 +96,6 @@ aspectRatio: "52"
 ```python
 class Solution:
     def canPartition(self, nums):
-        # Step 1: Compute total sum
         total = 0
         for num in nums:
             total = total + num
@@ -125,30 +124,28 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public String longestPalindrome(String s) {
-        String ans = "";
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                String sub = s.substring(i, j + 1);
-                if (isPalindrome(sub) && sub.length() > ans.length()) {
-                    ans = sub;
-                }
-            }
-        }
-        return ans;
-    }
-    boolean isPalindrome(String str) {
-        int l = 0, r = str.length() - 1;
-        while (l < r) {
-            if (str.charAt(l) != str.charAt(r)) return false;
-            l++;
-            r--;
-        }
-        return true;
-    }
-}
-
+class Solution:
+    def longestPalindrome(self, s):
+        ans = ""
+        i = 0
+        while i < len(s):
+            j = i
+            while j < len(s):
+                sub = s[i:j + 1]
+                if self.isPalindrome(sub) and len(sub) > len(ans):
+                    ans = sub
+                j = j + 1
+            i = i + 1
+        return ans
+    def isPalindrome(self, string):
+        l = 0
+        r = len(string) - 1
+        while l < r:
+            if string[l] != string[r]:
+                return False
+            l = l + 1
+            r = r - 1
+        return True
 ```
 
 ## 646. Maximum Length of Pair Chain
@@ -163,26 +160,18 @@ aspectRatio: "52"
 ```
 
 ```python
-import python.util.*;
-
-class Solution {
-    public int findLongestChain(int[][] pairs) {
-        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);  // sort by ending value
-        
-        int count = 1;
-        int lastEnd = pairs[0][1];
-        
-        for (int i = 1; i < pairs.length; i++) {
-            if (pairs[i][0] > lastEnd) {
-                count++;
-                lastEnd = pairs[i][1];
-            } 
-        }
-        
-        return count;
-    }
-}
-
+class Solution:
+    def findLongestChain(self, pairs):
+        pairs.sort(key=lambda x: x[1])
+        count = 1
+        last_end = pairs[0][1]
+        i = 1
+        while i < len(pairs):
+            if pairs[i][0] > last_end:
+                count = count + 1
+                last_end = pairs[i][1]
+            i = i + 1
+        return count
 ```
 
 ## 21. Merge Two Sorted Lists
@@ -199,26 +188,23 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode(0);
-        ListNode tail = dummy;
-        while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                tail.next = list1;
-                list1 = list1.next;
-            } else {
-                tail.next = list2;
-                list2 = list2.next;
-            }
-            tail = tail.next;
-        }
-        // attach the remaining nodes
-        if (list1 != null) tail.next = list1;
-        else tail.next = list2;
-        return dummy.next;
-    }
-}
+class Solution:
+    def mergeTwoLists(self, list1, list2):
+        dummy = ListNode(0)
+        tail = dummy
+        while list1 is not None and list2 is not None:
+            if list1.val < list2.val:
+                tail.next = list1
+                list1 = list1.next
+            else:
+                tail.next = list2
+                list2 = list2.next
+            tail = tail.next
+        if list1 is not None:
+            tail.next = list1
+        else:
+            tail.next = list2
+        return dummy.next
 ```
 
 ## 234. Palindrome Linked List
@@ -235,36 +221,30 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) return true;
-        
-        ListNode slow = head, fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        ListNode second = reverse(slow);
-        ListNode first = head;
-        while (second != null) {
-            if (first.val != second.val) 
-                return false;
-            first = first.next;
-            second = second.next;
-        }
-        return true;
-    }
-    private ListNode reverse(ListNode head) {
-        ListNode next = null;
-        ListNode curr=head;
-        ListNode prev = null;
-        while (head != null) {
-			next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
-    }
-}
+class Solution:
+    def isPalindrome(self, head):
+        if head is None or head.next is None:
+            return True
+        slow = head
+        fast = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        second = self.reverse(slow)
+        first = head
+        while second is not None:
+            if first.val != second.val:
+                return False
+            first = first.next
+            second = second.next
+        return True
+    def reverse(self, head):
+        prev = None
+        curr = head
+        while curr is not None:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        return prev
 ```
