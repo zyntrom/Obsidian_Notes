@@ -45,15 +45,13 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-	public int findTheWinner(int n, int k) {
-		int winner =0;
-		for(int i=1;i<=n;i++){
-			winner= (winner+k)%i;
-		}
-		return winner+1;
-	}
-}
+var findTheWinner = function(n, k) {
+    let winner = 0;
+    for (let i = 1; i <= n; i++) {
+        winner = (winner + k) % i;
+    }
+    return winner + 1;
+};
 ```
 
 ## 53. Maximum Subarray
@@ -68,18 +66,15 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public int maxSubArray(int[] nums) {
-        int currentSum = nums[0];
-        int maxSum = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            // extend or restart
-            currentSum = Math.max(nums[i], currentSum + nums[i]);
-            maxSum = Math.max(maxSum, currentSum);
-        }
-        return maxSum;
+var maxSubArray = function(nums) {
+    let currentSum = nums[0];
+    let maxSum = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        currentSum = Math.max(nums[i], currentSum + nums[i]);
+        maxSum = Math.max(maxSum, currentSum);
     }
-}
+    return maxSum;
+};
 ```
 
 ## 416. Partition Equal Subset Sum
@@ -94,24 +89,19 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public boolean canPartition(int[] nums) {
-        int total = 0;
-        for (int num : nums) total += num;
-        // If total sum is odd → cannot partition
-        if (total % 2 != 0) return false;
-        int target = total / 2;
-        boolean[] dp = new boolean[target + 1];
-        dp[0] = true; // base case
-        for (int num : nums) {
-            for (int s = target; s >= num; s--) {
-                dp[s] = dp[s] || dp[s - num];
-            }
+var canPartition = function(nums) {
+    let total = nums.reduce((acc, num) => acc + num, 0);
+    if (total % 2 !== 0) return false;
+    const target = total / 2;
+    const dp = new Array(target + 1).fill(false);
+    dp[0] = true; 
+    for (const num of nums) {
+        for (let s = target; s >= num; s--) {
+            dp[s] = dp[s] || dp[s - num];
         }
-        return dp[target];
     }
-}
-
+    return dp[target];
+};
 ```
 
 ## 5. Longest Palindromic Substring
@@ -126,30 +116,27 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public String longestPalindrome(String s) {
-        String ans = "";
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                String sub = s.substring(i, j + 1);
-                if (isPalindrome(sub) && sub.length() > ans.length()) {
-                    ans = sub;
-                }
-            }
-        }
-        return ans;
-    }
-    boolean isPalindrome(String str) {
-        int l = 0, r = str.length() - 1;
+var longestPalindrome = function(s) {
+    let ans = "";
+    const isPalindrome = (str) => {
+        let l = 0, r = str.length - 1;
         while (l < r) {
-            if (str.charAt(l) != str.charAt(r)) return false;
+            if (str[l] !== str[r]) return false;
             l++;
             r--;
         }
         return true;
+    };
+    for (let i = 0; i < s.length; i++) {
+        for (let j = i; j < s.length; j++) {
+            const sub = s.substring(i, j + 1);
+            if (isPalindrome(sub) && sub.length > ans.length) {
+                ans = sub;
+            }
+        }
     }
-}
-
+    return ans;
+};
 ```
 
 ## 646. Maximum Length of Pair Chain
@@ -164,26 +151,18 @@ aspectRatio: "52"
 ```
 
 ```js
-import js.util.*;
-
-class Solution {
-    public int findLongestChain(int[][] pairs) {
-        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);  // sort by ending value
-        
-        int count = 1;
-        int lastEnd = pairs[0][1];
-        
-        for (int i = 1; i < pairs.length; i++) {
-            if (pairs[i][0] > lastEnd) {
-                count++;
-                lastEnd = pairs[i][1];
-            } 
+var findLongestChain = function(pairs) {
+    pairs.sort((a, b) => a[1] - b[1]);
+    let count = 1;
+    let lastEnd = pairs[0][1];
+    for (let i = 1; i < pairs.length; i++) {
+        if (pairs[i][0] > lastEnd) {
+            count++;
+            lastEnd = pairs[i][1];
         }
-        
-        return count;
     }
-}
-
+    return count;
+};
 ```
 
 ## 21. Merge Two Sorted Lists
@@ -200,26 +179,22 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode(0);
-        ListNode tail = dummy;
-        while (list1 != null && list2 != null) {
-            if (list1.val < list2.val) {
-                tail.next = list1;
-                list1 = list1.next;
-            } else {
-                tail.next = list2;
-                list2 = list2.next;
-            }
-            tail = tail.next;
+var mergeTwoLists = function(list1, list2) {
+    const dummy = new ListNode(0);
+    let tail = dummy;
+    while (list1 !== null && list2 !== null) {
+        if (list1.val < list2.val) {
+            tail.next = list1;
+            list1 = list1.next;
+        } else {
+            tail.next = list2;
+            list2 = list2.next;
         }
-        // attach the remaining nodes
-        if (list1 != null) tail.next = list1;
-        else tail.next = list2;
-        return dummy.next;
+        tail = tail.next;
     }
-}
+    tail.next = list1 !== null ? list1 : list2;
+    return dummy.next;
+};
 ```
 
 ## 234. Palindrome Linked List
@@ -236,36 +211,30 @@ aspectRatio: "52"
 ```
 
 ```js
-class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) return true;
-        
-        ListNode slow = head, fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        ListNode second = reverse(slow);
-        ListNode first = head;
-        while (second != null) {
-            if (first.val != second.val) 
-                return false;
-            first = first.next;
-            second = second.next;
-        }
-        return true;
+var isPalindrome = function(head) {
+    if (head === null || head.next === null) return true;
+    let slow = head, fast = head;
+    while (fast !== null && fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next.next;
     }
-    private ListNode reverse(ListNode head) {
-        ListNode next = null;
-        ListNode curr=head;
-        ListNode prev = null;
-        while (head != null) {
-			next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
+    let second = reverse(slow);
+    let first = head;
+    while (second !== null) {
+        if (first.val !== second.val) return false;
+        first = first.next;
+        second = second.next;
     }
+    return true;
+};
+function reverse(head) {
+    let prev = null, curr = head, next = null;
+    while (curr !== null) {
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
 }
 ```
