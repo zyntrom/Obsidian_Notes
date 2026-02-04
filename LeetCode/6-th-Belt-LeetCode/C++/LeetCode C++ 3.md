@@ -12,28 +12,29 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-
-    String[] map = 
-    {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-    List<String> ans = new ArrayList<>();
-    public List<String> letterCombinations(String digits) {
-        if (digits.isEmpty()) return ans;
-        backtrack(digits, 0, new StringBuilder());
-        return ans;
-    }
-    void backtrack(String digits, int index, StringBuilder cur) {
-        if (index == digits.length()) {
-            ans.add(cur.toString());
+private:
+    vector<string> map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    vector<string> ans;
+    void backtrack(const string& digits, int index, string& cur) {
+        if (index == digits.size()) {
+            ans.push_back(cur);
             return;
         }
-        
-        String letters = map[digits.charAt(index) - '0'];
-        for (char ch : letters.toCharArray()) {
-            cur.append(ch);                 // choose
+        string letters = map[digits[index] - '0'];
+        for (char ch : letters) {
+            cur.push_back(ch);               // choose
             backtrack(digits, index + 1, cur); // explore
-            cur.deleteCharAt(cur.length() - 1); // un-choose (undo)
+            cur.pop_back();                  // un-choose (undo)
         }
     }
+public:
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return ans;
+        string cur;
+        backtrack(digits, 0, cur);
+        return ans;
+    }
+};
 }
 ```
 
