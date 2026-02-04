@@ -35,7 +35,6 @@ public:
         return ans;
     }
 };
-}
 ```
 
 ## 46. Permutations
@@ -51,29 +50,28 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-
-    public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        backtrack(nums, new ArrayList<>(), ans);
-        return ans;
-    }
-    void backtrack(
-	    int[] nums, 
-	    List<Integer> curr, 
-	    List<List<Integer>> ans
-	) {
-        if (curr.size() == nums.length) {
-            ans.add(new ArrayList<>(curr));
+private:
+    void backtrack(vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
+        if (curr.size() == nums.size()) {
+            ans.push_back(curr);
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
-            if (curr.contains(nums[i])) continue; 
-            curr.add(nums[i]);        
-            backtrack(nums, curr, ans); 
-            curr.remove(curr.size() - 1); 
+        for (int i = 0; i < nums.size(); i++) {
+            if (find(curr.begin(), curr.end(), nums[i]) != curr.end()) continue;
+
+            curr.push_back(nums[i]);          
+            backtrack(nums, curr, ans);      
+            curr.pop_back();                  
         }
     }
-}
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> curr;
+        backtrack(nums, curr, ans);
+        return ans;
+    }
+};
 ```
 
 ## 51. N-Queens
@@ -89,46 +87,43 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
-    List<List<String>> ans = new ArrayList<>();
-    boolean[] col, diag1, diag2;
+private:
+    vector<vector<string>> ans;
+    vector<bool> col, diag1, diag2;
     int n;
-
-    public List<List<String>> solveNQueens(int n) {
-        this.n = n;
-        col = new boolean[n];
-        diag1 = new boolean[2 * n];
-        diag2 = new boolean[2 * n];
-        char[][] board = new char[n][n];
-        for (char[] r : board) Arrays.fill(r, '.');
-        backtrack(0, board);
-        return ans;
+    vector<string> toList(vector<vector<char>>& board) {
+        vector<string> res;
+        for (auto& row : board)
+            res.push_back(string(row.begin(), row.end()));
+        return res;
     }
-    void backtrack(int row, char[][] board) {
+    void backtrack(int row, vector<vector<char>>& board) {
         if (row == n) {
-            ans.add(toList(board));
+            ans.push_back(toList(board));
             return;
         }
-        
         for (int c = 0; c < n; c++) {
             int d1 = row - c + n;
             int d2 = row + c;
-            
             if (col[c] || diag1[d1] || diag2[d2]) continue;
             board[row][c] = 'Q';
             col[c] = diag1[d1] = diag2[d2] = true;
-            
-            backtrack(row + 1, board); 
-            
+            backtrack(row + 1, board);
             board[row][c] = '.';
             col[c] = diag1[d1] = diag2[d2] = false;
         }
     }
-    List<String> toList(char[][] board) {
-        List<String> res = new ArrayList<>();
-        for (char[] r : board) res.add(new String(r));
-        return res;
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        this->n = n;
+        col.assign(n, false);
+        diag1.assign(2 * n, false);
+        diag2.assign(2 * n, false);
+        vector<vector<char>> board(n, vector<char>(n, '.'));
+        backtrack(0, board);
+        return ans;
     }
-}
+};
 
 ```
 
@@ -145,13 +140,10 @@ aspectRatio: "52"
 
 ```cpp
 class Solution {
+private:
     int count = 0;
-    public int countArrangement(int n) {
-        boolean[] used = new boolean[n + 1];
-        backtrack(1, n, used);
-        return count;
-    }
-    private void backtrack(int pos, int n, boolean[] used) {
+
+    void backtrack(int pos, int n, vector<bool>& used) {
         if (pos > n) {
             count++;
             return;
@@ -164,7 +156,14 @@ class Solution {
             }
         }
     }
-}
+
+public:
+    int countArrangement(int n) {
+        vector<bool> used(n + 1, false);
+        backtrack(1, n, used);
+        return count;
+    }
+};
 
 ```
 
