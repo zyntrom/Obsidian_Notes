@@ -48,7 +48,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     int findTheWinner(int n, int k) {
@@ -72,7 +72,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
@@ -98,7 +98,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     bool canPartition(vector<int>& nums) {
@@ -129,7 +129,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     string longestPalindrome(string s) {
@@ -167,7 +167,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
@@ -201,7 +201,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
@@ -238,7 +238,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```java
+```cpp
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
