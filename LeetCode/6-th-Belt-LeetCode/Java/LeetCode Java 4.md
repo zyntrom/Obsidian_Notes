@@ -19,7 +19,7 @@ class Solution {
             int mid = (left + right) / 2;
             long hours = 0;
             for (int p : piles)
-                hours += (p + mid - 1) / mid;
+            hours += (p + mid - 1) / mid;
             if (hours <= h) right = mid;
             else left = mid + 1;
         }
