@@ -305,13 +305,14 @@ class Solution {
             if (
 	            !dq.isEmpty() && 
 	            dq.peekFirst() == i - k
-	        ) dq.pollFirst();
+	        ) 
+	        dq.pollFirst();
 	        
             while (
 	            !dq.isEmpty() && 
 	            nums[dq.peekLast()] < nums[i]
-	        ) dq.pollLast();
-	        
+	        ) 
+	        dq.pollLast();
             dq.offerLast(i);
             if (i >= k - 1) 
             result[i - k + 1] = nums[dq.peekFirst()];
