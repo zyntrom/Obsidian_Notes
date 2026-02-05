@@ -1,6 +1,6 @@
 # Binary Search
 ## 875. Koko Eating Bananas
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Koko Eating Bananas - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -30,7 +30,7 @@ var minEatingSpeed = function(piles, h) {
 ```
 
 ## 1802. Maximum Value at a Given Index in a Bounded Array
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Maximum Value at a Given Index in a Bounded Array - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -69,7 +69,7 @@ var maxValue = function(n, index, maxSum) {
 ```
 
 ## 2300. Successful Pairs of Spells and Potions
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Successful Pairs of Spells and Potions - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -104,7 +104,7 @@ var successfulPairs = function(spells, potions, success) {
 ```
 
 ## 300. Longest Increasing Subsequence
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Longest Increasing Subsequence - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -134,7 +134,7 @@ var lengthOfLIS = function(nums) {
 
 # Sliding Window
 ## 567. Permutation in String
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Permutation in String - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
