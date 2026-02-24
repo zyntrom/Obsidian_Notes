@@ -131,28 +131,27 @@ aspectRatio: "52"
 ```java
 class Solution {
     public String longestPalindrome(String s) {
-        String ans = "";
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                String sub = s.substring(i, j + 1);
-                if (isPalindrome(sub) && sub.length() > ans.length()) {
-                    ans = sub;
+        int maxLen = 0;
+        int start = 0
+        for(int i = 0; i < s.length(); i++){
+            for(int j = i; j < s.length(); j++){
+                if(isPal(s, i, j) && (j - i + 1) > maxLen){
+                    start = i;
+                    maxLen = j - i + 1;
                 }
             }
         }
-        return ans;
-    }
-    boolean isPalindrome(String str) {
-        int l = 0, r = str.length() - 1;
-        while (l < r) {
-            if (str.charAt(l) != str.charAt(r)) return false;
+        return s.substring(start, start + maxLen);
+    
+    boolean isPal(String s, int l, int r){
+        while(l < r){
+            if(s.charAt(l) != s.charAt(r)) return false;
             l++;
             r--;
         }
         return true;
     }
 }
-
 ```
 
 ## 646. Maximum Length of Pair Chain
