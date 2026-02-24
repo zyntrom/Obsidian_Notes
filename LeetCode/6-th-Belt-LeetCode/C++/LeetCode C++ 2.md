@@ -133,21 +133,21 @@ aspectRatio: "52"
 class Solution {
 public:
     string longestPalindrome(string s) {
-        string ans = "";
-        for (int i = 0; i < (int)s.size(); i++) {
-            for (int j = i; j < (int)s.size(); j++) {
-                string sub = s.substr(i, j - i + 1);
-                if (isPalindrome(sub) && sub.size() > ans.size()) {
-                    ans = sub;
+        int n = s.size();
+        int start = 0, maxLen = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                if (isPalindrome(s, i, j) && (j - i + 1) > maxLen) {
+                    start = i;
+                    maxLen = j - i + 1;
                 }
             }
         }
-        return ans;
+        return s.substr(start, maxLen);
     }
-    bool isPalindrome(string &str) {
-        int l = 0, r = str.size() - 1;
+    bool isPalindrome(string &s, int l, int r) {
         while (l < r) {
-            if (str[l] != str[r]) return false;
+            if (s[l] != s[r]) return false;
             l++;
             r--;
         }
