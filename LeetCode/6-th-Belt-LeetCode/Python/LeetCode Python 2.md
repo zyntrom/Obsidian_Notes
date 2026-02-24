@@ -99,11 +99,13 @@ class Solution:
         total = 0
         for num in nums:
             total = total + num
+            
         if total % 2 != 0:
             return False
         target = total // 2
         dp = [False] * (target + 1)
-        dp[0] = True  
+        dp[0] = True
+          
         for num in nums:
             s = target
             while s >= num:
