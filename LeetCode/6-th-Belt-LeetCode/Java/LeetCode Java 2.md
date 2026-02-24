@@ -170,8 +170,7 @@ import java.util.*;
 
 class Solution {
     public int findLongestChain(int[][] pairs) {
-        Arrays.sort(pairs, (a, b) -> a[1] - b[1]);  // sort by ending value
-        
+        Arrays.sort(pairs, (a, b) -> a[1] - b[1]); 
         int count = 1;
         int lastEnd = pairs[0][1];
         
