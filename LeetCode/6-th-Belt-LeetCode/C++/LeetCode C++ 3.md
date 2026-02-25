@@ -181,15 +181,15 @@ aspectRatio: "52"
 ```cpp
 class Solution {
 private:
-    void backtrack(vector<int>& nums, int target, int start, vector<int>& curr, vector<vector<int>>& res) {
+    void backtrack(vector<int>& cand, int target, int start, vector<int>& curr, vector<vector<int>>& res) {
         if (target == 0) {
-            res.push_back(curr);
+            ans.push_back(curr);
             return;
         }
-        for (int i = start; i < nums.size(); i++) {
-            if (nums[i] > target) break;
-            curr.push_back(nums[i]);
-            backtrack(nums, target - nums[i], i, curr, res); 
+        for (int i = start; i < cand.size(); i++) {
+            if (cand[i] > target) break;
+            curr.push_back(cand[i]);
+            backtrack(cand, target - cand[i], i, curr, res); 
             curr.pop_back();
         }
     }
