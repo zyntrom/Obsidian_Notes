@@ -194,12 +194,12 @@ private:
         }
     }
 public:
-    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> res;
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> ans;
         vector<int> curr;
-        backtrack(nums, target, 0, curr, res);
-        return res;
+        backtrack(candidates, target, 0, curr, ans);
+        return ans;
     }
 };
 ```
