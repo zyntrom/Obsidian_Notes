@@ -343,10 +343,10 @@ private:
         if (board[i][j] != word[index]) return false;
         char temp = board[i][j];
         board[i][j] = '#';  
-        bool found = backtrack(board, word, i + 1, j, idx + 1)
-                  || backtrack(board, word, i - 1, j, idx + 1)
-                  || backtrack(board, word, i, j + 1, idx + 1)
-                  || backtrack(board, word, i, j - 1, idx + 1);
+        bool found = backtrack(board, word, i + 1, j, index + 1)
+                  || backtrack(board, word, i - 1, j, index + 1)
+                  || backtrack(board, word, i, j + 1, index + 1)
+                  || backtrack(board, word, i, j - 1, index + 1);
         board[i][j] = temp; 
         return found;
     }
