@@ -462,11 +462,11 @@ private:
         }
         return true;
     }
-    void backtrack(const vector<string>& arr, int idx, string cur, int len) {
+    void backtrack(const vector<string>& arr, int idx, string curr, int len) {
         maxLen = max(maxLen, len);
         for (int i = idx; i < arr.size(); i++) {
             if (isUnique(cur, arr[i])) {
-                backtrack(arr, i + 1, cur + arr[i], len + arr[i].size());
+                backtrack(arr, i + 1, curr + arr[i], len + arr[i].size());
             }
         }
     }
