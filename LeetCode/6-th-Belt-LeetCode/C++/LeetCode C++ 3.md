@@ -383,24 +383,24 @@ private:
         }
         return true;
     }
-    void backtrack(int start, const string& s, vector<string>& path, vector<vector<string>>& res) {
+    void backtrack(int start, const string& s, vector<string>& curr, vector<vector<string>>& ans) {
         if (start == s.size()) {
-            res.push_back(path);
+            ans.push_back(curr);
             return;
         }
         for (int end = start; end < s.size(); end++) {
             if (isPal(s, start, end)) {
-                path.push_back(s.substr(start, end - start + 1)); 
-                backtrack(end + 1, s, path, res);
-                path.pop_back();
+                curr.push_back(s.substr(start, end - start + 1)); 
+                backtrack(end + 1, s, curr, ans);
+                curr.pop_back();
             }
         }
     }
 public:
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> res;
-        vector<string> path;
-        backtrack(0, s, path, res);
+        vector<vector<string>> ans;
+        vector<string> curr;
+        backtrack(0, s, curr, ans);
         return res;
     }
 };
