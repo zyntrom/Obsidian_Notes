@@ -143,15 +143,15 @@ class Solution {
 private:
     int count = 0;
 
-    void backtrack(int pos, int n, vector<bool>& used) {
-        if (pos > n) {
+    void backtrack(int index, int n, vector<bool>& used) {
+        if (index > n) {
             count++;
             return;
         }
         for (int num = 1; num <= n; num++) {
-            if (!used[num] && (num % pos == 0 || pos % num == 0)) {
+            if (!used[num] && (num % index == 0 || index % num == 0)) {
                 used[num] = true;
-                backtrack(pos + 1, n, used);
+                backtrack(index + 1, n, used);
                 used[num] = false;
             }
         }
