@@ -304,12 +304,12 @@ private:
         }
         if (open < n) {
             cur.push_back('(');
-            backtrack(res, cur, open + 1, close, n);
+            backtrack(ans, cur, open + 1, close, n);
             cur.pop_back();
         }
         if (close < open) {
             cur.push_back(')');
-            backtrack(res, cur, open, close + 1, n);
+            backtrack(ans, cur, open, close + 1, n);
             cur.pop_back();
         }
     }
