@@ -256,27 +256,27 @@ aspectRatio: "52"
 ```cpp
 class Solution {
 private:
-    void backtrack(int idx, vector<int>& nums, vector<int>& path, vector<vector<int>>& res) {
-        if (path.size() >= 2) {
-            res.push_back(path);
+    void backtrack(int idx, vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
+        if (curr.size() >= 2) {
+            ans.push_back(curr);
         }
 
         unordered_set<int> used; 
         for (int i = idx; i < nums.size(); i++) {
             if (used.count(nums[i])) continue; 
-            if (!path.empty() && nums[i] < path.back()) continue;
+            if (!curr.empty() && nums[i] < curr.back()) continue;
             used.insert(nums[i]);
-            path.push_back(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.pop_back();
+            curr.push_back(nums[i]);
+            backtrack(i + 1, nums, curr, ans);
+            curr.pop_back();
         }
     }
 
 public:
     vector<vector<int>> findSubsequences(vector<int>& nums) {
-        vector<vector<int>> res;
-        vector<int> path;
-        backtrack(0, nums, path, res);
+        vector<vector<int>> ans;
+        vector<int> curr;
+        backtrack(0, nums, curr, ans);
         return res;
     }
 };
