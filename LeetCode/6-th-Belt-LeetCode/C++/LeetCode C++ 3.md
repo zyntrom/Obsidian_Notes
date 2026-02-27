@@ -256,13 +256,13 @@ aspectRatio: "52"
 ```cpp
 class Solution {
 private:
-    void backtrack(int idx, vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
+    void backtrack(int index, vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
         if (curr.size() >= 2) {
             ans.push_back(curr);
         }
 
         unordered_set<int> used; 
-        for (int i = idx; i < nums.size(); i++) {
+        for (int i = index; i < nums.size(); i++) {
             if (used.count(nums[i])) continue; 
             if (!curr.empty() && nums[i] < curr.back()) continue;
             used.insert(nums[i]);
