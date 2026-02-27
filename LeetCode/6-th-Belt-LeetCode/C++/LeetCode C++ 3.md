@@ -15,23 +15,23 @@ class Solution {
 private:
     vector<string> map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
     vector<string> ans;
-    void backtrack(const string& digits, int index, string& cur) {
+    void backtrack(const string& digits, int index, string& curr) {
         if (index == digits.size()) {
-            ans.push_back(cur);
+            ans.push_back(curr);
             return;
         }
         string letters = map[digits[index] - '0'];
         for (char ch : letters) {
-            cur.push_back(ch);               // choose
-            backtrack(digits, index + 1, cur); // explore
-            cur.pop_back();                  // un-choose (undo)
+            curr.push_back(ch);               // choose
+            backtrack(digits, index + 1, curr); // explore
+            curr.pop_back();                  // un-choose (undo)
         }
     }
 public:
     vector<string> letterCombinations(string digits) {
         if (digits.empty()) return ans;
-        string cur;
-        backtrack(digits, 0, cur);
+        string curr;
+        backtrack(digits, 0, curr);
         return ans;
     }
 };
