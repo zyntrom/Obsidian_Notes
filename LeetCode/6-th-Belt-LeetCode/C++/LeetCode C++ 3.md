@@ -421,19 +421,19 @@ aspectRatio: "52"
 class Solution {
 private:
     void backtrack(int index, vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
-        res.push_back(path);
+        ans.push_back(curr);
         for (int i = index; i < nums.size(); i++) {
-            path.push_back(nums[i]);
-            backtrack(i + 1, nums, path, res);
-            path.pop_back();
+            curr.push_back(nums[i]);
+            backtrack(i + 1, nums, curr, ans);
+            curr.pop_back();
         }
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> res;
-        vector<int> path;
-        backtrack(0, nums, path, res);
-        return res;
+        vector<vector<int>> ans;
+        vector<int> curr;
+        backtrack(0, nums, curr, ans);
+        return ans;
     }
 };
 
