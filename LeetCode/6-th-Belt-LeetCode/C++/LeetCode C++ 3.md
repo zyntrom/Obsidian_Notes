@@ -420,7 +420,7 @@ aspectRatio: "52"
 ```cpp
 class Solution {
 private:
-    void backtrack(int index, vector<int>& nums, vector<int>& path, vector<vector<int>>& res) {
+    void backtrack(int index, vector<int>& nums, vector<int>& curr, vector<vector<int>>& ans) {
         res.push_back(path);
         for (int i = index; i < nums.size(); i++) {
             path.push_back(nums[i]);
