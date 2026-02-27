@@ -337,10 +337,10 @@ aspectRatio: "52"
 ```cpp
 class Solution {
 private:
-    bool backtrack(vector<vector<char>>& board, string& word, int i, int j, int idx) {
-        if (idx == word.size()) return true;
+    bool backtrack(vector<vector<char>>& board, string& word, int i, int j, int index) {
+        if (index == word.size()) return true;
         if (i < 0 || j < 0 || i >= board.size() || j >= board[0].size()) return false;
-        if (board[i][j] != word[idx]) return false;
+        if (board[i][j] != word[index]) return false;
         char temp = board[i][j];
         board[i][j] = '#';  
         bool found = backtrack(board, word, i + 1, j, idx + 1)
