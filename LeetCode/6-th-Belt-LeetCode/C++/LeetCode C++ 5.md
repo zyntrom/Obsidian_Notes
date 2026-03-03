@@ -82,8 +82,49 @@ aspectRatio: "52"
 
 ```
 
-## Infix to Prefix
+## Postfix to Prefix
 - [ ] Check 
+
+```cpp
+
+```
+
+## Postfix to Infix
+- [ ] Check 
+
+```cpp
+
+```
+
+# Stack/Greedy
+
+## 402. Remove K Digits
+- [ ] Check 
+```embed
+title: "Remove K Digits - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Remove K Digits - Given string num representing a non-negative integer num, and an integer k, return the smallest possible integer after removing k digits from num.     Example 1:   Input: num = \"1432219\", k = 3 Output: \"1219\" Explanation: Remove the three digits 4, 3, and 2 to form the new number 1219 which is the smallest.   Example 2:   Input: num = \"10200\", k = 1 Output: \"200\" Explanation: Remove the leading 1 and the number is 200. Note that the output must not contain leading zeroes.   Example 3:   Input: num = \"10\", k = 2 Output: \"0\" Explanation: Remove all the digits from the number and it is left with nothing which is 0.      Constraints:   * 1 <= k <= num.length <= 105  * num consists of only digits.  * num does not have any leading zeros except for the zero itself."
+url: "https://leetcode.com/problems/remove-k-digits/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
+```cpp
+
+```
+
+#  Stack/Hash Map
+
+## 496. Next Greater Element I
+- [ ] Check 
+```embed
+title: "Next Greater Element I - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Next Greater Element I - The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.  You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.  For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.  Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.     Example 1:   Input: nums1 = [4,1,2], nums2 = [1,3,4,2] Output: [-1,3,-1] Explanation: The next greater element for each value of nums1 is as follows: - 4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1. - 1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3. - 2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.   Example 2:   Input: nums1 = [2,4], nums2 = [1,2,3,4] Output: [3,-1] Explanation: The next greater element for each value of nums1 is as follows: - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3. - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.      Constraints:   * 1 <= nums1.length <= nums2.length <= 1000  * 0 <= nums1[i], nums2[i] <= 104  * All integers in nums1 and nums2 are unique.  * All the integers of nums1 also appear in nums2.     Follow up: Could you find an O(nums1.length + nums2.length) solution?"
+url: "https://leetcode.com/problems/next-greater-element-i/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```cpp
 
