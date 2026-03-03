@@ -133,7 +133,23 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    long long subArrayRanges(vector<int>& nums) {
+        int n = nums.size();
+        long long total = 0;
+        for (int i = 0; i < n; i++) {
+            int mini = nums[i];
+            int maxi = nums[i];
+            for (int j = i; j < n; j++) {
+                mini = min(mini, nums[j]);
+                maxi = max(maxi, nums[j]);
+                total += (maxi - mini);
+            }
+        }
+        return total;
+    }
+};
 ```
 
 ## 907. Sum of Subarray Minimums
@@ -148,28 +164,142 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+        int n = arr.size();
+        long long total = 0;
+        int mod = 1e9 + 7;
+        for (int i = 0; i < n; i++) {
+            int mini = arr[i];
+            for (int j = i; j < n; j++) {
+                mini = min(mini, arr[j]);
+                total = (total + mini) % mod;
+            }
+        }
+        return total;
+    }
+};
 ```
 
 ## Infix to Prefix
 - [ ] Check 
 
 ```cpp
+#include <bits/stdc++.h>
+using namespace std;
 
+int precedence(char c) {
+    if (c == '+' || c == '-') return 1;
+    if (c == '*' || c == '/') return 2;
+    if (c == '^') return 3;
+    return -1;
+}
+string infixToPrefix(string s) {
+    
+    reverse(s.begin(), s.end());
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == '(')
+            s[i] = ')';
+        else if (s[i] == ')')
+            s[i] = '(';
+    }
+    stack<char> st;
+    string result = "";
+    for (int i = 0; i < s.length(); i++) {
+        
+        char c = s[i];
+        if (isalnum(c)) {
+            result += c;
+        }
+        else if (c == '(') {
+            st.push(c);
+        }
+        else if (c == ')') {
+            while (!st.empty() && st.top() != '(') {
+                result += st.top();
+                st.pop();
+            }
+            st.pop(); 
+        }
+        else {
+            while (!st.empty() && precedence(st.top()) >= precedence(c)) {
+                result += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+    while (!st.empty()) {
+        result += st.top();
+        st.pop();
+    }
+    reverse(result.begin(), result.end());
+    return result;
+}
+int main() {
+    string s = "(A-B/C)*(A/K-L)";
+    cout << infixToPrefix(s);
+}
 ```
 
 ## Postfix to Prefix
 - [ ] Check 
 
 ```cpp
-
+#include <bits/stdc++.h>
+using namespace std;
+string postfixToPrefix(string s) {
+    stack<string> st;
+    for (int i = 0; i < s.length(); i++) {       
+        char c = s[i];
+        if (isalnum(c)) {
+            string temp(1, c);
+            st.push(temp);
+        }
+        else {
+            string op2 = st.top(); st.pop();
+            string op1 = st.top(); st.pop();
+            string result = c + op1 + op2;
+            st.push(result);
+        }
+    }
+    return st.top();
+}
+int main() {
+    string s = "AB+C*";
+    cout << postfixToPrefix(s);
+}
 ```
 
 ## Postfix to Infix
 - [ ] Check 
 
 ```cpp
+#include <bits/stdc++.h>
+using namespace std;
 
+string postfixToInfix(string s) {
+    stack<string> st;
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (isalnum(c)) {
+            string temp(1, c);
+            st.push(temp);
+        }
+        else {
+            string op2 = st.top(); st.pop();
+            string op1 = st.top(); st.pop();
+            string result = "(" + op1 + c + op2 + ")";
+            st.push(result);
+        }
+    }
+    return st.top();
+}
+int main() {
+    string s = "AB+C*";
+    cout << postfixToInfix(s);
+}
 ```
 
 # Stack/Greedy
