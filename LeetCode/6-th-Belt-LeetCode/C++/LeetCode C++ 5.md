@@ -12,7 +12,38 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> st;
+        for (int a : asteroids) {
+            bool destroyed = false;
+            while (!st.empty() && st.top() > 0 && a < 0) {
+                if (abs(st.top()) < abs(a)) {
+                    st.pop(); 
+                }
+                else if (abs(st.top()) == abs(a)) {
+                    st.pop(); 
+                    destroyed = true;
+                    break;
+                }
+                else {
+                    destroyed = true; 
+                    break;
+                }
+            }
+            if (!destroyed) {
+                st.push(a);
+            }
+        }
+        vector<int> result(st.size());
+        for (int i = st.size() - 1; i >= 0; i--) {
+            result[i] = st.top();
+            st.pop();
+        }
+        return result;
+    }
+};
 ```
 
 ## 150. Evaluate Reverse Polish Notation
@@ -27,7 +58,30 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> st;
+        for (string s : tokens) {
+            if (s == "+" || s == "-" || s == "*" || s == "/") {
+                
+                int b = st.top(); 
+                st.pop();
+                
+                int a = st.top(); 
+                st.pop();
+                if (s == "+") st.push(a + b);
+                else if (s == "-") st.push(a - b);
+                else if (s == "*") st.push(a * b);
+                else if (s == "/") st.push(a / b);
+            }
+            else {
+                st.push(stoi(s));
+            }
+        }
+        return st.top();
+    }
+};
 ```
 
 ## 84. Largest Rectangle in Histogram
@@ -42,7 +96,29 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        stack<int> st; 
+        int maxArea = 0;
+        int n = heights.size();
+        for (int i = 0; i <= n; i++) {
+            int currentHeight = (i == n) ? 0 : heights[i];
+            while (!st.empty() && currentHeight < heights[st.top()]) { 
+                int height = heights[st.top()];
+                st.pop();
+                int width;
+                if (st.empty())
+                    width = i;
+                else
+                    width = i - st.top() - 1;
+                maxArea = max(maxArea, height * width);
+            }
+            st.push(i);
+        }
+        return maxArea;
+    }
+};
 ```
 
 ## 2104. Sum of Subarray Ranges
