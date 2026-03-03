@@ -309,7 +309,30 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int left = 0;
+        int right = nums.size() - 1;
+        int count = 0;
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum == k) {
+                count++;
+                left++;
+                right--;
+            }
+            else if (sum < k) {
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
+        return count;
+    }
+};
 ```
 
 ## 825. Friends Of Appropriate Ages
@@ -324,7 +347,25 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int numFriendRequests(vector<int>& ages) {
+        sort(ages.begin(), ages.end());
+        int n = ages.size();
+        int left = 0;
+        int right = 0;
+        int total = 0;
+        for (int i = 0; i < n; i++) {
+            if (ages[i] < 15) continue; 
+            while (ages[left] <= 0.5 * ages[i] + 7)
+                left++;
+            while (right < n && ages[right] <= ages[i])
+                right++;
+            total += max(0, right - left - 1);
+        }
+        return total;
+    }
+};
 ```
 
 ## 42. Trapping Rain Water
@@ -339,6 +380,32 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        
+        int left = 0;
+        int right = height.size() - 1;
+        int leftMax = 0, rightMax = 0;
+        int water = 0;
+        while (left < right) {
+            if (height[left] < height[right]) {    
+                if (height[left] >= leftMax)
+                    leftMax = height[left];
+                else
+                    water += leftMax - height[left];
+                left++;
+            }
+            else {                
+                if (height[right] >= rightMax)
+                    rightMax = height[right];
+                else
+                    water += rightMax - height[right];
+                right--;
+            }
+        }
+        return water;
+    }
+};
 ```
 
