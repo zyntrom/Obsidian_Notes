@@ -12,7 +12,25 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int left = 0;
+        int right = height.size() - 1;
+        int maxWater = 0;
+        while (left < right) {
+            int h = min(height[left], height[right]);
+            int width = right - left;
+            int area = h * width;
+            maxWater = max(maxWater, area);
+            if (height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+        return maxWater;
+    }
+};
 ```
 
 ## 838. Push Dominoes
@@ -27,7 +45,40 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    string pushDominoes(string dominoes) {
+        int n = dominoes.size();
+        string s = dominoes;
+        int last = -1; 
+        for (int i = 0; i <= n; i++) {            
+            if (i == n || s[i] != '.') {
+                if (last == -1) {
+                    if (i < n && s[i] == 'L') {
+                        for (int k = 0; k < i; k++)
+                            s[k] = 'L';
+                    }
+                }
+                else {
+                    if (s[last] == s[i]) {
+                        for (int k = last + 1; k < i; k++)
+                            s[k] = s[last];
+                    }
+                    else if (s[last] == 'R' && s[i] == 'L') {
+                        int l = last + 1;
+                        int r = i - 1;
+                        while (l < r) {
+                            s[l++] = 'R';
+                            s[r--] = 'L';
+                        }
+                    }
+                }
+                last = i;
+            }
+        }
+        return s;
+    }
+};
 ```
 
 ##  881. Boats to Save People
@@ -42,7 +93,24 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int numRescueBoats(vector<int>& people, int limit) {
+        sort(people.begin(), people.end());
+        int left = 0;
+        int right = people.size() - 1;
+        int boats = 0;
+        while (left <= right) {
+            
+            if (people[left] + people[right] <= limit) {
+                left++; 
+            }
+            right--;   
+            boats++;  
+        }
+        return boats;
+    }
+};
 ```
 
 ## 795. Number of Subarrays with Bounded Maximum

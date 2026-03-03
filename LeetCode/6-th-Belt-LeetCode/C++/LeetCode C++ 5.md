@@ -316,7 +316,31 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        string st = "";
+        for (char c : num) {
+            while (!st.empty() && k > 0 && st.back() > c) {
+                st.pop_back();
+                k--;
+            }
+            st.push_back(c);
+        }
+        while (!st.empty() && k > 0) {
+            st.pop_back();
+            k--;
+        }
+        int i = 0;
+        while (i < st.size() && st[i] == '0') {
+            i++;
+        }
+        string result = st.substr(i);
+        if (result == "")
+            return "0";
+        return result;
+    }
+};
 ```
 
 #  Stack/Hash Map
@@ -333,5 +357,28 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        stack<int> st;
+        unordered_map<int, int> mp;
+        for (int num : nums2) {
+            
+            while (!st.empty() && st.top() < num) {
+                mp[st.top()] = num;
+                st.pop();
+            }
+            st.push(num);
+        }
+        while (!st.empty()) {
+            mp[st.top()] = -1;
+            st.pop();
+        }
+        vector<int> result;
+        for (int num : nums1) {
+            result.push_back(mp[num]);
+        }
+        return result;
+    }
+};
 ```
