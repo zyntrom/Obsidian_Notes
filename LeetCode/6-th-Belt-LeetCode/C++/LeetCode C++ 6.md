@@ -125,7 +125,26 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int countSubarrays(vector<int>& nums, int bound) {
+        int count = 0;
+        int current = 0;
+        for (int num : nums) {
+            if (num <= bound) {
+                current++;      
+            } else {
+                current = 0;   
+            }
+            count += current;
+        }
+        return count;
+    }
+    int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+        return countSubarrays(nums, right) 
+             - countSubarrays(nums, left - 1);
+    }
+};
 ```
 
 ## 3Sum Closest
@@ -140,7 +159,31 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int closestSum = nums[0] + nums[1] + nums[2];
+        for (int i = 0; i < n - 2; i++) {
+            int left = i + 1;
+            int right = n - 1;
+            while (left < right) {
+                int currentSum = nums[i] + nums[left] + nums[right];
+                if (abs(target - currentSum) < abs(target - closestSum)) {
+                    closestSum = currentSum;
+                }
+                if (currentSum < target)
+                    left++;
+                else if (currentSum > target)
+                    right--;
+                else
+                    return currentSum; 
+            }
+        }
+        return closestSum;
+    }
+};
 ```
 
 ## 19. Remove Nth Node From End of List
@@ -155,7 +198,24 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* fast = dummy;
+        ListNode* slow = dummy;
+        for (int i = 0; i <= n; i++) {
+            fast = fast->next;
+        }
+        while (fast != NULL) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slow->next = slow->next->next;
+        return dummy->next;
+    }
+};
 ```
 
 ## 948. Bag of Tokens
@@ -170,7 +230,33 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int bagOfTokensScore(vector<int>& tokens, int power) {
+        sort(tokens.begin(), tokens.end());
+        int left = 0;
+        int right = tokens.size() - 1;
+        int score = 0;
+        int maxScore = 0;
+        while (left <= right) {
+            if (power >= tokens[left]) {
+                power -= tokens[left];
+                score++;
+                left++;
+                maxScore = max(maxScore, score);
+            }
+            else if (score > 0) {
+                power += tokens[right];
+                score--;
+                right--;
+            }
+            else {
+                break;
+            }
+        }
+        return maxScore;
+    }
+};
 ```
 
 ## 1679. Max Number of K-Sum Pairs
@@ -185,7 +271,30 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int left = 0;
+        int right = nums.size() - 1;
+        int count = 0;
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum == k) {
+                count++;
+                left++;
+                right--;
+            }
+            else if (sum < k) {
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
+        return count;
+    }
+};
 ```
 
 ## 1679. Max Number of K-Sum Pairs
