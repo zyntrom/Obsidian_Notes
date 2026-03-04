@@ -122,7 +122,7 @@ public:
 ```
 
 ## 2104. Sum of Subarray Ranges
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Sum of Subarray Ranges - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
@@ -316,7 +316,7 @@ int main() {
 # Stack/Greedy
 
 ## 402. Remove K Digits
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Remove K Digits - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
