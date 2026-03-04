@@ -47,7 +47,7 @@ public:
 ```
 
 ## 150. Evaluate Reverse Polish Notation
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Evaluate Reverse Polish Notation - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
