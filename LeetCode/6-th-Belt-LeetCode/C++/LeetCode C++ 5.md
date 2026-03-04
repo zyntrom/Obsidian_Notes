@@ -85,7 +85,7 @@ public:
 ```
 
 ## 84. Largest Rectangle in Histogram
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Largest Rectangle in Histogram - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
