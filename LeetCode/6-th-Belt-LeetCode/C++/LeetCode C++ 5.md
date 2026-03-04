@@ -1,7 +1,7 @@
 # Stack
 
 ## 735. Asteroid Collision
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Asteroid Collision - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
