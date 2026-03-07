@@ -1,4 +1,4 @@
-# **NexusHub – Complete Documentation**
+# **Converge – Complete Documentation**
 
 **Tagline:**  
 _“Your personal productivity and collaboration hub — offline-first, modular, with code editing, Git/GitHub integration, chat, media, and meetings.”_
@@ -7,7 +7,7 @@ _“Your personal productivity and collaboration hub — offline-first, modular,
 
 ## **1. Project Overview**
 
-**NexusHub** is a **modular, offline-first personal ecosystem** that integrates:
+**Converge** is a **modular, offline-first personal ecosystem** that integrates:
 
 - **Files** – personal cloud storage with versioning
 - **Code Editor** – multi-language editing with Git/GitHub integration
@@ -221,11 +221,8 @@ _“Your personal productivity and collaboration hub — offline-first, modular,
 ## **6. Offline + Online Workflow**
 
 - **Offline:** All edits, tasks, chats, code commits, group interactions queued locally
-    
 - **Online:** Peer-to-peer sync across devices, GitHub push/pull, conflict resolution
-    
 - **Permissions:** Enforced offline and online
-    
 
 ---
 
@@ -234,64 +231,46 @@ _“Your personal productivity and collaboration hub — offline-first, modular,
 **Phase 1 – Core Infrastructure**
 
 - Local storage, offline DB, user & permissions
-    
 
 **Phase 2 – Workspace & Chat**
 
 - Tasks, notes, Kanban, offline-first chat
-    
 - File, media, code attachments
-    
 
 **Phase 3 – Media Library**
 
 - Indexing, playback, group/individual sharing
-    
 
 **Phase 4 – Code Editor + Git/GitHub**
 
 - Multi-language editing, offline commits, GitHub integration
-    
 
 **Phase 5 – Meetings & Calls**
 
 - Scheduling, audio/video, screen sharing, recording
-    
 - Link agendas, tasks, code, media
-    
 
 **Phase 6 – Groups & Permissions**
 
 - Private groups, role-based permissions, individual sharing
-    
 - Group-linked chat, workspace, code, media
-    
 
 **Phase 7 – Polishing & Optimization**
 
 - Offline-online sync refinement
-    
 - Conflict resolution
-    
 - Security & encryption
-    
 - UI/UX improvements
-    
 
 ---
 
 ## **8. Benefits**
 
 - **Unified Hub:** Code, tasks, media, chat, meetings in one platform
-    
 - **Offline-First:** Work without internet; automatic sync when online
-    
 - **Collaborative:** Peer-to-peer + GitHub for developer workflows
-    
 - **Secure:** Role-based permissions and encryption
-    
 - **Modular & Extendable:** Easy to scale or add new features
-    
 
 ---
 
