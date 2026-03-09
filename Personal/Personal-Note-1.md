@@ -1,28 +1,21 @@
-This release introduces a TCP server that allows clients to connect and execute database commands over the network. The server integrates the in-memory database engine with a command parser, enabling interaction through a simple text-based protocol.
+This release introduces a key expiration system that allows entries in the database to automatically expire after a specified time. The expiration mechanism uses timestamp tracking and lazy deletion to efficiently manage expired keys.
+
+This update enhances the database by adding time-based key management similar to behavior found in systems like Redis.
+
+---
 
 ### Added
 
-- TCP socket server for client connections
+- `EXPIRE key seconds` command to set expiration for keys
     
-- Command parser for processing text-based commands
+- `TTL key` command to check remaining lifetime of a key
     
-- Integration between server and database engine
+- Expiration timestamp tracking for stored keys
     
-- Support for basic database commands:
+- Lazy expiration mechanism that removes expired keys when accessed
     
-    - `SET key value`
-        
-    - `GET key`
-        
-    - `DEL key`
-        
 
-### Improved
-
-- Persistent client connections allowing multiple commands per session
-    
-- Modular server and parser components for easier extensibility
-    
+---
 
 ### Example Usage
 
@@ -32,49 +25,63 @@ Start the server:
 make run
 ```
 
-Connect using **OpenBSD netcat**:
-
-```
-nc localhost 6379
-```
-
-Run commands:
+Set a key and expiration:
 
 ```
 SET name Alen  
-GET name  
-DEL name
+EXPIRE name 5
+```
+
+Check remaining time:
+
+```
+TTL name
 ```
 
 Example output:
 
 ```
-OK  
-Alen  
-1
+4
 ```
 
-### Technical Details
+After expiration:
 
-- Language: C++
+```
+GET name  
+(nil)
+```
+
+---
+
+### Implementation Details
+
+- Expiration times stored using `std::chrono`
     
-- Networking: POSIX sockets
+- Separate expiration map for efficient lookup
     
-- Architecture modules:
+- Lazy expiration check performed during key access
     
-    - Server
-        
-    - Command Parser
-        
-    - Database Engine
-        
+- Integrated expiration logic into database operations
+    
+
+---
+
+### Supported Commands
+
+```
+SET key value  
+GET key  
+DEL key  
+EXPIRE key seconds  
+TTL key
+```
+
+---
 
 ### Next Release
 
-Planned features for **v0.3.0**:
+Planned features for **v0.4.0**:
 
-- Key expiration (`EXPIRE key seconds`)
-    
-- Time-to-live queries (`TTL key`)
-    
-- Expiration management system
+- Database persistence (saving key-value data to disk)
+- Snapshot-based storage system
+- Database loading on server startup
