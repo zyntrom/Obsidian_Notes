@@ -1,12 +1,14 @@
-### Overview
+This release introduces a TCP server that allows clients to connect and execute database commands over the network. The server integrates the in-memory database engine with a command parser, enabling interaction through a simple text-based protocol.
 
-Initial release of the project introducing the core in-memory key-value database engine. This version establishes the foundational storage layer that future networking, command parsing, and persistence features will build upon.
+### Added
 
-### Features
-
-- In-memory key-value storage using `std::unordered_map`
+- TCP socket server for client connections
     
-- Basic database operations:
+- Command parser for processing text-based commands
+    
+- Integration between server and database engine
+    
+- Support for basic database commands:
     
     - `SET key value`
         
@@ -14,32 +16,65 @@ Initial release of the project introducing the core in-memory key-value database
         
     - `DEL key`
         
-- Modular project structure with `src/` and `include/`
+
+### Improved
+
+- Persistent client connections allowing multiple commands per session
     
-- Basic executable demonstrating database functionality
+- Modular server and parser components for easier extensibility
     
+
+### Example Usage
+
+Start the server:
+
+```
+make run
+```
+
+Connect using **OpenBSD netcat**:
+
+```
+nc localhost 6379
+```
+
+Run commands:
+
+```
+SET name Alen  
+GET name  
+DEL name
+```
+
+Example output:
+
+```
+OK  
+Alen  
+1
+```
 
 ### Technical Details
 
 - Language: C++
     
-- Data Structure: Hash table (`std::unordered_map`)
+- Networking: POSIX sockets
     
-- Build System: Makefile
+- Architecture modules:
     
-- Modular database class implementation
-    
+    - Server
+        
+    - Command Parser
+        
+    - Database Engine
+        
 
-### Example
+### Next Release
 
-SET name Alen  
-GET name  
-DEL name
+Planned features for **v0.3.0**:
 
-### Upcoming in Next Release
-
-- Command parser implementation
+- Key expiration (`EXPIRE key seconds`)
     
-- TCP server for client connections
+- Time-to-live queries (`TTL key`)
     
-- Redis-style command interface
+- Expiration management system
