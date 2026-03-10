@@ -1,23 +1,20 @@
-This release introduces a key expiration system that allows entries in the database to automatically expire after a specified time. The expiration mechanism uses timestamp tracking and lazy deletion to efficiently manage expired keys.
+This release introduces **basic support for the Redis Serialization Protocol (RESP)**, enabling structured client-server communication similar to Redis.
 
-This update enhances the database by adding time-based key management similar to behavior found in systems like Redis.
+The command parser has been upgraded to handle both traditional text-based commands and RESP formatted requests. This lays the foundation for compatibility with Redis-style clients and tools.
 
----
+## Added
 
-### Added
+- Basic **RESP protocol parsing**
+- Support for **RESP Array** command format
+- `PING` command for connectivity testing
 
-- `EXPIRE key seconds` command to set expiration for keys
-    
-- `TTL key` command to check remaining lifetime of a key
-    
-- Expiration timestamp tracking for stored keys
-    
-- Lazy expiration mechanism that removes expired keys when accessed
-    
+## Improved
 
----
+- Command parser now supports **both plain text and RESP input**
+- Internal command handling updated to use argument vectors
+- Improved modular separation between parser and database engine
 
-### Example Usage
+## Example Usage
 
 Start the server:
 
@@ -25,63 +22,31 @@ Start the server:
 make run
 ```
 
-Set a key and expiration:
+Test plain text commands:
 
 ```
 SET name Alen  
-EXPIRE name 5
-```
-
-Check remaining time:
-
-```
-TTL name
-```
-
-Example output:
-
-```
-4
-```
-
-After expiration:
-
-```
 GET name  
-(nil)
+PING
 ```
 
----
-
-### Implementation Details
-
-- Expiration times stored using `std::chrono`
-    
-- Separate expiration map for efficient lookup
-    
-- Lazy expiration check performed during key access
-    
-- Integrated expiration logic into database operations
-    
-
----
-
-### Supported Commands
+Test RESP protocol manually:
 
 ```
-SET key value  
-GET key  
-DEL key  
-EXPIRE key seconds  
-TTL key
+printf "*1\r\n$4\r\nPING\r\n" | nc localhost 6379
 ```
 
----
+Response:
 
-### Next Release
+```
+PONG
+```
 
-Planned features for **v0.4.0**:
+## Supported Commands
 
-- Database persistence (saving key-value data to disk)
-- Snapshot-based storage system
-- Database loading on server startup
+- `SET key value`
+- `GET key`
+- `DEL key`
+- `EXPIRE key seconds`
+- `TTL key`
+- `PING`
