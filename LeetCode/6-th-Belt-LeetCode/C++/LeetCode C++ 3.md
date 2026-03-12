@@ -277,7 +277,7 @@ public:
         vector<vector<int>> ans;
         vector<int> curr;
         backtrack(0, nums, curr, ans);
-        return res;
+        return ans;
     }
 };
 
