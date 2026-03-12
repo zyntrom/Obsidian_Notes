@@ -1,6 +1,6 @@
 # Binary Search
 ## 875. Koko Eating Bananas
-- [ ] Check 
+- [x] Check 
 ```embed
 title: "Koko Eating Bananas - LeetCode"
 image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
