@@ -401,7 +401,7 @@ public:
         vector<vector<string>> ans;
         vector<string> curr;
         backtrack(0, s, curr, ans);
-        return res;
+        return ans;
     }
 };
 ```
