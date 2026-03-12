@@ -18,7 +18,7 @@ public:
         for (int p : piles) right = max(right, p);
         while (left < right) {
             int mid = left + (right - left) / 2;
-            long long hours = 0;
+            int hours = 0;
             for (int p : piles)
                 hours += (p + mid - 1) / mid; 
             if (hours <= h)
