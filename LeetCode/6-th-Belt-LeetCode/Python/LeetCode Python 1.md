@@ -192,13 +192,19 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution:
+import heapq
+class Solution(object):
     def kthSmallestPrimeFraction(self, arr, k):
-        frac = []
         n = len(arr)
-        for i in range(n):
-            for j in range(i + 1, n):
-                frac.append([arr[i], arr[j]])
-        frac.sort(key=lambda x: x[0] / x[1])
-        return frac[k - 1]
+        heap = []
+        for j in range(1, n):
+            heapq.heappush(heap, (arr[0] * 1.0 / arr[j], 0, j))
+        
+        for _ in range(k - 1):
+            _, i, j = heapq.heappop(heap)
+            
+            if i + 1 < j:
+                heapq.heappush(heap, (arr[i + 1] * 1.0 / arr[j], i + 1, j))
+        _, i, j = heapq.heappop(heap)
+        return [arr[i], arr[j]]
 ```
