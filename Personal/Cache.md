@@ -54,4 +54,4 @@ Cache cleared when:
 
 ## ✅ Summary
 
-In-memory caching improves response time significantly but is best suited for small-scale apps.
+In-memory caching improves response time significantly but is best suited for small-scale apps. 
