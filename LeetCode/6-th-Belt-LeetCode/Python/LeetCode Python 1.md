@@ -35,6 +35,9 @@ class Solution:
             right = right - 1
 ```
 
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
+
 ## 50. Pow(x, n)
 - [x] Check 
 ### Divide and Conquer
