@@ -140,6 +140,8 @@ class Solution:
         return greatness
 ```
 
+- **Time Complexity:** `O(n log n)`
+- **Space Complexity:** `O(1)`
 ## 128. Longest Consecutive Sequence
 - [x] Check 
 ### Hash Table
