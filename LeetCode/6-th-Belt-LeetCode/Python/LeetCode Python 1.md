@@ -89,18 +89,18 @@ aspectRatio: "52"
 ```python
 class Solution(object):
     def numMovesStonesII(self, stones):
-        stones.sort()
+	    stones.sort()
         n = len(stones)
         max1 = stones[n - 1] - stones[1] - (n - 2)
         max2 = stones[n - 2] - stones[0] - (n - 2)
         maxMoves = max(max1, max2)
-        minMoves = float('inf')
+        minMoves = float("inf")
         j = 0
         for i in range(n):
-            while j < n and stones[j] - stones[i] + 1 <= n:
+            while j + 1 < n and stones[j + 1] - stones[i] + 1 <= n:
                 j += 1
-            stonesInWindow = j - i
-            if stonesInWindow == n - 1 and stones[j - 1] - stones[i] + 1 == n - 1:
+            stonesInWindow = j - i + 1
+            if stonesInWindow == n - 1 and stones[j] - stones[i] + 1 == n - 1:
                 minMoves = min(minMoves, 2)
             else:
                 minMoves = min(minMoves, n - stonesInWindow)
