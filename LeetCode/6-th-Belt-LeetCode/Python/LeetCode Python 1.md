@@ -107,6 +107,8 @@ class Solution(object):
         return [minMoves, maxMoves]
 ```
 
+- **Time Complexity:** `O(log n)`
+- **Space Complexity:** `O(log n)`
 ## 2592. Maximize Greatness of an Array
 - [x] Check 
 ### Greedy/Sorting
