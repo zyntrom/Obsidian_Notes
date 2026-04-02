@@ -208,3 +208,6 @@ class Solution(object):
         _, i, j = heapq.heappop(heap)
         return [arr[i], arr[j]]
 ```
+
+- **Time Complexity:** ``
+- **Space Complexity:** `O(n)`
