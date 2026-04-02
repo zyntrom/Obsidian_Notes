@@ -209,5 +209,5 @@ class Solution(object):
         return [arr[i], arr[j]]
 ```
 
-- **Time Complexity:** ``
+- **Time Complexity:** `**O(n log n + k log n)** → usually **O(k log n)**`
 - **Space Complexity:** `O(n)`
