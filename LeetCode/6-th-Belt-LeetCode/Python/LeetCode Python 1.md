@@ -176,6 +176,8 @@ class Solution:
         return max_length
 ```
 
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)`
 ## 786. K-th Smallest Prime Fraction
 - [x] Check 
 ### Heap
