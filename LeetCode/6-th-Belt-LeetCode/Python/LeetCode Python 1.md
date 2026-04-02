@@ -17,11 +17,13 @@ class Solution:
         n = len(nums)
         i = n - 2
         while i >= 0 and nums[i] >= nums[i + 1]:
-            i = i - 1
+            i = i - 1 
+            #We move from right → left to find the first position where: nums[i] < nums[i+1]
         if i >= 0:
             j = n - 1
             while nums[i] >= nums[j]:
                 j = j - 1
+                #Find the smallest number greater than nums[i] from the right side
             self.swap(nums, i, j)
         self.reverse(nums, i + 1, n - 1)
     def swap(self, nums, i, j):
