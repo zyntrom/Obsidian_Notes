@@ -71,6 +71,8 @@ class Solution:
             return half * half * x
 ```
 
+- **Time Complexity:** `O(log n)`
+- **Space Complexity:** `O(log n)`
 ## 1040. Moving Stones Until Consecutive II
 - [x] Check 
 ### Greedy/Sliding Window
@@ -85,20 +87,7 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution:
-    def myPow(self, x, n):
-        pow_val = n
-        if pow_val < 0:
-            x = 1.0 / x
-            pow_val = -pow_val
-        result = 1.0
-        current_product = x
-        while pow_val > 0:
-            if pow_val % 2 == 1:
-                result = result * current_product
-            current_product = current_product * current_product
-            pow_val = pow_val // 2
-        return result
+
 ```
 
 ## 2592. Maximize Greatness of an Array
