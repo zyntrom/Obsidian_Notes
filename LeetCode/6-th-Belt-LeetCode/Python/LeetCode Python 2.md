@@ -86,6 +86,8 @@ class Solution:
         return max_sum
 ```
 
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
 ## 416. Partition Equal Subset Sum
 - [x] Check 
 ```embed
