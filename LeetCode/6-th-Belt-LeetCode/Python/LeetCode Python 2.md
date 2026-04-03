@@ -135,28 +135,23 @@ aspectRatio: "52"
 ```
 
 ```python
-class Solution:
+class Solution(object):
     def longestPalindrome(self, s):
+        n = len(s)
         ans = ""
-        i = 0
-        while i < len(s):
-            j = i
-            while j < len(s):
-                sub = s[i:j + 1]
-                if self.isPalindrome(sub) and len(sub) > len(ans):
-                    ans = sub
-                j = j + 1
-            i = i + 1
+        for i in range(n):
+            p1 = self.expand(s, i, i)
+            p2 = self.expand(s, i, i + 1)
+            if len(p1) > len(ans):
+                ans = p1
+            if len(p2) > len(ans):
+                ans = p2
         return ans
-    def isPalindrome(self, string):
-        l = 0
-        r = len(string) - 1
-        while l < r:
-            if string[l] != string[r]:
-                return False
-            l = l + 1
-            r = r - 1
-        return True
+    def expand(self, s, l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1
+            r += 1
+        return s[l+1:r]
 ```
 
 ## 646. Maximum Length of Pair Chain
