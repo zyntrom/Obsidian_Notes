@@ -120,6 +120,9 @@ class Solution:
         return dp[target]
 ```
 
+- **Time Complexity:** `O(n * target)`
+- **Space Complexity:** `O(target)`
+
 ## 5. Longest Palindromic Substring
 - [x] Check 
 ```embed
