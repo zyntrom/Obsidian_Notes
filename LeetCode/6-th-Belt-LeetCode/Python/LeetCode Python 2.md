@@ -34,6 +34,8 @@ class Solution:
         return result
 ```
 
+- **Time Complexity:** `O(n²)`
+- **Space Complexity:** `O(n)`
 ## 1823. Find the Winner of the Circular Game
 - [x] Check 
 ### Queue/Simulation
@@ -58,6 +60,8 @@ class Solution:
         return winner + 1
 ```
 
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(1)`
 ## 53. Maximum Subarray
 - [x] Check 
 ```embed
