@@ -107,7 +107,18 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution(object):
+    def subArrayRanges(self, nums):
+        n = len(nums)
+        total = 0
+        for i in range(n):
+            mini = nums[i]
+            maxi = nums[i]
+            for j in range(i, n):
+                mini = min(mini, nums[j])
+                maxi = max(maxi, nums[j])
+                total += (maxi - mini)
+        return total
 ```
 
 ## 907. Sum of Subarray Minimums
@@ -122,21 +133,96 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution(object):
+    def sumSubarrayMins(self, arr):
+        n = len(arr)
+        mod = 10**9 + 7
+        total = 0
+        left = [0] * n
+        right = [0] * n
+        stack = []
+        for i in range(n):
+            while stack and arr[stack[-1]] > arr[i]:
+                stack.pop()
+            left[i] = i + 1 if not stack else i - stack[-1]
+            stack.append(i)  
+        stack = []
+        for i in range(n - 1, -1, -1):
+            while stack and arr[stack[-1]] >= arr[i]:
+                stack.pop()
+            right[i] = n - i if not stack else stack[-1] - i
+            stack.append(i)
+        for i in range(n):
+            total = (total + arr[i] * left[i] * right[i]) % mod
+        return total
 ```
 
 ## Infix to Prefix
 - [ ] Check 
 
 ```cpp
+class Solution:
+    def precedence(self, c):
+        if c in ('+', '-'):
+            return 1
+        if c in ('*', '/'):
+            return 2
+        if c == '^':
+            return 3
+        return -1
+    def infixToPrefix(self, s):
+        s = s[::-1]
+        s = list(s)
+        for i in range(len(s)):
+            if s[i] == '(':
+                s[i] = ')'
+            elif s[i] == ')':
+                s[i] = '('
+        stack = []
+        result = []
+        for c in s:
+            if c.isalnum():
+                result.append(c)
+            elif c == '(':
+                stack.append(c)
+            elif c == ')':
+                while stack and stack[-1] != '(':
+                    result.append(stack.pop())
+                stack.pop()  # remove '('
+            else:
+                while stack and self.precedence(stack[-1]) >= self.precedence(c):
+                    result.append(stack.pop())
+                stack.append(c)
+        while stack:
+            result.append(stack.pop())
+        return ''.join(result[::-1])
 
+s = "(A-B/C)*(A/K-L)"
+sol = Solution()
+print(sol.infixToPrefix(s))
 ```
 
 ## Postfix to Prefix
 - [ ] Check 
 
 ```cpp
+class Solution:
+    def postfixToPrefix(self, s):
+        stack = []
+        for c in s:
+            if c.isalnum():
+                stack.append(c)
+            else:
+                op2 = stack.pop()
+                op1 = stack.pop()
+                result = c + op1 + op2
+                stack.append(result)
+        
+        return stack[-1]
 
+s = "AB+C*"
+sol = Solution()
+print(sol.postfixToPrefix(s))
 ```
 
 ## Postfix to Infix
