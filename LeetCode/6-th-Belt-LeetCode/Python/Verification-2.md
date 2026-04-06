@@ -421,5 +421,26 @@ aspectRatio: "100"
 ```
 
 ```python
-
+class Solution:
+    def ratInMaze(self, maze):
+        n = len(maze)
+        result = []
+        directions = [(1, 0, 'D'), (0, -1, 'L'), (0, 1, 'R'), (-1, 0, 'U')]
+        visited = [[False] * n for _ in range(n)]
+        def backtrack(x, y, path):
+            if x == n - 1 and y == n - 1:
+                result.append(path)
+                return
+            for dx, dy, move in directions:
+                nx, ny = x + dx, y + dy
+                if (0 <= nx < n and 0 <= ny < n and
+                    not visited[nx][ny] and maze[nx][ny] == 1):
+                    visited[nx][ny] = True
+                    backtrack(nx, ny, path + move)
+                    visited[nx][ny] = False 
+        if maze[0][0] == 1:
+            visited[0][0] = True
+            backtrack(0, 0, "")
+        
+        return sorted(result)
 ```
