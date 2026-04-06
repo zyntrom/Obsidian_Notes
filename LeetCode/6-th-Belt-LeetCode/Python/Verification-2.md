@@ -10,7 +10,21 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def maxArea(self, height):
+        left = 0
+        right = len(height) - 1
+        max_water = 0
+        while left < right:
+            h = min(height[left], height[right])
+            width = right - left
+            area = h * width
+            max_water = max(max_water, area)
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        return max_water
 ```
 ## 2. Trapping Rain Water
 
@@ -24,7 +38,27 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def trap(self, height):
+        left = 0
+        right = len(height) - 1
+        left_max = 0
+        right_max = 0
+        water = 0
+        while left < right:
+            if height[left] < height[right]:
+                if height[left] >= left_max:
+                    left_max = height[left]
+                else:
+                    water += left_max - height[left]
+                left += 1
+            else:
+                if height[right] >= right_max:
+                    right_max = height[right]
+                else:
+                    water += right_max - height[right]
+                right -= 1
+        return water
 ```
 ## 3. Sliding Window Maximum
 
@@ -38,7 +72,21 @@ aspectRatio: "52"
 ```
 
 ```python
-
+from collections import deque
+class Solution:
+    def maxSlidingWindow(self, nums, k):
+        n = len(nums)
+        result = [0] * (n - k + 1)
+        dq = deque()
+        for i in range(n):
+            if dq and dq[0] == i - k:
+                dq.popleft()
+            while dq and nums[dq[-1]] < nums[i]:
+                dq.pop()
+            dq.append(i)
+            if i >= k - 1:
+                result[i - k + 1] = nums[dq[0]]
+        return result
 ```
 ## 4. Next Greater Element I
 
@@ -52,7 +100,17 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+        stack = []
+        mp = {}
+        for num in nums2:
+            while stack and stack[-1] < num:
+                mp[stack.pop()] = num
+            stack.append(num)t
+        while stack:
+            mp[stack.pop()] = -1
+        return [mp[num] for num in nums1]
 ```
 ## 5. Remove K Digits
 
@@ -66,7 +124,19 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def removeKdigits(self, num, k):
+        stack = []
+        for c in num:
+            while stack and k > 0 and stack[-1] > c:
+                stack.pop()
+                k -= 1
+            stack.append(c)
+        while stack and k > 0:
+            stack.pop()
+            k -= 1
+        result = ''.join(stack).lstrip('0')
+        return result if result else "0"
 ```
 ## 6. Pow(x, n)
 
@@ -80,7 +150,21 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution:
+    def myPow(self, x, n):
+        pow_val = n
+        if pow_val < 0:
+            x = 1.0 / x
+            pow_val = -pow_val
+        return self.fastPow(x, pow_val)
+    def fastPow(self, x, n):
+        if n == 0:
+            return 1.0
+        half = self.fastPow(x, n // 2)
+        if n % 2 == 0:
+            return half * half
+        else:
+            return half * half * x
 ```
 ## 7. 3Sum Closest
 
@@ -94,7 +178,25 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        n = len(nums)
+        closest_sum = nums[0] + nums[1] + nums[2]
+        for i in range(n - 2):
+            left = i + 1
+            right = n - 1
+            while left < right:
+                current_sum = nums[i] + nums[left] + nums[right]
+                if abs(target - current_sum) < abs(target - closest_sum):
+                    closest_sum = current_sum
+                if current_sum < target:
+                    left += 1
+                elif current_sum > target:
+                    right -= 1
+                else:
+                    return current_sum  
+        return closest_sum
 ```
 ## 8. Sum of Subarray Ranges
 
@@ -108,7 +210,18 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def subArrayRanges(self, nums):
+        n = len(nums)
+        total = 0
+        for i in range(n):
+            mini = nums[i]
+            maxi = nums[i]
+            for j in range(i, n):
+                mini = min(mini, nums[j])
+                maxi = max(maxi, nums[j])
+                total += (maxi - mini)
+        return total
 ```
 ## 9. Moving Stones Until Consecutive II
 
@@ -122,7 +235,24 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def numMovesStonesII(self, stones):
+	    stones.sort()
+        n = len(stones)
+        max1 = stones[n - 1] - stones[1] - (n - 2)
+        max2 = stones[n - 2] - stones[0] - (n - 2)
+        maxMoves = max(max1, max2)
+        minMoves = float("inf")
+        j = 0
+        for i in range(n):
+            while j + 1 < n and stones[j + 1] - stones[i] + 1 <= n:
+                j += 1
+            stonesInWindow = j - i + 1
+            if stonesInWindow == n - 1 and stones[j] - stones[i] + 1 == n - 1:
+                minMoves = min(minMoves, 2)
+            else:
+                minMoves = min(minMoves, n - stonesInWindow)
+        return [minMoves, maxMoves]
 ```
 ## 10. Remove Nth Node From End of List
 
