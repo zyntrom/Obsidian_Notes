@@ -217,6 +217,15 @@ class Solution:
 
 ## 8. Palindrome Partitioning
 
+```embed
+title: "Palindrome Partitioning - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Palindrome Partitioning - Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.     Example 1:  Input: s = \"aab\" Output: [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]   Example 2:  Input: s = \"a\" Output: [[\"a\"]]      Constraints:   * 1 <= s.length <= 16  * s contains only lowercase English letters."
+url: "https://leetcode.com/problems/palindrome-partitioning/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
 ```python
 class Solution:
     def partition(self, s):
@@ -242,6 +251,15 @@ class Solution:
 ```
 
 ## 9. N-Queens
+
+```embed
+title: "N-Queens - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? N-Queens - The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.  Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.  Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.     Example 1:  [https://assets.leetcode.com/uploads/2020/11/13/queens.jpg]   Input: n = 4 Output: [[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]] Explanation: There exist two distinct solutions to the 4-queens puzzle as shown above   Example 2:   Input: n = 1 Output: [[\"Q\"]]      Constraints:   * 1 <= n <= 9"
+url: "https://leetcode.com/problems/n-queens/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```python
 class Solution:
@@ -277,6 +295,15 @@ class Solution:
 
 ## 10. Partition Equal Subset Sum
 
+```embed
+title: "Partition Equal Subset Sum - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Partition Equal Subset Sum - Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.     Example 1:   Input: nums = [1,5,11,5] Output: true Explanation: The array can be partitioned as [1, 5, 5] and [11].   Example 2:   Input: nums = [1,2,3,5] Output: false Explanation: The array cannot be partitioned into equal sum subsets.      Constraints:   * 1 <= nums.length <= 200  * 1 <= nums[i] <= 100"
+url: "https://leetcode.com/problems/partition-equal-subset-sum/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
 ```python
 class Solution:
     def canPartition(self, nums):
@@ -300,6 +327,15 @@ class Solution:
 
 ## 11. Max Number of K-Sum Pairs
 
+```embed
+title: "Max Number of K-Sum Pairs - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Max Number of K-Sum Pairs - You are given an integer array nums and an integer k.  In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.  Return the maximum number of operations you can perform on the array.     Example 1:   Input: nums = [1,2,3,4], k = 5 Output: 2 Explanation: Starting with nums = [1,2,3,4]: - Remove numbers 1 and 4, then nums = [2,3] - Remove numbers 2 and 3, then nums = [] There are no more pairs that sum up to 5, hence a total of 2 operations.  Example 2:   Input: nums = [3,1,3,4,3], k = 6 Output: 1 Explanation: Starting with nums = [3,1,3,4,3]: - Remove the first two 3's, then nums = [1,4,3] There are no more pairs that sum up to 6, hence a total of 1 operation.     Constraints:   * 1 <= nums.length <= 105  * 1 <= nums[i] <= 109  * 1 <= k <= 109"
+url: "https://leetcode.com/problems/max-number-of-k-sum-pairs/description/"
+favicon: ""
+aspectRatio: "52"
+```
+
 ```python
 class Solution(object):
     def maxOperations(self, nums, k):
@@ -321,6 +357,15 @@ class Solution(object):
 ```
 
 ## 12. Path with Maximum Gold
+
+```embed
+title: "Path with Maximum Gold - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Path with Maximum Gold - In a gold mine grid of size m x n, each cell in this mine has an integer representing the amount of gold in that cell, 0 if it is empty.  Return the maximum amount of gold you can collect under the conditions:   * Every time you are located in a cell you will collect all the gold in that cell.  * From your position, you can walk one step to the left, right, up, or down.  * You can't visit the same cell more than once.  * Never visit a cell with 0 gold.  * You can start and stop collecting gold from any position in the grid that has some gold.     Example 1:   Input: grid = [[0,6,0],[5,8,7],[0,9,0]] Output: 24 Explanation: [[0,6,0],  [5,8,7],  [0,9,0]] Path to get the maximum gold, 9 -> 8 -> 7.   Example 2:   Input: grid = [[1,0,7],[2,0,6],[3,4,5],[0,3,0],[9,0,20]] Output: 28 Explanation: [[1,0,7],  [2,0,6],  [3,4,5],  [0,3,0],  [9,0,20]] Path to get the maximum gold, 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7.      Constraints:   * m == grid.length  * n == grid[i].length  * 1 <= m, n <= 15  * 0 <= grid[i][j] <= 100  * There are at most 25 cells containing gold."
+url: "https://leetcode.com/problems/path-with-maximum-gold/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```python
 class Solution:
@@ -350,6 +395,15 @@ class Solution:
 
 ## 13. Find the Winner of the Circular Game
 
+```embed
+title: "Find the Winner of the Circular Game - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Find the Winner of the Circular Game - There are n friends that are playing a game. The friends are sitting in a circle and are numbered from 1 to n in clockwise order. More formally, moving clockwise from the ith friend brings you to the (i+1)th friend for 1 <= i < n, and moving clockwise from the nth friend brings you to the 1st friend.  The rules of the game are as follows:   1. Start at the 1st friend.  2. Count the next k friends in the clockwise direction including the friend you started at. The counting wraps around the circle and may count some friends more than once.  3. The last friend you counted leaves the circle and loses the game.  4. If there is still more than one friend in the circle, go back to step 2 starting from the friend immediately clockwise of the friend who just lost and repeat.  5. Else, the last friend in the circle wins the game.  Given the number of friends, n, and an integer k, return the winner of the game.     Example 1:  [https://assets.leetcode.com/uploads/2021/03/25/ic234-q2-ex11.png]   Input: n = 5, k = 2 Output: 3 Explanation: Here are the steps of the game: 1) Start at friend 1. 2) Count 2 friends clockwise, which are friends 1 and 2. 3) Friend 2 leaves the circle. Next start is friend 3. 4) Count 2 friends clockwise, which are friends 3 and 4. 5) Friend 4 leaves the circle. Next start is friend 5. 6) Count 2 friends clockwise, which are friends 5 and 1. 7) Friend 1 leaves the circle. Next start is friend 3. 8) Count 2 friends clockwise, which are friends 3 and 5. 9) Friend 5 leaves the circle. Only friend 3 is left, so they are the winner.  Example 2:   Input: n = 6, k = 5 Output: 1 Explanation: The friends leave in this order: 5, 4, 6, 2, 3. The winner is friend 1.      Constraints:   * 1 <= k <= n <= 500     Follow up:  Could you solve this problem in linear time with constant space?"
+url: "https://leetcode.com/problems/find-the-winner-of-the-circular-game/"
+favicon: ""
+aspectRatio: "52"
+```
+
 ```python
 class Solution:
     def findTheWinner(self, n, k):
@@ -362,6 +416,15 @@ class Solution:
 ```
 
 ## 14. Unique Paths
+
+```embed
+title: "Unique Paths - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Unique Paths - There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.  Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.  The test cases are generated so that the answer will be less than or equal to 2 * 109.     Example 1:  [https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png]   Input: m = 3, n = 7 Output: 28   Example 2:   Input: m = 3, n = 2 Output: 3 Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner: 1. Right -> Down -> Down 2. Down -> Down -> Right 3. Down -> Right -> Down      Constraints:   * 1 <= m, n <= 100"
+url: "https://leetcode.com/problems/unique-paths/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```python
 class Solution(object):
