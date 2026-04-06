@@ -25,3 +25,64 @@ class Solution:
 ```python
 
 ```
+
+## 3. Permutations
+
+```python
+
+```
+
+## 4. Generate Parentheses
+
+```python
+
+```
+
+## 5. Combination Sum
+
+```python
+
+```
+
+## 6. Combination Sum  II
+
+```python
+
+```
+
+## 7. Word Search
+
+```python
+
+```
+
+## 8. Palindrome Partitioning
+
+```python
+
+```
+
+## 9. 
+
+```python
+
+```
+
+## 10.
+
+```python
+
+```
+
+## 11. 
+
+```python
+
+```
+
+## 12.
+
+```python
+
+```
+
