@@ -41,7 +41,32 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def pushDominoes(self, dominoes):
+        n = len(dominoes)
+        s = list(dominoes)
+        last = -1
+        for i in range(n + 1):
+            if i == n or s[i] != '.':
+                
+                if last == -1:
+                    if i < n and s[i] == 'L':
+                        for k in range(i):
+                            s[k] = 'L'
+                else:
+                    if i < n and s[last] == s[i]:
+                        for k in range(last + 1, i):
+                            s[k] = s[last]
+                    elif i < n and s[last] == 'R' and s[i] == 'L':
+                        l = last + 1
+                        r = i - 1
+                        while l < r:
+                            s[l] = 'R'
+                            s[r] = 'L'
+                            l += 1
+                            r -= 1
+                last = i
+        return ''.join(s)
 ```
 
 ##  881. Boats to Save People
@@ -56,7 +81,18 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def numRescueBoats(self, people, limit):
+        people.sort()
+        left = 0
+        right = len(people) - 1
+        boats = 0
+        while left <= right:
+            if people[left] + people[right] <= limit:
+                left += 1
+            right -= 1
+            boats += 1
+        return boats
 ```
 
 ## 795. Number of Subarrays with Bounded Maximum
@@ -71,7 +107,19 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def countSubarrays(self, nums, bound):
+        count = 0
+        current = 0
+        for num in nums:
+            if num <= bound:
+                current += 1
+            else:
+                current = 0
+            count += current
+        return count
+    def numSubarrayBoundedMax(self, nums, left, right):
+        return self.countSubarrays(nums, right) - self.countSubarrays(nums, left - 1)
 ```
 
 ## 3Sum Closest
@@ -86,7 +134,25 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        n = len(nums)
+        closest_sum = nums[0] + nums[1] + nums[2]
+        for i in range(n - 2):
+            left = i + 1
+            right = n - 1
+            while left < right:
+                current_sum = nums[i] + nums[left] + nums[right]
+                if abs(target - current_sum) < abs(target - closest_sum):
+                    closest_sum = current_sum
+                if current_sum < target:
+                    left += 1
+                elif current_sum > target:
+                    right -= 1
+                else:
+                    return current_sum  
+        return closest_sum
 ```
 
 ## 19. Remove Nth Node From End of List
