@@ -11,7 +11,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
+```python
 class Solution(object):
     def asteroidCollision(self, asteroids):
         stack = []
@@ -43,7 +43,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
+```python
 class Solution(object):
     def evalRPN(self, tokens):
         stack = []
@@ -76,7 +76,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
+```python
 class Solution(object):
     def largestRectangleArea(self, heights):
         stack = []  # will store indices
@@ -106,7 +106,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
+```python
 class Solution(object):
     def subArrayRanges(self, nums):
         n = len(nums)
@@ -132,7 +132,7 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
+```python
 class Solution(object):
     def sumSubarrayMins(self, arr):
         n = len(arr)
@@ -160,7 +160,7 @@ class Solution(object):
 ## Infix to Prefix
 - [ ] Check 
 
-```cpp
+```python
 class Solution:
     def precedence(self, c):
         if c in ('+', '-'):
@@ -205,7 +205,7 @@ print(sol.infixToPrefix(s))
 ## Postfix to Prefix
 - [ ] Check 
 
-```cpp
+```python
 class Solution:
     def postfixToPrefix(self, s):
         stack = []
@@ -228,8 +228,23 @@ print(sol.postfixToPrefix(s))
 ## Postfix to Infix
 - [ ] Check 
 
-```cpp
-
+```python
+class Solution:
+    def postfixToInfix(self, s):
+        stack = []
+        for c in s:
+            if c.isalnum():
+                stack.append(c)
+            else:
+                op2 = stack.pop()
+                op1 = stack.pop()
+                
+                result = "(" + op1 + c + op2 + ")"
+                stack.append(result)
+        return stack[-1]
+s = "AB+C*"
+sol = Solution()
+print(sol.postfixToInfix(s))
 ```
 
 # Stack/Greedy
@@ -245,8 +260,20 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
-
+```python
+class Solution(object):
+    def removeKdigits(self, num, k):
+        stack = []
+        for c in num:
+            while stack and k > 0 and stack[-1] > c:
+                stack.pop()
+                k -= 1
+            stack.append(c)
+        while stack and k > 0:
+            stack.pop()
+            k -= 1
+        result = ''.join(stack).lstrip('0')
+        return result if result else "0"
 ```
 
 #  Stack/Hash Map
@@ -262,6 +289,16 @@ favicon: ""
 aspectRatio: "52"
 ```
 
-```cpp
-
+```python
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+        stack = []
+        mp = {}
+        for num in nums2:
+            while stack and stack[-1] < num:
+                mp[stack.pop()] = num
+            stack.append(num)t
+        while stack:
+            mp[stack.pop()] = -1
+        return [mp[num] for num in nums1]
 ```
