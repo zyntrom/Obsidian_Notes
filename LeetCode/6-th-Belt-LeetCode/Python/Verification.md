@@ -62,27 +62,38 @@ class Solution:
 
 ```
 
-## 9. 
+## 9. N-Queens
 
 ```python
 
 ```
 
-## 10.
+## 10. Partition Equal Subset Sum
 
 ```python
 
 ```
 
-## 11. 
+## 11. Max Number of K-Sum Pairs
 
 ```python
 
 ```
 
-## 12.
+## 12. Path with Maximum Gold
 
 ```python
 
 ```
 
+## 13. Find the Winner of the Circular Game
+
+```python
+
+```
+
+## 14. Unique Paths
+
+```python
+
+```
