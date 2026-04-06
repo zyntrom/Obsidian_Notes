@@ -167,7 +167,19 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = dummy
+        slow = dummy
+        for _ in range(n + 1):
+            fast = fast.next
+        while fast is not None:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next     
+        return dummy.next
 ```
 
 ## 948. Bag of Tokens
@@ -182,7 +194,26 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def bagOfTokensScore(self, tokens, power):
+        tokens.sort()
+        left = 0
+        right = len(tokens) - 1
+        score = 0
+        max_score = 0        
+        while left <= right:
+            if power >= tokens[left]:
+                power -= tokens[left]
+                score += 1
+                left += 1
+                max_score = max(max_score, score)
+            elif score > 0:
+                power += tokens[right]
+                score -= 1
+                right -= 1
+            else:
+                break
+        return max_score
 ```
 
 ## 1679. Max Number of K-Sum Pairs
@@ -197,22 +228,23 @@ aspectRatio: "52"
 ```
 
 ```python
-
-```
-
-## 1679. Max Number of K-Sum Pairs
-- [ ] Check 
-```embed
-title: "Max Number of K-Sum Pairs - LeetCode"
-image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
-description: "Can you solve this real interview question? Max Number of K-Sum Pairs - You are given an integer array nums and an integer k.  In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.  Return the maximum number of operations you can perform on the array.     Example 1:   Input: nums = [1,2,3,4], k = 5 Output: 2 Explanation: Starting with nums = [1,2,3,4]: - Remove numbers 1 and 4, then nums = [2,3] - Remove numbers 2 and 3, then nums = [] There are no more pairs that sum up to 5, hence a total of 2 operations.  Example 2:   Input: nums = [3,1,3,4,3], k = 6 Output: 1 Explanation: Starting with nums = [3,1,3,4,3]: - Remove the first two 3's, then nums = [1,4,3] There are no more pairs that sum up to 6, hence a total of 1 operation.     Constraints:   * 1 <= nums.length <= 105  * 1 <= nums[i] <= 109  * 1 <= k <= 109"
-url: "https://leetcode.com/problems/max-number-of-k-sum-pairs/description/"
-favicon: ""
-aspectRatio: "52"
-```
-
-```python
-
+class Solution(object):
+    def maxOperations(self, nums, k):
+        nums.sort()
+        left = 0
+        right = len(nums) - 1
+        count = 0
+        while left < right:
+            s = nums[left] + nums[right]
+            if s == k:
+                count += 1
+                left += 1
+                right -= 1
+            elif s < k:
+                left += 1
+            else:
+                right -= 1
+        return count
 ```
 
 ## 825. Friends Of Appropriate Ages
@@ -227,7 +259,22 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def numFriendRequests(self, ages):
+        ages.sort()
+        n = len(ages)
+        left = 0
+        right = 0
+        total = 0
+        for i in range(n):
+            if ages[i] < 15:
+                continue
+            while ages[left] <= 0.5 * ages[i] + 7:
+                left += 1
+            while right < n and ages[right] <= ages[i]:
+                right += 1
+            total += max(0, right - left - 1)
+        return total
 ```
 
 ## 42. Trapping Rain Water
