@@ -166,17 +166,44 @@ aspectRatio: "52"
 ```python
 
 ```
-## 13.
+## 13. Permutation Sequence
+
+```embed
+title: "Permutation Sequence - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Permutation Sequence - The set [1, 2, 3, ..., n] contains a total of n! unique permutations.  By listing and labeling all of the permutations in order, we get the following sequence for n = 3:   1. \"123\"  2. \"132\"  3. \"213\"  4. \"231\"  5. \"312\"  6. \"321\"  Given n and k, return the kth permutation sequence.     Example 1:  Input: n = 3, k = 3 Output: \"213\"   Example 2:  Input: n = 4, k = 9 Output: \"2314\"   Example 3:  Input: n = 3, k = 1 Output: \"123\"      Constraints:   * 1 <= n <= 9  * 1 <= k <= n!"
+url: "https://leetcode.com/problems/permutation-sequence/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```python
 
 ```
-## 14.
+## 14. Sum of Subarray Minimums
+
+```embed
+title: "Sum of Subarray Minimums - LeetCode"
+image: "https://leetcode.com/static/images/LeetCode_Sharing.png"
+description: "Can you solve this real interview question? Sum of Subarray Minimums - Given an array of integers arr, find the sum of min(b), where b ranges over every (contiguous) subarray of arr. Since the answer may be large, return the answer modulo 109 + 7.     Example 1:   Input: arr = [3,1,2,4] Output: 17 Explanation:  Subarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4].  Minimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1. Sum is 17.   Example 2:   Input: arr = [11,81,94,43,3] Output: 444      Constraints:   * 1 <= arr.length <= 3 * 104  * 1 <= arr[i] <= 3 * 104"
+url: "https://leetcode.com/problems/sum-of-subarray-minimums/description/"
+favicon: ""
+aspectRatio: "52"
+```
 
 ```python
 
 ```
-## 15.
+## 15. Rat in a Maze
+
+```embed
+title: "Rat in a Maze | Practice | GeeksforGeeks "
+image: "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png"
+description: "Consider a rat placed at position (0, 0) in an n x n square matrix maze[][]. The rat's goal is to reach the destination at position (n-1, n-1). The rat can move in four possible directions:&nbsp;'U'(up),&nbsp;'D'(down),&nbsp;'L' (left),&nbsp;'R' (rig"
+url: "https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1"
+favicon: ""
+aspectRatio: "100"
+```
 
 ```python
 

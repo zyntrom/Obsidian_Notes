@@ -12,7 +12,24 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution(object):
+    def asteroidCollision(self, asteroids):
+        stack = []
+        for a in asteroids:
+            destroyed = False
+            while stack and stack[-1] > 0 and a < 0:
+                if abs(stack[-1]) < abs(a):
+                    stack.pop()
+                elif abs(stack[-1]) == abs(a):
+                    stack.pop()
+                    destroyed = True
+                    break
+                else:
+                    destroyed = True
+                    break
+            if not destroyed:
+                stack.append(a)
+        return stack
 ```
 
 ## 150. Evaluate Reverse Polish Notation
@@ -27,7 +44,25 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution(object):
+    def evalRPN(self, tokens):
+        stack = []
+        for token in tokens:
+            if token in {"+", "-", "*", "/"}:
+                b = stack.pop()
+                a = stack.pop()
+                
+                if token == "+":
+                    stack.append(a + b)
+                elif token == "-":
+                    stack.append(a - b)
+                elif token == "*":
+                    stack.append(a * b)
+                else:  # division
+                    stack.append(int(a / b))
+            else:
+                stack.append(int(token))
+        return stack[-1]
 ```
 
 ## 84. Largest Rectangle in Histogram
@@ -42,7 +77,22 @@ aspectRatio: "52"
 ```
 
 ```cpp
-
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        stack = []  # will store indices
+        max_area = 0
+        n = len(heights)
+        for i in range(n + 1):
+            current_height = 0 if i == n else heights[i]
+            while stack and current_height < heights[stack[-1]]:
+                height = heights[stack.pop()]
+                if not stack:
+                    width = i
+                else:
+                    width = i - stack[-1] - 1
+                max_area = max(max_area, height * width)
+            stack.append(i)
+        return max_area
 ```
 
 ## 2104. Sum of Subarray Ranges
