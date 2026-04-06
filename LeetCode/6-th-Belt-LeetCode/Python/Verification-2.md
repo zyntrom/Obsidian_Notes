@@ -266,7 +266,19 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        dummy = ListNode(0)
+        dummy.next = head
+        fast = dummy
+        slow = dummy
+        for _ in range(n + 1):
+            fast = fast.next
+        while fast is not None:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next     
+        return dummy.next
 ```
 ## 11. Longest Increasing Subsequence
 
@@ -280,7 +292,23 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution:
+    def lengthOfLIS(self, nums):
+        dp = [0] * len(nums) 
+        length = 0
+        for num in nums:
+            left = 0
+            right = length
+            while left < right:
+                mid = (left + right) // 2
+                if dp[mid] < num:
+                    left = mid + 1
+                else:
+                    right = mid
+            dp[left] = num
+            if left == length:
+                length += 1
+        return length
 ```
 ## 12. Restore IP Addresses
 
@@ -294,7 +322,24 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def restoreIpAddresses(self, s):
+        result = []   
+        def backtrack(start, path):
+            if len(path) == 4 and start == len(s):
+                result.append(".".join(path))
+                return
+            if len(path) == 4:
+                return
+            for length in range(1, 4): 
+                if start + length > len(s):
+                    break
+                part = s[start:start + length]
+                if (part.startswith('0') and len(part) > 1) or int(part) > 255:
+                    continue
+                backtrack(start + length, path + [part])
+        backtrack(0, [])
+        return result
 ```
 ## 13. Permutation Sequence
 
@@ -308,7 +353,26 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution:
+    def getPermutation(self, n, k):
+        nums = []
+        fact = 1
+        i = 1
+        while i <= n:
+            nums.append(i)
+            fact = fact * i
+            i = i + 1
+        k = k - 1 
+        result = ""
+        i = n
+        while i > 0:
+            fact = fact // i
+            idx = k // fact
+            result = result + str(nums[idx])
+            nums.pop(idx)
+            k = k % fact
+            i = i - 1
+        return result
 ```
 ## 14. Sum of Subarray Minimums
 
@@ -322,7 +386,28 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def sumSubarrayMins(self, arr):
+        n = len(arr)
+        mod = 10**9 + 7
+        total = 0
+        left = [0] * n
+        right = [0] * n
+        stack = []
+        for i in range(n):
+            while stack and arr[stack[-1]] > arr[i]:
+                stack.pop()
+            left[i] = i + 1 if not stack else i - stack[-1]
+            stack.append(i)  
+        stack = []
+        for i in range(n - 1, -1, -1):
+            while stack and arr[stack[-1]] >= arr[i]:
+                stack.pop()
+            right[i] = n - i if not stack else stack[-1] - i
+            stack.append(i)
+        for i in range(n):
+            total = (total + arr[i] * left[i] * right[i]) % mod
+        return total
 ```
 ## 15. Rat in a Maze
 
