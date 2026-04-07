@@ -12,8 +12,6 @@ aspectRatio: "52"
 ```python
 class Solution:
     def letterCombinations(self, digits):
-        if not digits:
-            return []
         mapping = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
         ans = []
         def backtrack(index, path):
