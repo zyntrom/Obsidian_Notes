@@ -386,7 +386,22 @@ aspectRatio: "52"
 ```
 
 ```python
-
+class Solution(object):
+    def sumSubarrayMins(self, arr):
+        mod = 10**9 + 7
+        n = len(arr)
+        stack = []
+        result = 0
+        for i in range(n + 1):
+            while stack and (i == n or arr[stack[-1]] > arr[i]):
+                mid = stack.pop()
+                left = stack[-1] if stack else -1
+                right = i
+                count = (mid - left) * (right - mid)
+                result += arr[mid] * count
+            stack.append(i)
+        
+        return result % mod
 ```
 ## 15. Rat in a Maze
 
