@@ -27,6 +27,11 @@ class Solution:
         return ans
 ```
 
+| Complexity Type      | Value         |
+| -------------------- | ------------- |
+| Time                 | **O(n · 4ⁿ)** |
+| Space (auxiliary)    | **O(n)**      |
+| Space (total output) | **O(n · 4ⁿ)** |
 ## 2. Subsets
 
 ```embed
