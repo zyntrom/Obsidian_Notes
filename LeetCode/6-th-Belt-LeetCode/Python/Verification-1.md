@@ -57,6 +57,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value         |
+| --------------- | ------------- |
+| Time            | **O(n · 2ⁿ)** |
+| Space           | **O(n · 2ⁿ)** |
 ## 3. Permutations
 
 ```embed
@@ -86,6 +90,10 @@ class Solution:
         return ans
 ```
 
+| Complexity Type | Value         |
+| --------------- | ------------- |
+| Time            | **O(n · n!)** |
+| Space           | **O(n · n!)** |
 ## 4. Generate Parentheses
 
 ```embed
@@ -117,6 +125,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value     |
+| --------------- | --------- |
+| Time            | **O(4ⁿ)** |
+| Space           | **O(4ⁿ)** |
 ## 5. Combination Sum
 
 ```embed
