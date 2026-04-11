@@ -128,10 +128,10 @@ class Solution(object):
         return [mp[num] for num in nums1]
 ```
 
-| Complexity Type | Value    |
-| --------------- | -------- |
-| Time            | O(n + m) |
-| Space           | O(n)     |
+| Complexity Type | Value    |     |
+| --------------- | -------- | --- |
+| Time            | O(n + m) |     |
+| Space           | O(n)     |     |
 ## 5. Remove K Digits
 
 ```embed
