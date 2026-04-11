@@ -159,6 +159,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value                                         |
+| --------------- | --------------------------------------------- |
+| Time            | **O(n^T)** _(exponential, upper bound)_       |
+| Space           | **O(T)** _(recursion depth, ignoring output)_ |
 ## 6. Combination Sum  II
 
 ```embed
@@ -191,6 +195,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value                                         |
+| --------------- | --------------------------------------------- |
+| Time            | **O(n^T)** _(exponential, upper bound)_       |
+| Space           | **O(T)** _(recursion depth, ignoring output)_ |
 ## 7. Word Search
 
 ```embed
@@ -230,6 +238,10 @@ class Solution:
         return False
 ```
 
+| Complexity Type | Value            |
+| --------------- | ---------------- |
+| Time            | (O(m . n . 4^L)) |
+| Space           | (O(L))           |
 ## 8. Palindrome Partitioning
 
 ```embed
