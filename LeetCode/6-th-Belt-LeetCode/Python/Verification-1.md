@@ -159,10 +159,10 @@ class Solution:
         return res
 ```
 
-| Complexity Type | Value                                         |
-| --------------- | --------------------------------------------- |
-| Time            | **O(n^T)** _(exponential, upper bound)_       |
-| Space           | **O(T)** _(recursion depth, ignoring output)_ |
+| Complexity Type | Value                                           |
+| --------------- | ----------------------------------------------- |
+| Time            | **O(n^(T/m))** _(exponential, upper bound)_     |
+| Space           | **O(T/m)** _(recursion depth, ignoring output)_ |
 ## 6. Combination Sum  II
 
 ```embed
@@ -195,10 +195,10 @@ class Solution:
         return res
 ```
 
-| Complexity Type | Value                                         |
-| --------------- | --------------------------------------------- |
-| Time            | **O(n^T)** _(exponential, upper bound)_       |
-| Space           | **O(T)** _(recursion depth, ignoring output)_ |
+| Complexity Type | Value                                           |
+| --------------- | ----------------------------------------------- |
+| Time            | **O(n^(T/m))** _(exponential, upper bound)_     |
+| Space           | **O(T/m)** _(recursion depth, ignoring output)_ |
 ## 7. Word Search
 
 ```embed
@@ -324,10 +324,10 @@ class Solution:
         return res
 ```
 
-| Complexity Type | Value                                  |
-| --------------- | -------------------------------------- |
-| Time            | O(n!) *(more precise: O(n · n!))       |
-| Space           | O(n² + n) ≈ O(n²) _(excluding output)_ |
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n!) |
+| Space           | O(n²) |
 ## 10. Partition Equal Subset Sum
 
 ```embed
