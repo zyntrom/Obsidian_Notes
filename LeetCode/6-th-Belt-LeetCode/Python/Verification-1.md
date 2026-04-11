@@ -125,10 +125,10 @@ class Solution:
         return res
 ```
 
-| Complexity Type | Value     |
-| --------------- | --------- |
-| Time            | **O(4ⁿ)** |
-| Space           | **O(4ⁿ)** |
+| Complexity Type | Value           |
+| --------------- | --------------- |
+| Time            | **O(4^n / √n)** |
+| Space           | **O(n)**        |
 ## 5. Combination Sum
 
 ```embed
