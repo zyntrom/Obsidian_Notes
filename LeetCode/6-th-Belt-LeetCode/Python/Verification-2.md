@@ -26,6 +26,11 @@ class Solution(object):
                 right -= 1
         return max_water
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(1)  |
 ## 2. Trapping Rain Water
 
 ```embed
@@ -60,6 +65,11 @@ class Solution(object):
                 right -= 1
         return water
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(1)  |
 ## 3. Sliding Window Maximum
 
 ```embed

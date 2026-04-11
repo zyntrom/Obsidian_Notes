@@ -277,6 +277,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value                           |
+| --------------- | ------------------------------- |
+| Time            | O(n · 2^n) _(worst case)_       |
+| Space           | O(n · 2^n) _(including output)_ |
 ## 9. N-Queens
 
 ```embed
@@ -320,6 +324,10 @@ class Solution:
         return res
 ```
 
+| Complexity Type | Value                                  |
+| --------------- | -------------------------------------- |
+| Time            | O(n!) *(more precise: O(n · n!))       |
+| Space           | O(n² + n) ≈ O(n²) _(excluding output)_ |
 ## 10. Partition Equal Subset Sum
 
 ```embed
@@ -352,6 +360,10 @@ class Solution:
         return dp[target]
 ```
 
+| Complexity Type | Value         |
+| --------------- | ------------- |
+| Time            | O(n · target) |
+| Space           | O(target)     |
 ## 11. Max Number of K-Sum Pairs
 
 ```embed
@@ -383,6 +395,10 @@ class Solution(object):
         return count
 ```
 
+| Complexity Type | Value                                  |
+| --------------- | -------------------------------------- |
+| Time            | O(n log n)                             |
+| Space           | O(1) _(or O(log n) depending on sort)_ |
 ## 12. Path with Maximum Gold
 
 ```embed
@@ -420,6 +436,10 @@ class Solution:
         return self.max_gold
 ```
 
+| Complexity Type | Value                                         |
+| --------------- | --------------------------------------------- |
+| Time            | O(m · n · 4^(m·n)) _(worst case upper bound)_ |
+| Space           | O(m · n)                                      |
 ## 13. Find the Winner of the Circular Game
 
 ```embed
@@ -442,6 +462,10 @@ class Solution:
         return winner + 1
 ```
 
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(1)  |
 ## 14. Unique Paths
 
 ```embed
@@ -462,3 +486,8 @@ class Solution(object):
                 dp[j] += dp[j - 1]
         return dp[n - 1]
 ```
+
+|Complexity Type|Value|
+|---|---|
+|Time|O(m · n)|
+|Space|O(n)|
