@@ -98,6 +98,11 @@ class Solution:
                 result[i - k + 1] = nums[dq[0]]
         return result
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(k)  |
 ## 4. Next Greater Element I
 
 ```embed
@@ -122,6 +127,11 @@ class Solution(object):
             mp[stack.pop()] = -1
         return [mp[num] for num in nums1]
 ```
+
+| Complexity Type | Value    |
+| --------------- | -------- |
+| Time            | O(n + m) |
+| Space           | O(n)     |
 ## 5. Remove K Digits
 
 ```embed
@@ -148,6 +158,11 @@ class Solution(object):
         result = ''.join(stack).lstrip('0')
         return result if result else "0"
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(n)  |
 ## 6. Pow(x, n)
 
 ```embed
@@ -176,6 +191,11 @@ class Solution:
         else:
             return half * half * x
 ```
+
+| Complexity Type | Value    |
+| --------------- | -------- |
+| Time            | O(log n) |
+| Space           | O(log n) |
 ## 7. 3Sum Closest
 
 ```embed
@@ -208,6 +228,11 @@ class Solution(object):
                     return current_sum  
         return closest_sum
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n²) |
+| Space           | O(1)  |
 ## 8. Sum of Subarray Ranges
 
 ```embed
@@ -233,6 +258,11 @@ class Solution(object):
                 total += (maxi - mini)
         return total
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n²) |
+| Space           | O(1)  |
 ## 9. Moving Stones Until Consecutive II
 
 ```embed
@@ -264,6 +294,11 @@ class Solution(object):
                 minMoves = min(minMoves, n - stonesInWindow)
         return [minMoves, maxMoves]
 ```
+
+| Complexity Type | Value      |
+| --------------- | ---------- |
+| Time            | O(n log n) |
+| Space           | O(1)       |
 ## 10. Remove Nth Node From End of List
 
 ```embed
