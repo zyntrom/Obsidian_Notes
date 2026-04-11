@@ -325,6 +325,11 @@ class Solution(object):
         slow.next = slow.next.next     
         return dummy.next
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(n)  |
+| Space           | O(1)  |
 ## 11. Longest Increasing Subsequence
 
 ```embed
@@ -355,6 +360,11 @@ class Solution:
                 length += 1
         return length
 ```
+
+|Complexity Type|Value|
+|---|---|
+|Time|O(n log n)|
+|Space|O(n)|
 ## 12. Restore IP Addresses
 
 ```embed
@@ -386,6 +396,11 @@ class Solution(object):
         backtrack(0, [])
         return result
 ```
+
+| Complexity Type | Value |
+| --------------- | ----- |
+| Time            | O(1)  |
+| Space           | O(1)  |
 ## 13. Permutation Sequence
 
 ```embed
@@ -419,6 +434,11 @@ class Solution:
             i = i - 1
         return result
 ```
+
+|Complexity Type|Value|
+|---|---|
+|Time|O(n²)|
+|Space|O(n)|
 ## 14. Sum of Subarray Minimums
 
 ```embed
