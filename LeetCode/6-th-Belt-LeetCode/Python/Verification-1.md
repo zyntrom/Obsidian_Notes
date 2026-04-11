@@ -395,10 +395,10 @@ class Solution(object):
         return count
 ```
 
-| Complexity Type | Value                                  |
-| --------------- | -------------------------------------- |
-| Time            | O(n log n)                             |
-| Space           | O(1) _(or O(log n) depending on sort)_ |
+| Complexity Type | Value      |
+| --------------- | ---------- |
+| Time            | O(n log n) |
+| Space           | O(1)       |
 ## 12. Path with Maximum Gold
 
 ```embed
@@ -436,10 +436,10 @@ class Solution:
         return self.max_gold
 ```
 
-| Complexity Type | Value                                         |
-| --------------- | --------------------------------------------- |
-| Time            | O(m · n · 4^(m·n)) _(worst case upper bound)_ |
-| Space           | O(m · n)                                      |
+| Complexity Type | Value               |
+| --------------- | ------------------- |
+| Time            | O(m · n · 4^(m·n))  |
+| Space           | O(m · n)            |
 ## 13. Find the Winner of the Circular Game
 
 ```embed
